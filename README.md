@@ -1,4 +1,8 @@
+# INSTALLATION DU PROJET
 
+Pour installer ce projet suivez les étapes suivantes:
+    - Clôner le répo avec la clé SSH dans votre terminal 
+    - Tapez la ligne de commande ````npm i```
 # PRÉSENTATION
 
 ## 1.1 Présentation du projet
