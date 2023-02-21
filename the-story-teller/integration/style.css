@@ -5,6 +5,14 @@ header{
     padding: 35px;
     border-bottom: 1px solid black;
 }
+img{
+
+    width: 5rem;
+    height: 5rem;
+
+
+}
+
 .mainmenubtn {
     background-color: skyblue;
     color: white;
