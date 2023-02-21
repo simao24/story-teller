@@ -16,13 +16,14 @@
 </head>
 <body>
     <header>
-        <nav aria-label="header navigation">
+        <nav class="nav-bar1" aria-label="header navigation">
             <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site">
                 <img src="/src/assets/images/Captura de Pantalla 2023-02-19 a las 20.11.36.png" alt="Logo de l'application">
             </a>
             <a href="/stories" class="connexion" title="link connexion" aria-label="lien vers la page de connexion">Connexion</a>
-            
+        </nav>   
             <!-- Search bar-->
+        <nav class="nav-bar2">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input id="searchbar" onkeyup="search_something()" type="text"
             name="search" placeholder="Rechercher">    
@@ -34,7 +35,7 @@
         <div class="container-reading">
             <h1 id="title1">HISTOIRES</h1>
             <!-- Menu déroulant-->
-            <h2>Catégorie</h2>
+          
             <nav class="nav-categories">
                 <ul>
                     <li class="menu-deroulant-categories"><a href="#">Catégories</a>
@@ -56,7 +57,7 @@
                     <h4><b>Aventure au Pole Nord</b></h4>
                     <span class="auteur">Auteur:</span>
                     <p>Frederic Wonderberg</p>
-                    <p>Description:</p>
+                    <span class="description">Description:</span>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                         Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora 
                         voluptatum ea esse, quis 
@@ -69,8 +70,8 @@
                 <div class="container">
                     <h4><b>Detective Loup</b></h4>
                     <span class="auteur">Auteur:</span>
-                    <p>Frederic Wonderberg</p>
-                    <p>Description:</p>
+                    <p>Marie-Anne Strump</p>
+                    <span class="description">Description:</span>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                         Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora 
                         voluptatum ea esse, quis 
