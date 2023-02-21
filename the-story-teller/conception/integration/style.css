@@ -180,7 +180,6 @@ h1 {
   }
 
 
-
   .container >p{
     text-align:left;
     line-height: 25px;
@@ -194,4 +193,19 @@ h1 {
   /* Add rounded corners to the top left and the top right corner of the image */
   img {
     border-radius: 5px 5px 0 0;
+  }
+
+  /*footer*/
+
+  footer {
+    text-align: center;
+    margin: 65px 15px;
+    line-height: 30px;
+  }
+
+  footer > h3 {
+    font-weight: 800;
+  }
+  footer > p {
+    font-weight: 500;
   }
