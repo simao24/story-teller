@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Story Teller</title>
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="../APP-STYLES/reset.css">
+    <link rel="stylesheet" href="../APP-STYLES/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
@@ -14,13 +14,12 @@
 <body>
     <header class="header">
         <a href="index.html" class="header__logo">
-          <img src="./logo-thestoryteller.png" alt="Story Teller logo">
+          <img src="../accueil/img/logo-thestoryteller.png" alt="Story Teller logo">
         </a>
         <form action="recherche.php" class="header__search">
-          <label for="recherche" class="header__search-label">Recherche :</label>
-          <input type="text" id="recherche" name="recherche" class="header__search-input">
-          <input type="submit" value="Rechercher" class="header__search-submit">
-        </form>
+          <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+          <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
+      </form>
         <div class="dropdown">
           <button class="mainmenubtn">Pseudo</button>
           <div class="dropdown-child">
@@ -39,7 +38,7 @@
     <main>
         <h1 class="favoris">Favoris</h1>
             <div class="story">
-                <img src="./story.jpg" alt="Image d'histoire" class="story__image">
+                <img src="../accueil/img/adventure-img.jpeg" alt="Image d'histoire" class="story__image">
                 <i class="fa-solid fa-thumbs-up"></i>
                 <h3 class="story-title">Titre de l'histoire</h3>
                 <h4 class="author">Auteur</h4>
@@ -47,7 +46,7 @@
             </div>
 
             <div class="story">
-                <img src="./story.jpg" alt="Image d'histoire" class="story__image">
+                <img src="../accueil/img/Captura de Pantalla 2023-02-21 a las 11.16.21.png" alt="Image d'histoire" class="story__image">
                 <i class="fa-solid fa-thumbs-up"></i>
                 <h3 class="story-title">Titre de l'histoire</h3>
                 <h4 class="author">Auteur</h4>

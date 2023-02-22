@@ -3,48 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Lecture d'histoires - utilisateur connecté -</title>
-
-    <!-- Feuille de style -->
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
+    <title>Lecture utilisateur connecté</title>
+    <link rel="stylesheet" href="../APP-STYLES/reset.css">
+    <link rel="stylesheet" href="../APP-STYLES/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0693f46e04.js" crossorigin="anonymous"></script>
-
 </head>
 
+
 <body>
-    <header>
-        <nav class="nav-bar1" aria-label="header navigation">
-            <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site">
-                <img src="./img/logo-thestoryteller.png" alt="Logo de l'application">
-            </a>
-            <a href="/stories" class="connexion" title="link connexion"
-                aria-label="lien vers la page de connexion">Connexion</a>
-        </nav>
-        <!-- Menu deroulant PSEUDO-->
-
+    <header class="header">
+        <a href="index.html" class="headerlogo">
+          <img src="../accueil/img/logo-thestoryteller.png" alt="Story Teller logo">
+        </a>
+        <form action="recherche.php" class="header__search">
+          <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+          <input type="text" id="recherche" name="recherche" placeholder="Rechercher" class="header__search-input"> 
+    
+      </form>
         <div class="dropdown">
-            <button class="mainmenubtn">Pseudo</button>
-            <div class="dropdown-child">
-                <a href="">Favoris</a>
-                <a href="">Créer une histoire</a>
-                <a href="">Gestion du compte</a>
-                <a href="">Mes histoires</a>
-                <a href="">Se deconnecter</a>
-            </div>
+          <button class="mainmenubtn">Pseudo</button>
+          <div class="dropdown-child">
+            <a href="">Favoris</a>
+            <a href="">Créer une histoire</a>
+            <a href="">Gestion du compte</a>
+            <a href="">Mes histoires</a>
+            <a href="">Se deconnecter</a>
+          </div>
+    
         </div>
-
-        <!-- Search bar-->
-        <nav class="nav-bar2">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input id="searchbar" onkeyup="search_something()" type="text" name="search" placeholder="Rechercher">
-        </nav>
-
-    </header>
+      </header>
 
     <main aria-labelledby="title1">
         <div class="container-reading">
@@ -52,8 +43,8 @@
             <!-- Menu déroulant-->
 
             <nav class="nav-categories">
-                <ul>
-                    <li class="menu-deroulant-categories"><a href="#">Catégories</a>
+                
+                    <li class="menu-categories"><a href="#">Catégories</a>
                         <ul class="sous-menu">
                             <li><a href="#">Aventures</a></li>
                             <li><a href="#">Science-fiction</a></li>
@@ -62,11 +53,11 @@
                             <li><a href="#">Horreur</a></li>
                         </ul>
                     </li>
-                </ul>
+            
             </nav>
 
             <div class="card">
-                <img src="./img/adventure-img.jpeg" alt="aventure au pole Nord">
+                <img src="../accueil/img/adventure-img.jpeg" alt="aventure au pole Nord">
                 <a href="/user/favoris" class="fa-regular fa-thumbs-up"></a>
                 <div class="container">
                     <h4><b>Aventure au Pole Nord</b></h4>
@@ -80,7 +71,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="./img/Captura de Pantalla 2023-02-21 a las 11.16.21.png" alt="aventure au pole Nord">
+                <img src="../accueil/img/Captura de Pantalla 2023-02-21 a las 11.16.21.png" alt="Detective Loup">
                 <a href="/user/favoris" class="fa-regular fa-thumbs-up"></a>
                 <div class="container">
                     <h4><b>Detective Loup</b></h4>

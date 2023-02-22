@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail d'une histoire</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Détail d'une histoire</title>
+        <link rel="stylesheet" href="../APP-STYLES/reset.css">
+        <link rel="stylesheet" href="../APP-STYLES/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0693f46e04.js" crossorigin="anonymous"></script>
+    </head>
 
 <body>
 
   <header class="header">
         <a href="index.html" class="header__logo">
-            <img src="logo-thestoryteller.png" alt="Story Teller logo" class="logo">
+            <img src="../accueil/img/logo-thestoryteller.png" alt="Story Teller logo" class="logo">
         </a>
 
         <form action="recherche.php" class="header__search">
-            <label for="recherche" class="header__search-label"></label>
-            <input type="text" id="recherche" name="recherche" class="header__search-input">
-            <input type="submit" value="Rechercher" class="header__search-submit">
+            <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+            <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
 
         <a href="connexion.html" class="header__connect">Connexion</a>
     </header>
 
     <main>
-        <h1>DETAIL D'UNE HISTOIRE</h1>
+        <h1 class="h1-detail-histoire">DETAIL D'UNE HISTOIRE</h1>
 
         <div class="storydetails">
             <div class="storydetail-img">
-                <img src="image_exemple.jpg" alt="Image du livre">
+                <img src="../accueil/img/adventure-img.jpeg" alt="Image du livre">
             </div>
 
             <div class="storydetail-infos">
                 <h2>TITRE DE L'HISTOIRE</h2>
-                <h3>Auteur</h3>
+                <h3>Auteur:</h3>
+                <p class="autor-name">Frederic Kronnenbourg</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>
                     Possimus est ullam voluptatibus asperiores soluta dignissimos,<br>
                     praesentium hic dolorum ipsum perspiciatis quod, cum tenetur deleniti non,<br>
