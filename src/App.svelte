@@ -1,17 +1,19 @@
 <script>
+
 import Footer from "./composants/Footer.svelte";
 import NavBarNonConnecte from "./composants/NavBarNonConnecte.svelte";
 
+
 </script>
 
-<main>
-    <body>
+<body>
+    <main>
        <NavBarNonConnecte/>
        
-        <main>
+       
             <h1 class="main__title">Bienvenue sur Story Teller</h1>
             <div class="main__buttons">
-                <a href="lecture.html"><button class="main__button">Lecture</button></a>
+                <a href="/readingNoConnected"><button class="main__button">Lecture</button></a>
                 <a href="ecrire.html"><button class="main__button">Ecrire</button></a>
             </div>
             <h3 class="main__subtitle">Votre histoire originale pourrait être le prochain best-seller</h3>
@@ -24,8 +26,8 @@ import NavBarNonConnecte from "./composants/NavBarNonConnecte.svelte";
                         pour une expérience de lecture unique.</p>
                 </div>
             </div>
-        </main>
+       
        <Footer/>
-    </body>
-    
-</main>
+      
+    </main>
+</body>
