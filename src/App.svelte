@@ -1,11 +1,13 @@
 <script>
 import Footer from "./composants/Footer.svelte";
 import NavBarNonConnecte from "./composants/NavBarNonConnecte.svelte";
+
 </script>
 
 <main>
     <body>
        <NavBarNonConnecte/>
+       
         <main>
             <h1 class="main__title">Bienvenue sur Story Teller</h1>
             <div class="main__buttons">
