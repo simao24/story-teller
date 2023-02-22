@@ -1,11 +1,4 @@
-<script>
-
-
-</script>
-
-<body>
-   
-    <main aria-labelledby="title1">
+<main aria-labelledby="title1">
         <div class="container-reading">
             <h1 id="title1">HISTOIRES</h1>
             <!-- Menu déroulant-->
@@ -55,5 +48,4 @@
         </div>
     </main>
     
-</body>
 
