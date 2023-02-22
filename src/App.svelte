@@ -1,0 +1,50 @@
+<script>
+import Footer from "./composants/Footer.svelte";
+</script>
+
+<main>
+    <body>
+        <header class="header">
+            <a href="index.html" class="header__logo">
+                <img src="./img/logo-thestoryteller.png" alt="Story Teller logo">
+            </a>
+            <form action="recherche.php" class="header__search">
+                <label for="recherche" class="header__search-label">Recherche :</label>
+                <input type="text" id="recherche" name="recherche" class="header__search-input">
+                <input type="submit" value="Rechercher" class="header__search-submit">
+            </form>
+            <a href="connexion.html" class="header__connect">Connexion</a>
+        </header>
+        <main>
+            <h1 class="main__title">Bienvenue sur Story Teller</h1>
+            <div class="main__buttons">
+                <a href="lecture.html"><button class="main__button">Lecture</button></a>
+                <a href="ecrire.html"><button class="main__button">Ecrire</button></a>
+            </div>
+            <h3 class="main__subtitle">Votre histoire originale pourrait être le prochain best-seller</h3>
+            <div class="main__image-text">
+                <img src="./img/img-homepage.jpg" alt="Votre image" class="main__image">
+                <div class="main__text">
+                    <h3 class="main__text-title">Découvrez des écrivains et partagez entre amis</h3>
+                    <p class="main__text-paragraph">Story Teller est un site de lecture en ligne où vous pouvez découvrir de
+                        nouveaux récits et partager vos propres histoires avec la communauté. Rejoignez-nous dès maintenant
+                        pour une expérience de lecture unique.</p>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div>
+                <p>Contact : thestoryteller.maya5@gmail.com</p>
+            </div>
+            <div class="footer-name">
+                <p>© The Story Teller 2023</p>
+            </div>
+            <div class="footer-logo"><i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-instagram"></i>
+            </div>
+        </footer>
+    </body>
+    
+     
+</main>
