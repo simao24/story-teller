@@ -1,12 +1,3 @@
-<body>
-    <header>
-        <nav aria-label="header navigation">
-            <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site">
-                <img src="./img/logo-thestoryteller.png" alt="Logo de l'application">
-            </a>
-        </nav>
-
-    </header>
 
     <main aria-labelledby="title1">
         <div class="container">
@@ -29,5 +20,5 @@
         </div>
     </main>
     
-</body>
+
 
