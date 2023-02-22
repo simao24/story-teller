@@ -26,11 +26,5 @@
         <button id="valider">Edit</button>
 
 
-<footer class="footer">
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <p>Contact : thestoryteller.maya5@gmail.com</p>
-        <p>All rights reserved</p>
-    </footer>
+
 </body>

@@ -78,11 +78,5 @@
             </div>
         </div>
     </main>
-    <footer>
-        <h3>Contact: thestoryteller.maya5@gmail.com</h3>
-        <p>ALL RIGHTS RESERVED</p>
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-    </footer>
+
 </body>

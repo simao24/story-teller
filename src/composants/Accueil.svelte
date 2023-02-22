@@ -1,16 +1,4 @@
-<body>
-    <header class="header">
-        <a href="index.html" class="header__logo">
-            <img src="./img/logo-thestoryteller.png" alt="Story Teller logo">
-        </a>
-        <form action="recherche.php" class="header__search">
-            <label for="recherche" class="header__search-label">Recherche :</label>
-            <input type="text" id="recherche" name="recherche" class="header__search-input">
-            <input type="submit" value="Rechercher" class="header__search-submit">
-        </form>
-        <a href="connexion.html" class="header__connect">Connexion</a>
-    </header>
-    <main>
+      <main>
         <h1 class="main__title">Bienvenue sur Story Teller</h1>
         <div class="main__buttons">
             <a href="lecture.html"><button class="main__button">Lecture</button></a>
@@ -27,17 +15,6 @@
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <div>
-            <p>Contact : thestoryteller.maya5@gmail.com</p>
-        </div>
-        <div class="footer-name">
-            <p>© The Story Teller 2023</p>
-        </div>
-        <div class="footer-logo"><i class="fa-brands fa-twitter"></i>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-instagram"></i>
-        </div>
-    </footer>
-</body>
+    
+
 

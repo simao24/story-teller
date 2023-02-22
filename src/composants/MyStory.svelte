@@ -75,10 +75,5 @@
     </div>
     </main>
 
-    <footer class="footer">
-      <a href="https://twitter.com/"><img src="votre_icone_twitter.png" alt="Twitter" class="footer__icon"></a>
-      <a href="https://www.facebook.com/"><img src="votre_icone_facebook.png" alt="Facebook" class="footer__icon"></a>
-      <a href="https://www.instagram.com/"><img src="votre_icone_instagram.png" alt="Instagram" class="footer__icon"></a>
-    </footer>
 
 </body>
