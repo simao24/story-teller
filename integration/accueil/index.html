@@ -7,6 +7,9 @@
     <title>The Story Teller</title>
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0693f46e04.js" crossorigin="anonymous"></script>
 </head>
 
@@ -16,9 +19,9 @@
             <img src="./img/logo-thestoryteller.png" alt="Story Teller logo">
         </a>
         <form action="recherche.php" class="header__search">
-            <label for="recherche" class="header__search-label">Recherche :</label>
-            <input type="text" id="recherche" name="recherche" class="header__search-input">
-            <input type="submit" value="Rechercher" class="header__search-submit">
+            <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+            <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
+    
         </form>
         <a href="connexion.html" class="header__connect">Connexion</a>
     </header>
@@ -38,6 +41,7 @@
                     pour une expérience de lecture unique.</p>
             </div>
         </div>
+        <div class="like"><a href=""><i class="fa-solid fa-thumbs-up fa-2xl"></i></a></div>
     </main>
     <footer class="footer">
         <div>
