@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+  }
+
+h1 {
+  font-weight: bold;
+}
+
+  /* Styles pour le header */
+  
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3B556D;
+      padding: 10px;
+    }
+  
+    .header__logo {
+      margin-right: 10px;
+    }
+  
+    .header__logo img {
+      height: 5rem;
+      width: 5rem;
+    }
+  
+    .header__search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      margin-bottom: 10px;
+      flex-grow: 1; /* Modification */
+    }
+  
+    .header__connect {
+      color: #fff;
+      text-decoration: none;
+      margin-left: auto; /* Modification */
+      margin-right: 10px; /* Modification */
+    }
+  
+    .header__search-label {
+      color: #fff;
+      margin-right: 10px;
+    }
+  
+    .header__search-input {
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      margin: 0.2rem;
+    }
+  
+    .header__search-submit {
+      background-color: #fff;
+      color: #333;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    
+    
+    /* Styles pour le main */
+    
+    .main__title {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 50px;
+    }
+    
+    .main__buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .main__button {
+      background-color:#3B556D;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    
+    .main__subtitle {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 50px;
+    }
+    
+    .main__image-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+    
+    .main__image {
+      width: 40%;
+      margin-right: 20px;
+      border-radius: 1em;
+      margin: 1rem;
+    }
+    
+    .main__text-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .main__text-paragraph {
+      font-size: 18px;
+    }
+    
+    .like {
+      margin-left: 350px;
+      height: 3rem;
+      color: #3B556D;
+      width: 100%;
+    }
+
+    .fa-thumbs-up {
+      color: #3B556D;
+      justify-content: right;
+    }
+    
+    /* Styles pour le footer */
+    
+    .footer {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color:#3B556D;
+      padding: 5rem;
+    }
+    
+    .footer__icon {
+      height: 30px;
+      margin: 0 10px;
+      cursor: pointer;
+
+    }
+    
+.mainmenubtn {
+    background-color: #1C2942;
+    color: white;
+    border: 0.8rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    padding:20px;
+    margin-top:20px;
+    max-width: 100%;
+    font-weight: bold;
+}
+.mainmenubtn:hover {
+    background-color: #5b6463;
+    }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child {
+    display: none;
+    background-color: #5FC2BA;
+    min-width: 200px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0; /* Ajout de la propriété right */
+    background-color: #5FC2BA;
+    min-width: 200px;
+    max-width: 100%; /* Limite la largeur à la largeur du parent */
+    overflow-x: auto;
+}
+.dropdown-child a {
+    color: blue;
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown:hover .dropdown-child {
+    display: block;
+}
