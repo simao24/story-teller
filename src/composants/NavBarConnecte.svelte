@@ -1,7 +1,10 @@
+    <script>
+        import logo from '../assets/logo-thestoryteller.png'
+    </script>
     <header>
         <nav class="nav-bar1" aria-label="header navigation">
             <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site">
-                <img src="./img/logo-thestoryteller.png" alt="Logo de l'application">
+                <img src={logo} alt="Logo de l'application">
             </a>
             <a href="/stories" class="connexion" title="link connexion"
                 aria-label="lien vers la page de connexion">Connexion</a>

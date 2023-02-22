@@ -1,12 +1,12 @@
 <script>
-
+import logo from '../assets/logo-thestoryteller.png'
 </script>
 
 <main>
     <header class="header">
         <a href="index.html" class="header__logo">
             
-            <img src="../logo-thestoryteller.png" alt="Story Teller logo">
+            <img src={logo} alt="Story Teller logo">
         </a>
         <form action="recherche.php" class="header__search">
             <label for="recherche" class="header__search-label">Recherche :</label>

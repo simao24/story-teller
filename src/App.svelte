@@ -1,17 +1,17 @@
 <script>
     import Router from 'svelte-spa-router';
 
-    import Accueil from "./composants/Accueil.svelte";
-    import Connexion from './composants/Connexion.svelte';
+    import Accueil from "./pages/Accueil.svelte";
+    import Connexion from './pages/Connexion.svelte';
     import Footer from "./composants/Footer.svelte";
     import NavBarNonConnecte from "./composants/NavBarNonConnecte.svelte";
     import NavBarConnecte from './composants/NavBarConnecte.svelte';
-    import ReadingNoConnected from './composants/ReadingNoConnected.svelte';
-    import ReadingConnected from './composants/ReadingConnected.svelte';
-    import GestionDeCompte from './composants/GestionDeCompte.svelte';
-    import CreateStory from './composants/CreateStory.svelte';
-    import MyStory from './composants/MyStory.svelte';
-    import StoryDetail from './composants/StoryDetail.svelte';
+    import ReadingNoConnected from './pages/ReadingNoConnected.svelte';
+    import ReadingConnected from './pages/ReadingConnected.svelte';
+    import GestionDeCompte from './pages/GestionDeCompte.svelte';
+    import CreateStory from './pages/CreateStory.svelte';
+    import MyStory from './pages/MyStory.svelte';
+    import StoryDetail from './pages/StoryDetail.svelte';
 
 
     const routes = {
@@ -28,7 +28,6 @@
     
     <Router {routes} />
 </main>
-<footer>
+
     <Footer/>
 
-</footer>
