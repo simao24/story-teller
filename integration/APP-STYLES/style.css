@@ -18,7 +18,15 @@ h1 {
       background-color: #3B556D;
       padding: 10px;
     }
-  
+  /* class rajouté après pour gerer la nav bar"*/
+   .nav-bar-nonconnected {
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3B556D;
+      padding: 10px;
+   }
     .header__logo {
       margin-right: 10px;
     }
