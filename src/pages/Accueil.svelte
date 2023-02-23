@@ -8,6 +8,7 @@
       <main>
         <h1 class="main__title">Bienvenue sur Story Teller</h1>
         <div class="main__buttons">
+          <button>Lecture</button>
             <a href="lecture.html"><button class="main__button">Lecture</button></a>
             <a href="ecrire.html"><button class="main__button">Ecrire</button></a>
         </div>
