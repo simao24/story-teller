@@ -10,6 +10,7 @@
     import Settings from "./pages/Settings.svelte";
     import CreateStory from "./pages/CreateStory.svelte";
     import MyStory from "./pages/MyStory.svelte";
+    import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
     import Error from "./pages/Error.svelte";
 
@@ -21,6 +22,7 @@
         "/reading-page": Readingpage,
         "/settings": Settings,
         "/create-story": CreateStory,
+        "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
         "*": Error,
