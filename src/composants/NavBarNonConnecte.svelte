@@ -10,9 +10,8 @@ import logo from '../assets/logo-thestoryteller.png'
                 <img src={logo} alt="Story Teller logo">
             </a>
             <form action="recherche.php" class="header__search">
-                <label for="recherche" class="header__search-label">Recherche :</label>
-                <input type="text" id="recherche" name="recherche" class="header__search-input">
-                <input type="submit" value="Rechercher" class="header__search-submit">
+                <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
             </form>
             <a href="connexion.html" class="header__connect">Connexion</a>
         </nav>
