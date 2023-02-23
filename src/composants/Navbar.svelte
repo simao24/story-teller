@@ -25,11 +25,13 @@
             <button class="mainmenubtn">Pseudo</button>
             <div class="dropdown-child">
                 <!--<a use:link={"/favorites"}>Favoris</a>-->
-                <a use:link={"/create-story"}>Créer une histoire</a>
-                <a use:link={"/settings"}>Gestion du compte</a>
-                <a use:link={"/my-story"}>Mes histoires</a>
-                <div class="signout" on:click={signoutHandle}>Se deconnecter</div>
+                <ul>
+                  <li use:link={"/create-story"}>Créer une histoire</li>
+                  <li use:link={"/settings"}>Gestion du compte</li>
+                  <li use:link={"/my-story"}>Mes histoires</li>
+                  <li class="signout" on:click={signoutHandle}>Se deconnecter</li>
 
+                </ul>
             </div>
         </div>
 
