@@ -3,6 +3,7 @@
 
     import Accueil from "./pages/Accueil.svelte";
     import Connexion from "./pages/Connexion.svelte";
+    import Inscription from './pages/Inscription.svelte';
     import Footer from "./composants/Footer.svelte";
     import Navbar from "./composants/Navbar.svelte";
     import Readingpage from "./pages/Readingpage.svelte";
@@ -16,6 +17,7 @@
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
+        "/inscription": Inscription,
         "/reading-page": Readingpage,
         "/settings": Settings,
         "/create-story": CreateStory,
