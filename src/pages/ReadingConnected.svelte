@@ -1,4 +1,9 @@
+<script>
+    import {link} from 'svelte-spa-router'
+    import GestionDeCompte from './GestionDeCompte.svelte';
+    import MyStory from './MyStory.svelte';
 
+</script>
 <body>
     <header>
         <nav class="nav-bar1" aria-label="header navigation">
@@ -14,7 +19,7 @@
             <button class="mainmenubtn">Pseudo</button>
             <div class="dropdown-child">
                 <a href="">Favoris</a>
-                <a href="">Créer une histoire</a>
+                <a href="" >Créer une histoire</a>
                 <a href="">Gestion du compte</a>
                 <a href="">Mes histoires</a>
                 <a href="">Se deconnecter</a>

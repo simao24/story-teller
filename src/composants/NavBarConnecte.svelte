@@ -1,5 +1,27 @@
     <script>
         import logo from '../assets/logo-thestoryteller.png'
+        import {link} from 'svelte-spa-router'
+
+        const nav_links = [
+    {
+        "text": "Favoris",
+        "url": "/Favoris"
+    },
+    {
+        "text": "Créer une histoire",
+        "url": "/CreateStory"
+    },
+    {
+        "text": "Gestion du compte",
+        "url": "/GestionDeCompte"
+    },
+    {
+        "text": "Mes histoires",
+        "url": "/MyStory"
+    },
+    
+
+]
     </script>
     <header>
         <nav class="nav-bar1" aria-label="header navigation">
@@ -14,11 +36,13 @@
         <div class="dropdown">
             <button class="mainmenubtn">Pseudo</button>
             <div class="dropdown-child">
-                <a href="">Favoris</a>
-                <a href="">Créer une histoire</a>
-                <a href="">Gestion du compte</a>
-                <a href="">Mes histoires</a>
-                <a href="">Se deconnecter</a>
+                {#each nav_links as nav}
+                <a href="{nav.url}"use:link>{nav.text}</a>
+                <a href="{nav.url}">{nav.text}</a>
+                <a href="{nav.url}">{nav.text}</a>
+                <a href="{nav.url}">{nav.text}</a>
+                <a href="{nav.url}">{nav.text}</a>
+                {/each}
             </div>
         </div>
 
