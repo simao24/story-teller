@@ -1,0 +1,122 @@
+@use "variables" as *;
+@use "mixins";
+
+.header {
+
+	&__logo {
+        
+        img {
+
+        }
+    }		
+
+	&__search {
+
+		&-label {
+
+			.fa-solid{
+
+            }
+					
+        }
+        
+		&-input {
+            
+        }
+			
+    }
+
+	&__connect {
+
+    }
+	
+}
+
+main {
+
+	&__title{
+        
+    }
+	
+
+	&__buttons{
+
+		a {
+
+        }
+
+			&__button{
+
+            }
+						
+    }
+	&__subtitle{
+
+    }
+	
+
+    &__image-text{
+
+        img {
+            background: url("../assets/img-homepage.jpg");
+            height: 200px;
+            background-size: 100%;
+        }
+
+    }
+
+		&__image{
+          
+
+            
+        }
+		
+
+
+			&__text-title {
+
+            }
+			
+
+			&__text-paragraph {
+
+            }
+			
+
+	.like {
+
+    
+
+		a {
+
+			.fa-solid {
+
+            }
+        }
+    }					
+}
+.footer {
+
+	div {
+
+		p {
+            
+        }
+			
+    }
+	&-name{
+    }
+
+		p{
+            
+        }
+			
+
+    &-logo {
+        
+    }
+
+		.fa-brands {
+            
+        }
+    }

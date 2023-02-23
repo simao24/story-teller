@@ -1,5 +1,11 @@
     <script>
         import logo from '../assets/logo-thestoryteller.png'
+	    import Router, {location, link} from 'svelte-spa-router';
+
+
+        function signoutHandle(){
+            //script de déconnexion
+        }
     </script>
     <header>
         <nav class="nav-bar1" aria-label="header navigation">
@@ -14,11 +20,11 @@
         <div class="dropdown">
             <button class="mainmenubtn">Pseudo</button>
             <div class="dropdown-child">
-                <a href="">Favoris</a>
-                <a href="">Créer une histoire</a>
-                <a href="">Gestion du compte</a>
-                <a href="">Mes histoires</a>
-                <a href="">Se deconnecter</a>
+                <!--<a use:link={"/favorites"}>Favoris</a>-->
+                <a use:link={"/create-story"}>Créer une histoire</a>
+                <a use:link={"/settings"}>Gestion du compte</a>
+                <a use:link={"/my-story"}>Mes histoires</a>
+                <div class="signout" on:click={signoutHandle}>Se deconnecter</div>
             </div>
         </div>
 

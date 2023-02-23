@@ -1,5 +1,6 @@
     <script>
-    import imghomepage from '../assets/img-homepage.jpg'
+    import imghomepage from "../assets/img-homepage.jpg"
+   
     
 
     </script>      
@@ -12,7 +13,7 @@
         </div>
         <h3 class="main__subtitle">Votre histoire originale pourrait être le prochain best-seller</h3>
         <div class="main__image-text">
-            <img src={imghomepage} alt="">
+            <img src={imghomepage} alt="accueil">
             <div class="main__text">
                 <h3 class="main__text-title">Découvrez des écrivains et partagez entre amis</h3>
                 <p class="main__text-paragraph">Story Teller est un site de lecture en ligne où vous pouvez découvrir de
@@ -22,5 +23,16 @@
         </div>
     </main>
     
+    <style lang="scss">
+        img{
+            width: 40%;
+            height: 30%;
+            margin-left: 45px;
+            margin-right: 25px;
+            border-radius: 10px;
+           
+        }
+        
+    </style>
 
 
