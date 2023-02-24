@@ -30,5 +30,9 @@
         </div>
       </div>
     </section>
+<<<<<<< HEAD
   </main>
   
+=======
+  </main>
+>>>>>>> ed48fa3 (CreateStory)
