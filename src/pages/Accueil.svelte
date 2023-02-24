@@ -27,11 +27,13 @@
 
 
     <style>
-        main{
-            background-image: url('../assets/papier-wallpaper.jpeg');
-            width: 100%;
-            height: fit-content;
-        }
+      /*  main{
+            background-image: url('../assets/papierroll-wallpaper.jpeg');
+            background-repeat: no-repeat;
+            width: max-content;
+            height: max-content;
+            
+        }*/
         img {
             width: 25%;
             height: 60%;
