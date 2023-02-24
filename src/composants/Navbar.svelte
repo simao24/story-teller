@@ -96,6 +96,7 @@
             font-size:x-large; 
             font-weight: 700;
             margin-right: 50px;
+            font-family: "Courier New";
          
 
         }
