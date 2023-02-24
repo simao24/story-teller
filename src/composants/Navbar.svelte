@@ -60,27 +60,51 @@
             </div>
         </menu>
     {:else}
-        <nav class="nav-bar1" aria-label="header navigation">
+      <nav class="nav-bar1" aria-label="header navigation">
+          <div class="div-nav-logo">
             <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Logo de l'application">
             </a>
-            <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
-                use:link>Connexion</a>
-        </nav>
-
-        <!-- Search bar-->
-        <nav class="nav-bar2">
-            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="div-nav-search">
+            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
-        </nav>
+          </div>
+          <div class="div-nav-connexion">
+            <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
+            use:link>Connexion</a>
+          </div>
+      </nav>
     {/if}
     </header>
 
     <style>
+       
         img {
-            width: 50px;
+            width: 27%;
+            margin:15px;
+          
+        }
+        a {
+            text-decoration: none;
+            color: azure;
+            font-size:x-large; 
+            font-weight: 700;
+            margin-right: 50px;
+         
         }
 
+       
+        #searchbar {
+            width: auto;
+            height: 20px;
+            border-radius:25px;
+           
+
+        }
+        i {
+            color:white;
+        }
         .logout{
             padding: .5em 1em;
             cursor: pointer;
@@ -88,4 +112,21 @@
             background-color: yellow;
             color: white;
         }
+        .nav-bar1{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-decoration: none;
+        
+          
+        }
+        
+        .div-nav-connexion {
+            
+            color: beige;
+
+        }
+            
+     
     </style>

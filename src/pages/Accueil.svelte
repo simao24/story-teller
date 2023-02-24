@@ -18,7 +18,8 @@
             <div class="main__text">
                 <h3 class="main__text-title">Découvrez des écrivains et partagez entre amis</h3>
                 <p class="main__text-paragraph">Story Teller est un site de lecture en ligne où vous pouvez découvrir de
-                    nouveaux récits et partager vos propres histoires avec la communauté. Rejoignez-nous dès maintenant
+                    nouveaux récits <br>  et partager vos propres histoires avec la communauté. <br>
+                    Rejoignez-nous dès maintenant
                     pour une expérience de lecture unique.</p>
             </div>
         </div>
@@ -27,7 +28,30 @@
 
     <style>
         img {
-            width: 20%;
-            height: 50%;
+            width: 25%;
+            height: 60%;
+            margin-left: 50px;
+            margin-right: 50px;
+            border-radius: 25px;
+        }
+        .main__button{
+            width: 80%;
+           justify-content: space-between;
+           align-items: center;
+           font-size: larger;
+           margin: 10px;
+          
+        }
+        .main__subtitle{
+            font-weight: 500;
+            font-style: italic;
+            
+        }
+        h3{
+            font-weight: 700;
+        }
+        p{
+            line-height: 30px;
+          
         }
     </style>
