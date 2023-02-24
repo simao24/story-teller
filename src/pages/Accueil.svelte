@@ -27,6 +27,11 @@
 
 
     <style>
+        main{
+            background-image: url('../assets/papier-wallpaper.jpeg');
+            width: 100%;
+            height: fit-content;
+        }
         img {
             width: 25%;
             height: 60%;
@@ -40,13 +45,21 @@
            align-items: center;
            font-size: larger;
            margin: 10px;
+          border-radius: 5px;
           
+        }
+        button:hover{
+            color:  #5FC2BA;
+            font-weight: bolder;
+            transition: .3seconds;
         }
         .main__subtitle{
             font-weight: 500;
             font-style: italic;
             
         }
+      
+    
         h3{
             font-weight: 700;
         }

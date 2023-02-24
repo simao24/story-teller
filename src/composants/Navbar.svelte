@@ -30,7 +30,7 @@
     <header class="header">
         {#if token}
         <nav class="nav-bar" aria-label="header navigation">
-            <a href="index.html" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
+            <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Story Teller logo">
              </a>
         </nav>
@@ -38,7 +38,7 @@
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
-        <a href="profil.html" class="headerconnect" use:link>Pseudo</a>
+        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
 
         <h1>Gestion de compte</h1>
         <h2>Profil d'utilisateur</h2>
@@ -49,10 +49,10 @@
             <button class="mainmenubtn">Pseudo</button>
             <div class="dropdown-child">
                 <ul>
-                    <!--<li><a href="/favorite" use:link>Favoris</a></li>
+                    <li><a href="/favorite" use:link>Favoris</a></li>
                     <li><a href="/create-story" use:link>créer une histoire</a></li>
                     <li><a href="/settings" use:link>Gestion de comppte</a></li>
-                    <li><a href="/my-story" use:link>Mes histoires</a></li>-->
+                    <li><a href="/my-story" use:link>Mes histoires</a></li>
                     <li>
                         <button class="logout" on:click={signoutHandle}>Se deconnecter</button>
                     </li>
@@ -92,6 +92,10 @@
             font-weight: 700;
             margin-right: 50px;
          
+        }
+        a:hover{
+            color:  #5FC2BA;
+            transition: .3seconds;
         }
 
        
