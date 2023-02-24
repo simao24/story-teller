@@ -7,7 +7,7 @@
     import Navbar from "./composants/Navbar.svelte";
     import Readingpage from "./pages/Readingpage.svelte";
     import Settings from "./pages/Settings.svelte";
-    import CreateStory from './pages/createStory.svelte';
+    import CreateStory from './pages/CreateStory.svelte';
     import MyStory from "./pages/MyStory.svelte";
     import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
