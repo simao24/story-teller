@@ -11,7 +11,7 @@
     import MyStory from "./pages/MyStory.svelte";
     import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
-    import Footer from "./composants/Footer.svelte";
+    
     import Error from "./pages/Error.svelte";
 
 
@@ -29,9 +29,13 @@
     };
 
 </script>
+<header>
+    <Navbar/>
+</header>
+<main>
+    <Router {routes} />
+</main>
+<footer>
+    
+</footer>
 
-<Navbar/>
-
-<Router {routes} />
-
-<Footer/>

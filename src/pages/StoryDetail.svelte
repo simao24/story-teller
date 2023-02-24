@@ -1,7 +1,7 @@
 <body>
 
-  <header class="header">
-        <a href="index.html" class="header__logo">
+    <header class="header">
+        <a href="index.html" class="header__logo" use:link>
             <img src="logo-thestoryteller.png" alt="Story Teller logo" class="logo">
         </a>
 
@@ -11,7 +11,7 @@
             <input type="submit" value="Rechercher" class="header__search-submit">
         </form>
 
-        <a href="connexion.html" class="header__connect">Connexion</a>
+        <a href="connexion.html" class="header__connect" use:link>Connexion</a>
     </header>
 
     <main>
@@ -35,6 +35,6 @@
 
     </main>
 
-   
+
 
 </body>

@@ -1,3 +1,7 @@
+<script>
+    import { link } from "svelte-spa-router";
+</script>
+
 <main aria-labelledby="title1">
     <div class="container">
         <h1 id="title1">Inscription</h1>

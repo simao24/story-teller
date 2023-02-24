@@ -1,3 +1,7 @@
+<script>
+    import { link } from "svelte-spa-router";
+</script>
+
 <main aria-labelledby="title1">
     <h1 class="favoris">Favoris</h1>
     <div class="story">
