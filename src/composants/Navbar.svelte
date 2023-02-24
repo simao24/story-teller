@@ -38,7 +38,8 @@
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
-        <a href="/create-story" class="headerconnect" use:link>Pseudo</a>
+
+        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
 
         <h1>Gestion de compte</h1>
         <h2>Profil d'utilisateur</h2>
@@ -60,28 +61,60 @@
             </div>
         </menu>
     {:else}
-        <nav class="nav-bar1" aria-label="header navigation">
+      <nav class="nav-bar1" aria-label="header navigation">
+          <div class="div-nav-logo">
             <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Logo de l'application">
             </a>
-            
-        </nav>
 
-        <!-- Search bar-->
-        <nav class="nav-bar2">
-            <i class="fa-solid fa-magnifying-glass"></i>
+
+          </div>
+          <div class="div-nav-search">
+            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
+          </div>
+          <div class="div-nav-connexion">
             <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
             use:link>Connexion</a>
-        </nav>
+          </div>
+      </nav>
+
     {/if}
     </header>
 
     <style>
+       
         img {
-            width: 70px;
+
+           width: 27%;
+            margin:15px;
+          
+        }
+        a {
+            text-decoration: none;
+            color: azure;
+            font-size:x-large; 
+            font-weight: 700;
+            margin-right: 50px;
+         
+
+        }
+        a:hover{
+            color:  #5FC2BA;
+            transition: .3seconds;
         }
 
+       
+        #searchbar {
+            width: auto;
+            height: 20px;
+            border-radius:25px;
+           
+
+        }
+        i {
+            color:white;
+        }
         .logout{
             padding: .5em 1em;
             cursor: pointer;
@@ -89,4 +122,21 @@
             background-color: yellow;
             color: white;
         }
+        .nav-bar1{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-decoration: none;
+        
+          
+        }
+        
+        .div-nav-connexion {
+            
+            color: beige;
+
+        }
+            
+     
     </style>

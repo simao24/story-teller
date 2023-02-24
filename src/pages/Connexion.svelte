@@ -64,12 +64,55 @@
             <label for="password">Mot de passe</label>
             <input required type="password" name="password" id="password" placeholder="***********"
                 bind:value={password}>
-
-            <input type="submit" value="Se connecter">
-
+            
+            <input class="submit-button" type="submit" value="Se connecter">
+          
         </form>
         <h2>Vous n'avez pas de compte? <a aria-label="lien vers l'inscription" href="/Inscription"
                 use:link>Inscrivez-vous</a></h2>
 
     </div>
 </main>
+
+<style>
+
+main {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+label{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+input {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.submit-button{
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+.submit-button:hover{
+        color:  #5FC2BA;
+        transition: .3seconds;
+        font-weight: bold;
+}
+
+.container{
+    width:50%;
+    justify-content: center;
+  
+ 
+}
+form{
+ 
+   flex-direction: column;
+    line-height: 45px;
+}
+
+</style>
