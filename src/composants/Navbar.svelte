@@ -1,5 +1,5 @@
     <script>
-        import {logo} from '../assets/logo-thestoryteller.png'
+        import logo from '../assets/logo-thestoryteller.png'
         import {
             link
         } from 'svelte-spa-router'
@@ -31,7 +31,7 @@
         {#if token}
         <nav class="nav-bar" aria-label="header navigation">
             <a href="index.html" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
-                <img src="./assets/logo-thestoryteller.png" alt="Story Teller logo">
+                <img src={logo} alt="Story Teller logo">
              </a>
         </nav>
         <form action="recherche.php" class="header__search">
