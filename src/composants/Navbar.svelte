@@ -1,5 +1,5 @@
     <script>
-        import {logo} from '../assets/logo-thestoryteller.png'
+        import logo from '../assets/logo-thestoryteller.png'
         import {
             link
         } from 'svelte-spa-router'
