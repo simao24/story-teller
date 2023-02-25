@@ -4,7 +4,9 @@
             link
         } from "svelte-spa-router";
     </script>
-
+    <body>
+        
+    
     <main>
     <div class="background">
         <h1 class="main__title">Bienvenue sur 
@@ -48,10 +50,15 @@
     </div>
     </main>
 
-
+</body>
     <style>
     
-    
+   body{
+        background: linear-gradient(45deg, #5fc2ba, #b6d1ce, rgba(246,246,246,1));
+        background-size: cover;
+        margin:0;
+        padding:0;
+    }
     h1{
      margin-top: 25px;
     margin-bottom:55px;
