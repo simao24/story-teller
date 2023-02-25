@@ -29,6 +29,7 @@
                 </div>
         </h1>
         <div class="main__buttons">
+            <img class="hand" src="./assets/hand.jpeg" alt="" srcset="">
 
             <a href="/reading-page" use:link><button class="main__button">Lire</button></a>
             <a href="/create-story" use:link><button class="main__button">Écrire</button></a>
@@ -58,6 +59,9 @@
         background-size: cover;
         margin:0;
         padding:0;
+    }
+    .hand{
+        width: 60%;;
     }
     h1{
      margin-top: 25px;
