@@ -137,10 +137,6 @@
 
 
 
-Resources
-       
-      
-    
     h3{
     font-weight: 400;
     }
