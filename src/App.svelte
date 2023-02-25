@@ -21,7 +21,7 @@
         "/inscription": Inscription,
         "/reading-page": Readingpage,
         "/settings": Settings,
-        "/create-story": CreateStory,
+        "/createStory": CreateStory,
         "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
