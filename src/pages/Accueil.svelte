@@ -29,7 +29,7 @@
                 </div>
         </h1>
         <div class="main__buttons">
-            <img class="hand" src="./assets/hand.jpeg" alt="" srcset="">
+          
 
             <a href="/reading-page" use:link><button class="main__button">Lire</button></a>
             <a href="/create-story" use:link><button class="main__button">Écrire</button></a>
