@@ -1,25 +1,15 @@
-<body>
+<script>
+    import imghomepage from "../assets/img-homepage.jpg"
 
-    <header class="header">
-        <a href="index.html" class="header__logo" use:link>
-            <img src="logo-thestoryteller.png" alt="Story Teller logo" class="logo">
-        </a>
-
-        <form action="recherche.php" class="header__search">
-            <label for="recherche" class="header__search-label"></label>
-            <input type="text" id="recherche" name="recherche" class="header__search-input">
-            <input type="submit" value="Rechercher" class="header__search-submit">
-        </form>
-
-        <a href="connexion.html" class="header__connect" use:link>Connexion</a>
-    </header>
-
+</script>
+  
     <main>
+        
         <h1>DETAIL D'UNE HISTOIRE</h1>
-
         <div class="storydetails">
             <div class="storydetail-img">
-                <img src="image_exemple.jpg" alt="Image du livre">
+                <img src={imghomepage} alt="Image du livre">
+                <i class="fa-solid fa-thumbs-up"></i>
             </div>
 
             <div class="storydetail-infos">
@@ -32,9 +22,55 @@
                 </p>
             </div>
         </div>
-
     </main>
 
+<style>
+    main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+       
+  }
 
+  h1{
+    margin-top: 40px;
+    font-size: large;
+  }
 
-</body>
+  .storydetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+  }
+
+  .storydetail-img {
+    position: relative;
+    margin-right: 20px;
+    margin-top: 65px;
+}
+
+.storydetail-img img {
+  width: 400px;
+  
+}
+.storydetail-img i {
+  position: absolute;
+  bottom: -30px;
+  right: -5px;
+  
+}
+  h2 {
+    margin-top: -65px;
+    margin-left: 50px;
+  }
+
+  h3 { 
+    margin-left: 50px;
+  }
+
+  p {
+    margin-left: 50px;
+  }
+
+</style>
