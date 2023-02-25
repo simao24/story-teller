@@ -2,6 +2,8 @@
   import {
     link
   } from "svelte-spa-router";
+
+  
 </script>
     <h1>Gestion de compte</h1>
     <div class="edit-container">
