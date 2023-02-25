@@ -1,4 +1,5 @@
 <script>
+
   import {
     link
   } from "svelte-spa-router";
@@ -27,7 +28,8 @@
         <a href="#" use:link>Modifier</a>
         <a href="#" use:link>Supprimer</a>
         <a href="#" use:link>ajouter une image</a>
+
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
+  
