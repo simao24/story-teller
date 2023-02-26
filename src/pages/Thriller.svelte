@@ -1,5 +1,5 @@
 <script>
-    import { push } from 'svelte-spa-router';
+    
     import imghomepage from "../assets/img-homepage.jpg"
     import {
         link
@@ -24,7 +24,7 @@
             <ul>
                 <li class="menu-deroulant-categories"><a href="#" use:link>Catégories</a>
                     <ul class="sous-menu">
-                        <li><a href="/aventure" use:link>Aventures</a></li>
+                        <li><a href="/aventures" use:link>Aventures</a></li>
                         <li><a href="/Science-fiction" use:link>Science-fiction</a></li>
                         <li><a href="/Thriller" use:link>Thriller</a></li>
                         <li><a href="/Romantique"use:link>Romantique</a></li>
