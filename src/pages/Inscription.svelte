@@ -4,7 +4,7 @@
 
 <main aria-labelledby="title1">
     <div class="container">
-        <h1 id="title1">Inscription</h1>
+        <h1 id="title1">INSCRIPTION</h1>
 
         <form action="#" aria-label="Informations de connexion">
             
@@ -26,3 +26,29 @@
             
     </div>
 </main>
+
+<style>
+    .container {
+        flex-direction: column;
+        margin: auto;
+        width: 50%;
+    }
+
+    #title1 {
+        margin-top: 15px;
+        margin-bottom: 100px;
+    }
+
+    form {
+        display: grid;
+        justify-content: center;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    input {
+        margin-bottom: 10px;
+    }
+</style>
