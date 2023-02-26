@@ -1,10 +1,5 @@
 <script>
-<<<<<<< HEAD
 
-  import {
-    link
-  } from "svelte-spa-router";
-=======
   import {
     link
   } from "svelte-spa-router";
@@ -49,8 +44,6 @@
     });
   }
 </script>
->>>>>>> 1a8a4f7 (CreateStory)
-</script>
 
 <main>
   <section class="section-left">
@@ -76,15 +69,7 @@
         <a href="#" use:link>Modifier</a>
         <a href="#" use:link>Supprimer</a>
         <a href="#" use:link>ajouter une image</a>
-<<<<<<< HEAD
-
-      </div>
-    </section>
-  </main>
-  
-=======
       </div>
     </div>
   </section>
 </main>
->>>>>>> 1a8a4f7 (CreateStory)
