@@ -1,7 +1,16 @@
 <script>
+    import imghomepage from "../assets/img-homepage.jpg"
     import {
         link
     } from "svelte-spa-router";
+
+    const get_stories = async () => {
+        const response = await fetch(import.meta.env.VITE_API_URL_GET_ITEMS + "/story");
+        const json = await response.json();
+        return json.data;
+        
+    }
+
 </script>
 
 
@@ -23,34 +32,35 @@
                 </li>
             </ul>
         </nav>
-
+        {#await get_stories()}
+        <p>Chargement de la liste...</p>
+        {:then stories} 
+        {#each stories as story}
         <div class="card">
-            <img src="./img/TheStoryTeller2-LOGO.png" alt="aventure au pole Nord">
-            <a href="/user/favoris" class="fa-regular fa-thumbs-up" use:link></a>
-            <div class="container">
-                <h4><b>Aventure au Pole Nord</b></h4>
+            
+            <img src={imghomepage} alt="aventure au pole Nord">
+            <a href="/favorite" class="fa-regular fa-thumbs-up" use:link></a>
+                        <div class="container">
+                <h4><b>{story.title}</b></h4>
                 <span class="auteur">Auteur:</span>
-                <p>Frederic Wonderberg</p>
+                <p>leyti</p>
                 <span class="description">Description:</span>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora
-                    voluptatum ea esse, quis
-                    at quidem doloribus </p>
+                <p>{story.resume} </p>
+                
             </div>
-        </div>
-        <div class="card">
-            <img src="./img/TheStoryTeller2-LOGO.png" alt="aventure au pole Nord">
-            <a href="/user/favoris" class="fa-regular fa-thumbs-up" use:link></a>
-            <div class="container">
-                <h4><b>Detective Loup</b></h4>
-                <span class="auteur">Auteur:</span>
-                <p>Marie-Anne Strump</p>
-                <span class="description">Description:</span>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora
-                    voluptatum ea esse, quis
-                    at quidem doloribus </p>
             </div>
-        </div>
-    </div>
+        {/each}
+        {/await}
+        
 </main>
+
+<style>
+    img {
+    width: 25%;
+    height: 60%;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 25px;
+    }
+
+</style>
