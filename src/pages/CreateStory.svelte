@@ -12,7 +12,7 @@
   </section>
   <section class="section-centrale">
     <h2> Profil utilisateur</h2>
-  
+
     <label for="story">ecrire une histoire</label>
     <textarea id="story" name="story" rows="5" cols="33">
             ça claque sa......
@@ -33,4 +33,3 @@
       </div>
     </section>
   </main>
-  
