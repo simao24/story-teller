@@ -50,95 +50,6 @@
 
 
     <style>
-<<<<<<< HEAD
-    
-    
-    h1{
-     margin-top: 25px;
-    margin-bottom:55px;
-    }
-
-    .waviy {
-    position: relative;
-    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
-    font-size: 60px;
-    }
-
-    .waviy span {
-    font-family: 'Alfa Slab One', cursive;
-    position: relative;
-    display: inline-block;
-    color: rgb(6, 6, 6);
-    text-transform: uppercase;
-    animation: waviy 1s infinite;
-    animation-delay: calc(.1s * var(--i));
-  
-    }
-    @keyframes waviy {
-     0%,40%,100% {
-    transform: translateY(0)
-    }
-     20% {
-        transform: translateY(-20px)
-    }
-    }
-        
-    img {
-    width: 25%;
-    height: 60%;
-    margin-left: 50px;
-    margin-right: 50px;
-    border-radius: 25px;
-    }
-
-    .main__button{
-    width: 80%;
-    justify-content: space-between;
-    align-items: center;
-    font-size: larger;
-    margin: 10px;
-    border-radius: 5px;
-          
-    }
-    button:hover{
-    color:  #5FC2BA;
-    font-weight: bolder;
-    transition: .3seconds;
-    }
-     
-    .main__title{
-    color: #3B556D;     
-    }
-
-    .main__subtitle{
-    width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 1.5rem;
-    margin: 15px auto;
-    font-family: "Courier New";
-    border-right: 0.15em solid #5FC2BA;
-    animation: typing 4s steps(38) 1s 1 normal both, blink 1s steps(1) infinite;
-    }
-
-    @keyframes typing {
-    from {
-    width: 0;
-    }
-    to {
-    width: 100%;
-    }
-    }
-
-    @keyframes blink {
-    50% {
-    border-color: transparent;
-    }
-    }
-
-
-
-=======
     
     
     h1{
@@ -230,7 +141,6 @@ Resources
        
       
     
->>>>>>> 0bc7d94d141857bdd0767bee835e5a5678fbde45
     h3{
     font-weight: 400;
     }
