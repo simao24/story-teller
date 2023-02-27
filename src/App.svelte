@@ -13,6 +13,7 @@
     import StoryDetail from "./pages/StoryDetail.svelte";
     
     import Error from "./pages/Error.svelte";
+    import Footer from './composants/Footer.svelte';
    
     
     
