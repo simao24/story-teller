@@ -1,7 +1,60 @@
 <script>
   import { link } from "svelte-spa-router";
+    import MyStory from "./MyStory.svelte";
   let user = null;
-  
+
+ // recuperation d'histoires depuis notre BDD- tentative-
+
+ /*const load_stories = async () => {
+        const token = localStorage.getItem('token');
+        const resa_ids = await get_resa_ids(token, user_id);
+        const newstory = await get_stories(token, resa_ids);
+        return newstory
+    }
+
+    // Fonction de récupération de la liste des ids de résa
+    const get_resa_ids = async (token, id) => {
+        // Création du endpoint avec filtre et fields
+        let endpoint = import.meta.env.VITE_API_URL+ "user/my-story?";
+        endpoint += "filter[user_id][_eq]=" + id;
+        endpoint += "&fields=user_id";
+
+        // Appel de la requête
+        const response = await fetch(endpoint, {
+            headers: {          
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+        // Extraction du json de la réponse
+        const result = await response.json();
+
+        //Extraction des ids pour les mettre dans un tableau
+        let ids = [];
+        result.data.forEach(item => {
+            ids.push(item.user_id);
+        });
+        return ids;
+    }
+
+    // Fonction de récupération de la liste des commentaires
+      const get_stories = async (token, resa_ids) => {
+        let endpoint = import.meta.env.VITE_API_URL + "stories/my-story?";
+        endpoint += "filter[resa_id][_in]=" + resa_ids.join(',');
+
+        // Appel de la requête
+        const response = await fetch(endpoint, {
+            headers: {          
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+        // Extraction du json de la réponse
+        const result = await response.json();
+        //Extraction et retour de la liste
+        return result.data;
+    }*/
+
+
+
 </script>
 <main>
   <section class="section-left">
