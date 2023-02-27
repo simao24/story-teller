@@ -1,10 +1,13 @@
 <script>
   import { link } from "svelte-spa-router";
+  let user = null;
+  
 </script>
 <main>
   <section class="section-left">
-
-    <h4>pseudo</h4>
+    {#if user }
+    <h4>{user.first_name}</h4>
+    {/if}
   </section>
   
   <section class="section-centrale">
