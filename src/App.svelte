@@ -15,6 +15,7 @@
     import Error from "./pages/Error.svelte";
     import Footer from './composants/Footer.svelte';
 
+
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
@@ -25,6 +26,11 @@
         "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
+        "/aventure": Aventure,
+        "/Science-fiction": ScienceFiction,
+        "/thriller": Thriller,
+        "/Romantique": Romantique,
+        "/Horreur": Horreur,
         "*": Error,
     };
 
@@ -34,8 +40,10 @@
 </header>
 <main>
     <Router {routes} />
-</main>
-<footer>
     
-</footer>
+</main>
+
+<Footer/>
+
+
 
