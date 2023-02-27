@@ -1,9 +1,12 @@
     <script>
         import logo from '../assets/logo-thestoryteller.png'
+        
+
         import {
             link
         } from 'svelte-spa-router'
         import {
+    getAPI,
             getToken,
             removeToken
         } from '../utils/api';
@@ -11,7 +14,28 @@
             push
         } from 'svelte-spa-router';
 
+        
         let token = getToken()
+        let user = null;
+     
+
+        //récuperer les données de l'utilisateur
+        function getUserInfos(){
+            if (!token) {
+                return
+            }
+            getAPI().get('/users/me')
+                    .then(function(response){
+                        console.log(response);
+                        user = response.data.data;
+
+                        })
+                    .catch(function(err){
+
+                    })
+
+        }
+        getUserInfos();
 
 
         function signoutHandle() {
@@ -38,8 +62,10 @@
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
-
-        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
+        {#if user }
+            <a href="/" class="headerconnect" use:link>{user.first_name}</a>
+        {/if}
+        
 
         <h1>Gestion de compte</h1>
         <h2>Profil d'utilisateur</h2>
@@ -47,7 +73,9 @@
         <!-- Menu deroulant PSEUDO-->
 
         <menu class="dropdown">
-            <button class="mainmenubtn">Pseudo</button>
+            {#if user }
+                <button class="mainmenubtn">{user.first_name}</button>
+            {/if}
             <div class="dropdown-child">
                 <ul>
                     <li><a href="/favorite" use:link>Favoris</a></li>
@@ -55,6 +83,7 @@
                     <li><a href="/settings" use:link>Gestion de compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
                     <li>
+                        
                         <button class="logout" on:click={signoutHandle}>Se deconnecter</button>
                     </li>
                 </ul>

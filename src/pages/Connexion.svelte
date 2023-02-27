@@ -26,7 +26,8 @@
                 .then(function (result) {
                     setToken(result.data.data.access_token)
                     //push("/")
-                    location.href = '/'
+                    //location.href = '/'
+                
                 })
                 .catch(function () {
                     console.log('error')
