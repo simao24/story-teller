@@ -39,7 +39,6 @@
 
 <style>   
 
-<style>
 
 .footer-nav {
   background-color: #222;
@@ -64,14 +63,14 @@
 }
 
 
-=======
+
 
 .footer-item {
   margin: 0.5rem;
   font-size: 1.2rem;
 }
 
-=======
+
 
 .footer-item a {
   color: #fff;
@@ -117,7 +116,7 @@
 }
 
 
-=======
+
 
 .back-to-top:hover {
   background-color: #fff;
@@ -128,6 +127,5 @@
 
     
     </style> 
-=======
-    </style>
+
 
