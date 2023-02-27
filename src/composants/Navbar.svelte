@@ -31,7 +31,10 @@
 
                         })
                     .catch(function(err){
-
+                        removeToken();
+                        location.href = '/#/connexion';
+                        //a chaque fois que directus envoie un message d'erreur on supprime le token et 
+                        //cela redirige vers la page de connexion
                     })
 
         }
@@ -52,7 +55,7 @@
     </script>
 
     <header class="header">
-        {#if token}
+        {#if user}
         <nav class="nav-bar" aria-label="header navigation">
             <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Story Teller logo">
