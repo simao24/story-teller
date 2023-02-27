@@ -1,5 +1,6 @@
 <script>
     import imghomepage from "../assets/img-homepage.jpg"
+    
 
 </script>
   

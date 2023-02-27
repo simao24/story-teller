@@ -1,31 +1,100 @@
-<footer>
+<script>
+    export let data;
+</script>
 
-    <section id="footer">
-        <div class="footer-container">
-            
-            <div class="logo-container">
-                <div class="icons">
-                    <i class="fa-brands fa-twitter"></i>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-pinterest"></i>
-                    
-                </div>
-            </div>
-            
-            <div class="info">
-                <i class="fas fa-map-marker-alt" data-text="PARIS"></i>
-                <i class="fas fa-phone-alt" data-text="+330600000000"></i>
-                <i class="fas fa-envelope-alt" data-text="thestoryteller.maya5@gmail.com"></i>
-            </div>
-            <div class="letter">
-            <h1>Newsletter</h1>
-            <p>entrer votre mail</p>
-            <input type="email"placeholder="Email">
-            <input type="submit"placeholder="submit">
+<footer>
+    <nav class="footer-nav">
+        <ul class="footer-links">
+          {#each data.links as link}
+            {#if link.displayInFooter}
+              <li class="footer-item">
+                <a href={link.url}>{link.linkText}</a>
+              </li>
+            {/if}
+          {/each}
+        </ul>
+        <div class="social-media-icons">
+
+                <i class="fab fa-facebook-f"></i>
+
+                <i class="fab fa-twitter"></i>
+
+                <i class="fab fa-instagram"></i>
+
         </div>
-    </section>
-    
-    
+
+        <button class="back-to-top" aria-label="Retour en haut de page">
+            <i class="fas fa-arrow-up"></i>
+        </button>
 </footer>
 
+
+<style>
+ 
+.footer-nav {
+  background-color: #222;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-item {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.footer-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-item:hover {
+  border-bottom: 2px solid #fff;
+}
+
+.social-media-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.social-media-icons a {
+  color: #fff;
+  margin-right: 1rem;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 9999;
+}
+
+.back-to-top:hover {
+  background-color: #fff;
+  color: #222;
+  transform: scale(1.1);
+}
+
+
+    </style>

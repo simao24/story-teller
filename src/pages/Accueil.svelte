@@ -4,7 +4,9 @@
             link
         } from "svelte-spa-router";
     </script>
-
+    <body>
+        
+    
     <main>
     <div class="background">
         <h1 class="main__title">Bienvenue sur 
@@ -27,6 +29,7 @@
                 </div>
         </h1>
         <div class="main__buttons">
+          
 
             <a href="/reading-page" use:link><button class="main__button">Lire</button></a>
             <a href="/create-story" use:link><button class="main__button">Écrire</button></a>
@@ -48,10 +51,18 @@
     </div>
     </main>
 
-
+</body>
     <style>
     
-    
+   body{
+        background: linear-gradient(45deg, #5fc2ba, #b6d1ce, rgba(246,246,246,1));
+        background-size: cover;
+        margin:0;
+        padding:0;
+    }
+    .hand{
+        width: 60%;;
+    }
     h1{
      margin-top: 25px;
     margin-bottom:55px;
@@ -135,12 +146,6 @@
     }
     }
 
-
-
-Resources
-       
-      
-    
     h3{
     font-weight: 400;
     }
