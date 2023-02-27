@@ -62,13 +62,6 @@
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
-        {#if user }
-            <a href="/" class="headerconnect" use:link>{user.first_name}</a>
-        {/if}
-        
-
-        <h1>Gestion de compte</h1>
-        <h2>Profil d'utilisateur</h2>
         
         <!-- Menu deroulant PSEUDO-->
 

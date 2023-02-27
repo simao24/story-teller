@@ -11,22 +11,22 @@
 
     let email = ''
     let password = ''
-    let username = ''
+
 
     function signin(e) {
         e.preventDefault()
 
 
-        if (email.length > 0 && password.length > 0 && username.length > 0) {
+        if (email.length > 0 && password.length > 0 ) {
             getAPI().post('/auth/login', {
-                    username,
+                    
                     email,
                     password
                 })
                 .then(function (result) {
                     setToken(result.data.data.access_token)
                     //push("/")
-                    //location.href = '/'
+                    location.href = '/'
                 
                 })
                 .catch(function () {
@@ -62,12 +62,7 @@
         <p class="form__paragraph">Vous n'avez pas de compte?<a href="/inscription" class="form__link">Inscrivez-vous</a></p>
 
         <div class="form__container">
-            <div class="form__group">
-                
-                <input type="name" name="name" class="form__input" placeholder=" " bind:value={username}>
-                <label for="email"class="form__label">Pseudo</label>
-                <span class="form__line"></span>
-            </div>
+           
             <div class="form__group">
                 
                 <input type="name" name="email" class="form__input" placeholder=" " bind:value={email}>
