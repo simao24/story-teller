@@ -11,11 +11,11 @@
     import MyStory from "./pages/MyStory.svelte";
     import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
-    import Footer from './composants/Footer.svelte';
-    
-    
     
     import Error from "./pages/Error.svelte";
+   
+    
+    
 
 
     const routes = {
@@ -24,10 +24,15 @@
         "/inscription": Inscription,
         "/reading-page": Readingpage,
         "/settings": Settings,
-        "/create-story": CreateStory,
+        "/createStory": CreateStory,
         "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
+        "/aventure": Aventure,
+        "/Science-fiction": ScienceFiction,
+        "/thriller": Thriller,
+        "/Romantique": Romantique,
+        "/Horreur": Horreur,
         "*": Error,
     };
 
