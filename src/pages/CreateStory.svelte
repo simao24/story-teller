@@ -1,10 +1,9 @@
 <script>
   import { link } from "svelte-spa-router";
 </script>
-
 <main>
   <section class="section-left">
-  
+
     <h4>pseudo</h4>
   </section>
   
@@ -14,7 +13,7 @@
     <textarea id="story" name="story" rows="5" cols="33" placeholder="Entrez votre histoire ici"></textarea>
     <button>Envoyer</button>
   </section>
-  
+
   <section class="sec-histoire">
     <div class="menu-deroulant-histoires">
       <button aria-label="Ouvrir le menu des options pour cette histoire">
@@ -28,6 +27,7 @@
     </div>
   </section>
 </main>
+
 
 <style>
   /* Reset de la marge et du padding */
@@ -113,3 +113,13 @@
     align-items: flex
   }
   </style>
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 <script>
     import Router from 'svelte-spa-router';
-
+    
     import Accueil from "./pages/Accueil.svelte";
     import Connexion from "./pages/Connexion.svelte";
     import Inscription from './pages/Inscription.svelte';
@@ -14,9 +14,6 @@
     
     import Error from "./pages/Error.svelte";
     import Footer from './composants/Footer.svelte';
-   
-    
-    
 
 
     const routes = {
