@@ -37,8 +37,10 @@
 </header>
 <main>
     <Router {routes} />
+    
 </main>
-<footer>
-    <Footer/>
-</footer>
+
+<Footer/>
+
+
 

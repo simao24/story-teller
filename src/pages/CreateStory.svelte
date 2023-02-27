@@ -4,7 +4,7 @@
 
 <main>
   <section class="section-left">
-    <img src="vite.svg" alt="image-profil">
+  
     <h4>pseudo</h4>
   </section>
   
@@ -112,3 +112,4 @@
     flex-direction: column;
     align-items: flex
   }
+  </style>

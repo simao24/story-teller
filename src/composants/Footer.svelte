@@ -14,15 +14,13 @@
           {/each}
         </ul>
         <div class="social-media-icons">
-            <a href="#">
+            
                 <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#">
+           
                 <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#">
+            
                 <i class="fab fa-instagram"></i>
-            </a>
+           
         </div>
 
         <button class="back-to-top" aria-label="Retour en haut de page">
