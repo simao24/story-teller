@@ -22,9 +22,9 @@
                     <span style="--i:8">E</span>
                     <span style="--i:9">L</span>
                     <span style="--i:10">L</span>
-                    <span style="--i:11">I</span>
-                    <span style="--i:12">N</span>
-                    <span style="--i:13">g</span>
+                    <span style="--i:11">E</span>
+                    <span style="--i:12">R</span>
+                    
                  
                 </div>
         </h1>
@@ -146,6 +146,12 @@
     }
     }
 
+
+
+Resources
+       
+      
+    
     h3{
     font-weight: 400;
     }
