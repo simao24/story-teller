@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
     import Router from 'svelte-spa-router';
 
     import Accueil from "./pages/Accueil.svelte";
