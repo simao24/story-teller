@@ -1,6 +1,7 @@
 <script>
   import { link } from "svelte-spa-router";
     import MyStory from "./MyStory.svelte";
+    
   let user = null;
 
  // recuperation d'histoires depuis notre BDD- tentative-
