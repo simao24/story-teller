@@ -6,7 +6,7 @@
             link
         } from 'svelte-spa-router'
         import {
-    getAPI,
+            getAPI,
             getToken,
             removeToken
         } from '../utils/api';
@@ -52,6 +52,12 @@
         function search_something() {
 
         }
+
+        let showDropdown = false;
+
+        function toggleDropdown() {
+            showDropdown = !showDropdown;
+        }
     </script>
 
     <header class="header">
@@ -72,15 +78,14 @@
             {#if user }
                 <button class="mainmenubtn">{user.first_name}</button>
             {/if}
-            <div class="dropdown-child">
+            <div class="dropdown-menu">
                 <ul>
                     <li><a href="/favorite" use:link>Favoris</a></li>
-                    <li><a href="/createStory" use:link>créer une histoire</a></li>
+                    <li><a href="/createStory" use:link>Créer une histoire</a></li>
                     <li><a href="/settings" use:link>Gestion de compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
-                    <li>
-                        
-                        <button class="logout" on:click={signoutHandle}>Se deconnecter</button>
+                    <li>   
+                        <button class="logout" on:click={signoutHandle}>Se déconnecter</button>
                     </li>
                 </ul>
             </div>
@@ -91,8 +96,6 @@
             <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Logo de l'application">
             </a>
-
-
           </div>
           <div class="div-nav-search">
             <i class="fa-solid fa-magnifying-glass fa-xl"></i>
@@ -110,11 +113,10 @@
     <style>
        
         img {
-
            width: 27%;
-            margin:15px;
-          
+            margin:15px; 
         }
+
         a {
             text-decoration: none;
             color: azure;
@@ -122,9 +124,8 @@
             font-weight: 700;
             margin-right: 50px;
             font-family: "Courier New";
-         
-
         }
+
         a:hover{
             color:  #5FC2BA;
             transition: .3seconds;
@@ -135,34 +136,73 @@
             width: auto;
             height: 20px;
             border-radius:25px;
-           
-
         }
+
         i {
             color:white;
         }
+
         .logout{
             padding: .5em 1em;
             cursor: pointer;
             border-radius: .5em;
-            background-color: yellow;
+            background-color: navy;
             color: white;
         }
-        .nav-bar1{
+
+        .nav-bar1 {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          text-decoration: none;
-        
-          
+          text-decoration: none;  
         }
         
         .div-nav-connexion {
-            
             color: beige;
-
         }
             
-     
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown button {
+            padding: 10px;
+            background-color: #0B162C;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #0B162C;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dropdown-menu li {
+        margin-bottom: 10px;
+    }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .dropdown-menu a:hover {
+    color: #5FC2BA;
+  }
     </style>
