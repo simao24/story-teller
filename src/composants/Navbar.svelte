@@ -1,9 +1,12 @@
     <script>
         import logo from '../assets/logo-thestoryteller.png'
+        
+
         import {
             link
         } from 'svelte-spa-router'
         import {
+    getAPI,
             getToken,
             removeToken
         } from '../utils/api';
@@ -11,7 +14,31 @@
             push
         } from 'svelte-spa-router';
 
+        
         let token = getToken()
+        let user = null;
+     
+
+        //récuperer les données de l'utilisateur
+        function getUserInfos(){
+            if (!token) {
+                return
+            }
+            getAPI().get('/users/me')
+                    .then(function(response){
+                        console.log(response);
+                        user = response.data.data;
+
+                        })
+                    .catch(function(err){
+                        removeToken();
+                        location.href = '/#/connexion';
+                        //a chaque fois que directus envoie un message d'erreur on supprime le token et 
+                        //cela redirige vers la page de connexion
+                    })
+
+        }
+        getUserInfos();
 
 
         function signoutHandle() {
@@ -28,33 +55,31 @@
     </script>
 
     <header class="header">
-        {#if token}
+        {#if user}
         <nav class="nav-bar" aria-label="header navigation">
             <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Story Teller logo">
              </a>
-        </nav>
+        </nav> 
         <form action="recherche.php" class="header__search">
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
-
-        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
-
-        <h1>Gestion de compte</h1>
-        <h2>Profil d'utilisateur</h2>
         
         <!-- Menu deroulant PSEUDO-->
 
         <menu class="dropdown">
-            <button class="mainmenubtn">Pseudo</button>
+            {#if user }
+                <button class="mainmenubtn">{user.first_name}</button>
+            {/if}
             <div class="dropdown-child">
                 <ul>
                     <li><a href="/favorite" use:link>Favoris</a></li>
-                    <li><a href="/create-story" use:link>créer une histoire</a></li>
+                    <li><a href="/createStory" use:link>créer une histoire</a></li>
                     <li><a href="/settings" use:link>Gestion de compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
                     <li>
+                        
                         <button class="logout" on:click={signoutHandle}>Se deconnecter</button>
                     </li>
                 </ul>

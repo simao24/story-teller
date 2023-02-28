@@ -11,15 +11,15 @@
 
     let email = ''
     let password = ''
-    let username = ''
+
 
     function signin(e) {
         e.preventDefault()
 
 
-        if (email.length > 0 && password.length > 0 && username.length > 0) {
+        if (email.length > 0 && password.length > 0 ) {
             getAPI().post('/auth/login', {
-                    username,
+                    
                     email,
                     password
                 })
@@ -27,6 +27,7 @@
                     setToken(result.data.data.access_token)
                     //push("/")
                     location.href = '/'
+                
                 })
                 .catch(function () {
                     console.log('error')
@@ -58,15 +59,10 @@
 
     <form action ="#" class="form" aria-label="Informations de connexion" on:submit={signin}>
         <h2 class="form__title">Connexion</h2>
-        <p class="form__paragraph">Vous n'avez pas de compte?<a href="/inscription" class="form__link">Inscrivez-vous</a></p>
+        <p class="form__paragraph">Vous n'avez pas de compte?<a href="/#/inscription" class="form__link">Inscrivez-vous</a></p>
 
         <div class="form__container">
-            <div class="form__group">
-                
-                <input type="name" name="name" class="form__input" placeholder=" " bind:value={username}>
-                <label for="email"class="form__label">Pseudo</label>
-                <span class="form__line"></span>
-            </div>
+           
             <div class="form__group">
                 
                 <input type="name" name="email" class="form__input" placeholder=" " bind:value={email}>
@@ -132,13 +128,12 @@ body {
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
 }
+
 .form__title{
     font-size: 2rem ;
     margin-bottom: .6rem;
     color: #1C2942;
     font-weight: bold;
-    
-
 }
 
 .form__paragraph{
@@ -150,6 +145,7 @@ body {
     font-weight: 600;
     color:rgb(0, 102, 255);
 }
+
 .form__container{
     margin-top: 3rem;
     display:grid;
@@ -206,8 +202,6 @@ body {
     padding: .8em 0;
     border: none;
     border-radius: .5em;
-
-
 }
 
 .form__submit:hover{

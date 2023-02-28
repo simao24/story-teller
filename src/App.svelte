@@ -2,7 +2,7 @@
 // @ts-nocheck
 
     import Router from 'svelte-spa-router';
-
+    
     import Accueil from "./pages/Accueil.svelte";
     import Connexion from "./pages/Connexion.svelte";
     import Inscription from './pages/Inscription.svelte';
@@ -13,18 +13,20 @@
     import MyStory from "./pages/MyStory.svelte";
     import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
+
     
     
+
+              
+
     import Error from "./pages/Error.svelte";
     import Footer from './composants/Footer.svelte';
-   
-    
-    
 
 
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
+        "/ecrire": Connexion,
         "/inscription": Inscription,
         "/reading-page": Readingpage,
         "/settings": Settings,
@@ -32,6 +34,7 @@
         "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
+
         "*": Error,
     };
 
@@ -43,7 +46,6 @@
     <Router {routes} />
     
 </main>
-
 <Footer/>
 
 

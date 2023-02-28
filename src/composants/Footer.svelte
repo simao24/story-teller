@@ -12,6 +12,7 @@
          
         </ul>
         <div class="social-media-icons">
+
             
                 <i class="fab fa-facebook-f"></i>
            
@@ -20,6 +21,7 @@
                 <i class="fab fa-instagram"></i>
            
         </div>
+
         
             <div>
                 <p>Contact : thestoryteller.maya5@gmail.com</p>
@@ -34,9 +36,12 @@
 </footer>
 
 
+
 <style>   
+
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
  
+
 .footer-nav {
   background-color: #222;
   color: #fff;
@@ -45,6 +50,9 @@
   justify-content: space-between;
   padding: 1rem;
 }
+
+
+
 
 .footer-links {
   list-style: none;
@@ -56,15 +64,25 @@
   align-items: center;
 }
 
+
+
+
 .footer-item {
   margin: 0.5rem;
   font-size: 1.2rem;
 }
 
+
+
 .footer-item a {
   color: #fff;
   text-decoration: none;
 }
+
+.footer-item:hover {
+  border-bottom: 2px solid #fff;
+}
+
 
 .footer-item:hover {
   border-bottom: 2px solid #fff;
@@ -76,6 +94,8 @@
   margin-right: 1rem;
 }
 
+
+
 .top-btn {
   all: unset; 
   position: fixed;
@@ -86,5 +106,9 @@
   opacity: 0;
   transition: .3s;
 }
+
+
     
     </style> 
+
+
