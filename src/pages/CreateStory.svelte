@@ -3,7 +3,38 @@
     import MyStory from "./MyStory.svelte";
     
   let user = null;
+  import {
+    getAPI,
+            getToken,
+            removeToken
+        } from '../utils/api';
 
+
+  // 1. Fonction pour envoyer les histoires écrites par l'utilisateur dans ma bdd
+
+  
+  let title ='';
+  let resume='';
+  let content='';
+  // 1.1- Définir la fonction handleSubmit qui sera applée lorsque l'utilisateur soumettra le formulaire. 
+  //Cette fonction effectuera une requête HTTP POST à notre API Directus pour enregistrer l'histoire dans notre bdd.
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+      try{
+        const reponse = await getAPI().post('/items/Story',{title, resume, content});
+       
+
+     
+      console.log(reponse.data);// Affiche la réponse de l'API dans la console
+      content=''; // Efface le texte dans le textarea
+      title=''; //
+      resume=''; //
+
+  } catch(error){
+    console.error(error);
+  }
+  }
  // recuperation d'histoires depuis notre BDD- tentative-
 
  /*const load_stories = async () => {
@@ -66,13 +97,18 @@
   
   <section class="section-centrale">
     <h2>Mon profil</h2>
-    <label for="story">Écrire une histoire</label>
-    <input type="text" id="title" name="title" placeholder="Titre" class="create__story-title">
-
-
-    <input type="text" id="category" name="category" placeholder="Categorie" class="create__story-categorie">
-    <textarea id="story" name="story" rows="5" cols="33" placeholder="Entrez votre histoire ici"></textarea>
-    <button>Envoyer</button>
+    <form on:submit={handleSubmit}>
+      <label for="story">Écrire une histoire</label>
+      <input type="text" id="title" name="title" placeholder="Titre" class="create__story-title" bind:value={title}>
+      <label for="story">Resume</label>
+      <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Entrez votre resume ici" bind:value={resume}></textarea>
+      <label for="story">Categorie</label>
+      <input type="text" id="category" name="category" placeholder="Categorie" class="create__story-categorie">
+      <label for="story">Mon histoire</label>
+      <textarea id="story" name="story" rows="5" cols="33" placeholder="Entrez votre histoire ici" bind:value={content}></textarea>
+    
+      <button type="submit">Envoyer</button>
+  </form>
  </section>
 
   <section class="sec-histoire">
@@ -81,9 +117,9 @@
         <i class="fas fa-ellipsis-v"></i>
       </button>
       <div class="sous-menu" role="menu">
-        <a href="#" role="menuitem" use:link>Modifier</a>
-        <a href="#" role="menuitem" use:link>Supprimer</a>
-        <a href="#" role="menuitem" use:link>Ajouter une image</a>
+        <a href="/" role="menuitem" use:link>Modifier</a>
+        <a href="/" role="menuitem" use:link>Supprimer</a>
+        <a href="/" role="menuitem" use:link>Ajouter une image</a>
       </div>
     </div>
   </section>

@@ -20,7 +20,7 @@
             <label for="confirm">Confirmer le mot de passe</label>
             <input required type="confirm" name="confirm" id="confirm" placeholder="***********">
 
-            <input type="submit" value="S'inscrire">
+            <input type="submit" class="form__submit" value="S'inscrire">
 
         </form>
             
@@ -43,6 +43,7 @@
         flex-direction: column;
         margin: auto;
         width: 50%;
+      
     }
 
     #title1 {
@@ -53,13 +54,35 @@
     form {
         display: grid;
         justify-content: center;
+    
+       
     }
 
     label {
         margin-bottom: 5px;
+       
     }
 
     input {
         margin-bottom: 10px;
+        
     }
+    .form__submit{
+    background-color:  #1C2942;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: .8em 0;
+    border: none;
+    border-radius: .5em;
+
+
+}
+
+.form__submit:hover{
+    background-color: #5FC2BA;
+    transition: .3s;
+    color:  #1C2942;
+}
 </style>
