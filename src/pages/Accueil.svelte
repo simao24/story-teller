@@ -32,7 +32,7 @@
           
 
             <a href="/reading-page" use:link><button class="main__button">Lire</button></a>
-            <a href="/create-story" use:link><button class="main__button">Écrire</button></a>
+            <a href="/ecrire" use:link><button class="main__button">Écrire</button></a>
         </div>
         <div id="scroll-text">
         <h3 class="main__subtitle">Votre histoire originale pourrait être le prochain best-seller</h3>
@@ -60,6 +60,7 @@
         margin:0;
         padding:0;
     }
+   
     .hand{
         width: 60%;;
     }
@@ -98,6 +99,7 @@
     height: 60%;
     margin-left: 50px;
     margin-right: 50px;
+    margin-bottom: 25px;
     border-radius: 25px;
     }
 

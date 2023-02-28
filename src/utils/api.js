@@ -25,3 +25,8 @@ export const getAPI = function(){
         headers: headers
     })
 }
+
+export const getInformation = function() {
+   
+
+}
