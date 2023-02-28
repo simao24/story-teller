@@ -12,23 +12,24 @@
     let email = ''
     let password = ''
     let description = ''
+    let role ='0d2b02a6-7bd6-4b31-a279-3c2744f9797e'
 
 
     function signin(e) {
         e.preventDefault()
 
 
-        if (email.length > 0 && password.length > 0 && first_name.length > 0 && description.length > 0) {
-            getAPI().post('/auth/signin', {
+        if (email.length > 0 && password.length > 0 && first_name.length > 0 && description.length > 0 && role.length > 0) {
+            getAPI().post('/users', {
                     first_name,
                     email,
                     description,
-                    password
+                    password,
+                    role
                 })
                 .then(function (result) {
-                    setToken(result.data.data.access_token)
-                    //push("/")
-                    location.href = '/'
+                    console.log(result);
+                    location.href = '/#/connexion'
                 
                 })
                 .catch(function () {
@@ -61,7 +62,7 @@
 <body aria-labelledby="title1">
   
 
-     <form action="#" class="form" aria-label="Informations de connexion">
+     <form action="#" class="form" aria-label="Informations de connexion" on:submit={signin}>
          <h2 class="form__title">Inscription</h2>
             <div class="form__container">
            
