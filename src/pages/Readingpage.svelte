@@ -73,7 +73,8 @@
         <div class="card">
             
             <img src={imghomepage} alt="aventure au pole Nord">
-            <a href="/favorite" class="fa-regular fa-thumbs-up" use:link></a>
+            <a class="fa-regular fa-thumbs-up" onclick={() => addFavorite(story)}></a>
+
                         <div class="container">
                 <h4><b>{story.title}</b></h4>
                 <span class="auteur">Auteur:</span>
