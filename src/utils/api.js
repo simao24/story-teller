@@ -25,8 +25,16 @@ export const getAPI = function(){
         headers: headers
     })
 }
+
 export const updateToken = function() {
     setInterval(function(){
         
     },10000) 
 }
+
+
+export const getInformation = function() {
+   
+
+}
+
