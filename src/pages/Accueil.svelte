@@ -76,7 +76,7 @@
     }
 
     .waviy span {
-    font-family: 'Alfa Slab One', cursive;
+    font-family: 'Alfa Slab One';
     position: relative;
     display: inline-block;
     color: rgb(6, 6, 6);
