@@ -26,7 +26,7 @@
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
-        "/ecrire": Connexion,
+        "/#/connexion": Connexion,
         "/inscription": Inscription,
         "/#/reading-page": Readingpage,
         "/settings": Settings,
