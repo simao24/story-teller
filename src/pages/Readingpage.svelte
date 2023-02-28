@@ -1,19 +1,53 @@
 <script>
+  import { push } from 'svelte-spa-router';
+  import imghomepage from "../assets/img-homepage.jpg"
+  import {
+      link
+  } from "svelte-spa-router";
 
-    import { push } from 'svelte-spa-router';
-    import imghomepage from "../assets/img-homepage.jpg"
-    import {
-        link
-    } from "svelte-spa-router";
+  const get_stories = async () => {
+    const response = await fetch(import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields=*,user_id.*,category_id.*");
+    const json = await response.json();
+    return json.data;
+  }
 
-    const get_stories = async () => {
-        const response = await fetch(import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields=*,user_id.*,category_id.*");
-        const json = await response.json();
-        return json.data;
+  // Ajouter une histoire aux favoris
+  const addFavorite = (story) => {
+    let favorites = [];
+
+    // Récupérez les données stockées dans le local storage sous la clé "favorites"
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Si des favoris ont été trouvés, mettez à jour la liste des favoris
+    if (storedFavorites.length > 0) {
+      favorites = storedFavorites;
     }
-</script>
-       
 
+    // Vérifiez si l'histoire existe déjà dans la liste des favoris
+    const exists = favorites.find((favorite) => favorite.id === story.id);
+
+    // Si l'histoire n'existe pas encore dans la liste des favoris, ajoutez-la
+    if (!exists) {
+      favorites.push({
+        id: story.id,
+        title: story.title,
+        author: story.user_id.pseudo,
+        description: story.resume,
+        image: imghomepage
+      });
+
+      // Stockez la liste des favoris mise à jour dans le local storage sous la clé "favorites"
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+      alert("Histoire ajoutée aux favoris !");
+    } else {
+      alert("Cette histoire est déjà dans vos favoris !");
+    }
+  }
+</script>
+
+
+      
 <main aria-labelledby="title1">
     <div class="container-reading">
         <h1 id="title1">HISTOIRES</h1>
