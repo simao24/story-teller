@@ -25,10 +25,10 @@
 
     const routes = {
         "/": Accueil,
-        "/connexion": Connexion,
+        "/#/connexion": Connexion,
         "/ecrire": Connexion,
         "/inscription": Inscription,
-        "/reading-page": Readingpage,
+        "/#/reading-page": Readingpage,
         "/settings": Settings,
         "/createStory": CreateStory,
         "/favorite": Favorite,
