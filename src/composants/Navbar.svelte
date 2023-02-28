@@ -60,7 +60,7 @@
             <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
                 <img src={logo} alt="Story Teller logo">
              </a>
-        </nav>
+        </nav> 
         <form action="recherche.php" class="header__search">
             <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
