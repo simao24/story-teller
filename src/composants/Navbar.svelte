@@ -39,8 +39,6 @@
             <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
         </form>
 
-        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
-
         <h1>Gestion de compte</h1>
         <h2>Profil d'utilisateur</h2>
         
@@ -51,7 +49,7 @@
             <div class="dropdown-child">
                 <ul>
                     <li><a href="/favorite" use:link>Favoris</a></li>
-                    <li><a href="/create-story" use:link>créer une histoire</a></li>
+                    <li><a href="/create-story" use:link>Créer une histoire</a></li>
                     <li><a href="/settings" use:link>Gestion de compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
                     <li>
@@ -86,7 +84,7 @@
        
         img {
 
-           width: 27%;
+           width: 50%;
             margin:15px;
           
         }
@@ -139,5 +137,70 @@
 
         }
             
-     
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 13%;
+        }
+
+        .dropdown-child {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        }
+
+        .dropdown-child ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        }
+
+        .dropdown-child ul li {
+        display: block;
+        }
+
+        .dropdown-child ul li a {
+        display: block;
+        padding: 5px 10px;
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+        }
+
+        .dropdown-child ul li:hover {
+        background-color: #f9f9f9;
+        }
+
+        .mainmenubtn {
+        display: inline-block;
+        background-color: #f9f9f9;
+        color: #333;
+        font-size: 16px;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        }
+
+        .mainmenubtn:hover {
+        background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-child {
+        display: block;
+        }
+
+        .logout {
+        background-color: transparent;
+        color: #333;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+        }
+
+        .logout:hover {
+        color: red;
+        }
     </style>
