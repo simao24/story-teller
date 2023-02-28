@@ -100,11 +100,11 @@
     <form on:submit={handleSubmit}>
       <label for="story">Écrire une histoire</label>
       <input type="text" id="title" name="title" placeholder="Titre" class="create__story-title" bind:value={title}>
-      <label for="story">Resume</label>
+      <label for="resume">Resume</label>
       <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Entrez votre resume ici" bind:value={resume}></textarea>
-      <label for="story">Categorie</label>
+      <label for="category">Categorie</label>
       <input type="text" id="category" name="category" placeholder="Categorie" class="create__story-categorie">
-      <label for="story">Mon histoire</label>
+      <label for="writemystory">Mon histoire</label>
       <textarea id="story" name="story" rows="5" cols="33" placeholder="Entrez votre histoire ici" bind:value={content}></textarea>
     
       <button type="submit">Envoyer</button>
