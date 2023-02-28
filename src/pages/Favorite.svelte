@@ -1,82 +1,137 @@
 <script>
-    import { link } from "svelte-spa-router";
+  import { onMount } from "svelte";
+  import { getFavorites } from "../api/favorites";
+  import imghomepage from "../assets/img-homepage.jpg"; // Définir la variable ici
+
+  let favoriteBooks = [];
+
+  const loadFavoriteBooks = async () => {
+    favoriteBooks = await getFavorites();
+  };
+
+  onMount(() => {
+    loadFavoriteBooks();
+  });
 </script>
 
 <main aria-labelledby="title1">
-    
-    <div class="favorites-container">
+  <div class="profile-area">
+    <img src={imghomepage} alt="accueil">
+    <h3 class="profile-username"></h3>
+  </div>
 
-        <div class="profile-area">
-            <img src="user_profile.jpeg" alt="Photo de profil">
-            <h3 class="profile-username">Pseudo</h3>
+  <div class="container-reading">
+    <h1 id="title1">FAVORIS</h1>
+
+    {#each favoriteBooks as book}
+      <div class="card">
+        <img src={book.imageUrl} alt={book.title} />
+        <a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link />
+        <div class="container">
+          <h4><b>{book.title}</b></h4>
+          <span class="auteur">Auteur:</span>
+          <p>{book.author}</p>
+          <span class="description">Description:</span>
+          <p>{book.description}</p>
         </div>
-
-        <div class="stories">
-
-            <h1 class="favoris">FAVORIS</h1>
-
-            <div class="story">
-                <div class="story-picture">
-                    <img src="../accueil/img/adventure-img.jpeg" alt="Image de l'histoire" class="storyimage">
-                    <div class="thumbs-up"><i class="fa-solid fa-thumbs-up"></i></div>
-                </div>
-
-                <div class="story-text">
-                    <h3 class="story-title">Titre de l'histoire</h3>
-                    <h4 class="author">Auteur</h4>
-                    <p class="text-paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel laborum doloremque quae unde, fuga molestias maiores corporis, similique dolorum facilis aspernatur, inventore hic velit necessitatibus? Perspiciatis doloribus deserunt et autem ipsa iste, nulla, sapiente repellat officia ad dolorem vero. Nam.</p>
-                </div>
-            </div>
-    
-            <div class="story">
-                <div class="story-picture">
-                    <img src="../accueil/img/adventure-img.jpeg" alt="Image de l'histoire" class="storyimage">
-                    <div class="thumbs-up"><i class="fa-solid fa-thumbs-up"></i></div>
-                </div>
-
-                <div class="story-text">
-                    <h3 class="story-title">Titre de l'histoire</h3>
-                    <h4 class="author">Auteur</h4>
-                    <p class="text-paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel laborum doloremque quae unde, fuga molestias maiores corporis, similique dolorum facilis aspernatur, inventore hic velit necessitatibus? Perspiciatis doloribus deserunt et autem ipsa iste, nulla, sapiente repellat officia ad dolorem vero. Nam.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+      </div>
+    {/each}
+  </div>
 </main>
 
-<style>
-    .favorites-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-top: 15px;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 100px;
-    }
-
-    .profile-area {
-        width: 30%;
-        margin-top: 100px;
-    }
-
-    .stories {
-        margin: auto;
-    }
-
-    .story {
-        width: 65%;
-    }
-
-    .thumbs-up {
-        text-align: right;
-    }
-
-    .story-text {
-        margin-left: 15px;
-        margin-bottom: 15px;
-    }
-</style>
+      
+      <style>
+    
+        main {
+          display: flex;
+          justify-content: center;
+        }
+      
+        .container-reading {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 80%;
+          margin-left: 100px;
+          padding-left: 20px;
+          border-left: 1px solid #ccc;
+        }
+      
+        .profile-area {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 1%;
+          padding-right: 1px;
+          border-right: 1px #ccc;
+        }
+      
+        .profile-area img {
+          margin-bottom: 1rem;
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+        }
+      
+        .card {
+          display: flex;
+          align-items: center;
+          margin: 2rem 0;
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          max-width: 600px;
+        }
+      
+        .card img {
+          margin-right: 1rem;
+          width: 150px;
+          height: 150px;
+          object-fit: cover;
+        }
+      
+        .card .container {
+          display: flex;
+          flex-direction: column;
+        }
+      
+        .card h4 {
+          margin: 0;
+        }
+      
+        .card .auteur {
+          margin-right: 0.5rem;
+        }
+      
+        .card p {
+          margin: 0.5rem 0;
+        }
+      
+        .card .description {
+          margin-top: 0.5rem;
+        }
+      
+        .auteur {
+          font-weight: bold;
+          margin-right: 5px;
+          display: inline-block;
+        }
+      
+        #title1 {
+          text-align: center;
+        }
+      
+        .divider {
+          border-left: 1px solid #ccc;
+          height: 100%;
+          position: absolute;
+          left: 18%;
+          top: 0;
+        }
+      
+        .profile-area {
+          position: relative;
+        }
+      </style>
+      
+    
