@@ -1,12 +1,10 @@
 <script>
       import { link } from "svelte-spa-router";
-      import {getAPI, setToken} from "../utils/api";
+      import {getAPI } from "../utils/api";
       
 
         // Configuration de la requête
-        
-
-          
+                 
           let newFirstName = "";
           let newEmail = "";
           let newPassword = "";
@@ -26,21 +24,21 @@
           }
           function handleEditClick() {
             let data= {}
+            
            if(newFirstName !=""){
-            data.first_Name=newFirstName
+            data.first_name=newFirstName
            }  
            if(newEmail !=""){
-            data.newEmail=newEmail
+            data.email=newEmail
            }  
            if(newPassword !=""){
-            data.newPassword=newPassword
+            data.password=newPassword
            }  
            if(newAvatar !=""){
-            data.newAvatar=newAvatar
+            data.avatar=newAvatar
            }  
 
-
-          getAPI().patch("/users/me", )
+          getAPI().patch("/users/me", data)
          .then (function(response){
           console.log(response);
          })
@@ -59,7 +57,7 @@
     <div class="edit-elements">
       <p>Photo de profil</p>
       <p>
-        <input type="text" value={newAvatar} on:input={handleAvatarChange} />
+        <input type="text" id= "avatar" value={newAvatar} on:input={handleAvatarChange}/>
       </p>
       <p>Pseudo</p>
       <p>
