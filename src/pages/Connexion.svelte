@@ -132,13 +132,12 @@ body {
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
 }
+
 .form__title{
     font-size: 2rem ;
     margin-bottom: .6rem;
     color: #1C2942;
     font-weight: bold;
-    
-
 }
 
 .form__paragraph{
@@ -150,6 +149,7 @@ body {
     font-weight: 600;
     color:rgb(0, 102, 255);
 }
+
 .form__container{
     margin-top: 3rem;
     display:grid;
@@ -206,8 +206,6 @@ body {
     padding: .8em 0;
     border: none;
     border-radius: .5em;
-
-
 }
 
 .form__submit:hover{

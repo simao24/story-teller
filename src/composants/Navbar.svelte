@@ -29,115 +29,120 @@
 
     <header class="header">
         {#if token}
-        <nav class="nav-bar" aria-label="header navigation">
-            <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
-                <img src={logo} alt="Story Teller logo">
-             </a>
-        </nav>
-        <form action="recherche.php" class="header__search">
-            <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
-            <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
-        </form>
+            <nav class="nav-bar" aria-label="header navigation">
+                <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
+                    <img src={logo} alt="Story Teller logo">
+                </a>
+            </nav>
+            <form action="recherche.php" class="header__search">
+                <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
+            </form>
 
-        <a href="/" class="headerconnect" use:link>Pseudo</a> <!-- ICI -->
+            <a href="/" class="headerconnect" use:link>Pseudo</a> 
 
-        <h1>Gestion de compte</h1>
-        <h2>Profil d'utilisateur</h2>
-        
-        <!-- Menu deroulant PSEUDO-->
+            <h1>Gestion de compte</h1>
 
-        <menu class="dropdown">
-            <button class="mainmenubtn">Pseudo</button>
-            <div class="dropdown-child">
+            <h2>Profil d'utilisateur</h2>
+            
+            <!-- Menu deroulant PSEUDO-->
+
+            <nav>
                 <ul>
+                <li>
+                    <button class="dropdown-toggle">Pseudo</button>
+                    <ul class="dropdown-menu">
                     <li><a href="/favorite" use:link>Favoris</a></li>
-                    <li><a href="/create-story" use:link>créer une histoire</a></li>
-                    <li><a href="/settings" use:link>Gestion de compte</a></li>
+                    <li><a href="/create-story" use:link>Créer une histoire</a></li>
+                    <li><a href="/settings" use:link>Gestion du compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
-                    <li>
-                        <button class="logout" on:click={signoutHandle}>Se deconnecter</button>
-                    </li>
+                    <li><button id="logout-btn">Se déconnecter</button></li>
+                    </ul>
+                </li>
                 </ul>
-            </div>
-        </menu>
-    {:else}
-      <nav class="nav-bar1" aria-label="header navigation">
-          <div class="div-nav-logo">
-            <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site" use:link>
-                <img src={logo} alt="Logo de l'application">
-            </a>
+            </nav>
+
+        {:else}
+
+            <nav class="nav-bar1" aria-label="header navigation">
+                <div class="div-nav-logo">
+                    <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site" use:link>
+                        <img src={logo} alt="Logo de l'application">
+                    </a>
 
 
-          </div>
-          <div class="div-nav-search">
-            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-            <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
-          </div>
-          <div class="div-nav-connexion">
-            <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
-            use:link>Connexion</a>
-          </div>
-      </nav>
+                </div>
+                <div class="div-nav-search">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                    <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
+                </div>
+                <div class="div-nav-connexion">
+                    <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
+                    use:link>Connexion</a>
+                </div>
+            </nav>
 
-    {/if}
+        {/if}
     </header>
 
-    <style>
-       
-        img {
+<style>
+    nav {
+        background-color: #1C2942;
+        color: #fff;
+    }
 
-           width: 27%;
-            margin:15px;
-          
-        }
-        a {
-            text-decoration: none;
-            color: azure;
-            font-size:x-large; 
-            font-weight: 700;
-            margin-right: 50px;
-            font-family: "Courier New";
-         
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
-        }
-        a:hover{
-            color:  #5FC2BA;
-            transition: .3seconds;
-        }
+    li {
+        display: inline-block;
+        position: relative;
+    }
 
-       
-        #searchbar {
-            width: auto;
-            height: 20px;
-            border-radius:25px;
-           
+    a {
+        color: #fff;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+    }
 
-        }
-        i {
-            color:white;
-        }
-        .logout{
-            padding: .5em 1em;
-            cursor: pointer;
-            border-radius: .5em;
-            background-color: yellow;
-            color: white;
-        }
-        .nav-bar1{
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          text-decoration: none;
-        
-          
-        }
-        
-        .div-nav-connexion {
+    button {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        font-size: 16px;
+        padding: 10px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .dropdown-toggle {
+        border-radius: 25px;
+    }
+
+    .dropdown-menu {
+        background-color: #1C2942;
+        display: none;
+        list-style: none;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 1;
+    }
+
+    .dropdown-menu li {
+        display: block;
+    }
+
+    .dropdown-toggle:focus + .dropdown-menu,
+    .dropdown-menu:focus {
+        display: block;
+    }
             
-            color: beige;
-
-        }
-            
-     
-    </style>
+</style>
