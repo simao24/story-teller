@@ -75,7 +75,7 @@
             <div class="dropdown-child">
                 <ul>
                     <li><a href="/favorite" use:link>Favoris</a></li>
-                    <li><a href="/create-story" use:link>créer une histoire</a></li>
+                    <li><a href="/createStory" use:link>créer une histoire</a></li>
                     <li><a href="/settings" use:link>Gestion de compte</a></li>
                     <li><a href="/my-story" use:link>Mes histoires</a></li>
                     <li>
