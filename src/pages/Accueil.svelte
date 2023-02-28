@@ -60,6 +60,7 @@
         margin:0;
         padding:0;
     }
+   
     .hand{
         width: 60%;;
     }
@@ -98,6 +99,7 @@
     height: 60%;
     margin-left: 50px;
     margin-right: 50px;
+    margin-bottom: 25px;
     border-radius: 25px;
     }
 

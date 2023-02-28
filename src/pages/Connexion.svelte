@@ -59,7 +59,7 @@
 
     <form action ="#" class="form" aria-label="Informations de connexion" on:submit={signin}>
         <h2 class="form__title">Connexion</h2>
-        <p class="form__paragraph">Vous n'avez pas de compte?<a href="/inscription" class="form__link">Inscrivez-vous</a></p>
+        <p class="form__paragraph">Vous n'avez pas de compte?<a href="/#/inscription" class="form__link">Inscrivez-vous</a></p>
 
         <div class="form__container">
            

@@ -28,6 +28,17 @@
 </main>
 
 <style>
+    
+    main{
+    background-color: #e5e5f7;
+    opacity: 0.7;
+    background-image: radial-gradient(#5FC2BA 0.75px, #e5e5f7 0.75px);
+    background-size: 15px 15px;
+    display: flex;
+    min-height: 100vh;
+    }
+
+
     .container {
         flex-direction: column;
         margin: auto;
