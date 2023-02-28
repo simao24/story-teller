@@ -1,17 +1,15 @@
 <script>
-    export let data;
+ 
 </script>
 
 <footer>
     <nav class="footer-nav">
         <ul class="footer-links">
-          {#each data.links as link}
-            {#if link.displayInFooter}
+         
               <li class="footer-item">
-                <a href={link.url}>{link.linkText}</a>
+               
               </li>
-            {/if}
-          {/each}
+         
         </ul>
         <div class="social-media-icons">
             
@@ -22,14 +20,22 @@
                 <i class="fab fa-instagram"></i>
            
         </div>
+        
+            <div>
+                <p>Contact : thestoryteller.maya5@gmail.com</p>
+            </div>
+            <div class="footer-name">
+                <p>© The Story Teller 2023</p>
+            </div>
 
-        <button class="back-to-top" aria-label="Retour en haut de page">
+        <button class="top-btn" aria-label="Retour en haut de page">
             <i class="fas fa-arrow-up"></i>
         </button>
 </footer>
 
 
 <style>   
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
  
 .footer-nav {
   background-color: #222;
@@ -70,31 +76,15 @@
   margin-right: 1rem;
 }
 
-.social-media-icons a {
-  color: #fff;
-  margin-right: 1rem;
-}
-
-.back-to-top {
+.top-btn {
+  all: unset; 
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: #222;
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  padding: 1rem;
-  border-radius: 50%;
+  right: 20px;
+  bottom: 20px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  z-index: 9999;
+  transform:scale(1.8);
+  opacity: 0;
+  transition: .3s;
 }
-
-.back-to-top:hover {
-  background-color: #fff;
-  color: #222;
-  transform: scale(1.1);
-}
-
     
     </style> 
