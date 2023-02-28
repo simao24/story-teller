@@ -6,10 +6,6 @@
         // Configuration de la requête
         
 
-          let firstName = "leyti";
-          let email = "leyti@gmail.com";
-          let password = "**********";
-          let avatar = "https://example.com/leyti.jpg";
           
           let newFirstName = "";
           let newEmail = "";
@@ -29,14 +25,22 @@
             newAvatar = event.target.value;
           }
           function handleEditClick() {
-            getAPI().patch("/users/me", {
-          "first_Name": newFirstName, 
-          "email":newEmail ,
-          "password": newPassword,
-          "avatar": newAvatar,
-          "id":"",
+            let data= {}
+           if(newFirstName !=""){
+            data.first_Name=newFirstName
+           }  
+           if(newEmail !=""){
+            data.newEmail=newEmail
+           }  
+           if(newPassword !=""){
+            data.newPassword=newPassword
+           }  
+           if(newAvatar !=""){
+            data.newAvatar=newAvatar
+           }  
 
-         } )
+
+          getAPI().patch("/users/me", )
          .then (function(response){
           console.log(response);
          })

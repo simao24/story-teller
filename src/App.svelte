@@ -11,12 +11,7 @@
     import MyStory from "./pages/MyStory.svelte";
     import Favorite from './pages/Favorite.svelte';
     import StoryDetail from "./pages/StoryDetail.svelte";
-    import Horreur from "./pages/Horreur.svelte";
-    import Romantique from "./pages/Romantique.svelte";
-    import Aventure from "./pages/Aventure.svelte";
-    import ScienceFiction from "./pages/ScienceFiction.svelte";
-    import Thriller from "./pages/Thriller.svelte";
-    
+              
     import Error from "./pages/Error.svelte";
     import Footer from './composants/Footer.svelte';
 
@@ -32,11 +27,7 @@
         "/favorite": Favorite,
         "/my-story": MyStory,
         "/story-detail": StoryDetail,
-        "/aventure": Aventure,
-        "/Science-fiction": ScienceFiction,
-        "/thriller": Thriller,
-        "/Romantique": Romantique,
-        "/Horreur": Horreur,
+              
         "*": Error,
     };
 
