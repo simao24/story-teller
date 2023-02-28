@@ -117,9 +117,12 @@
         <i class="fas fa-ellipsis-v"></i>
       </button>
       <div class="sous-menu" role="menu">
+
+
         <a href="/" role="menuitem" use:link>Modifier</a>
         <a href="/" role="menuitem" use:link>Supprimer</a>
         <a href="/" role="menuitem" use:link>Ajouter une image</a>
+
       </div>
     </div>
   </section>
@@ -147,13 +150,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .section-left img {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    margin-bottom: 1rem;
   }
 
   .section-left h4 {
