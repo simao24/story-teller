@@ -108,8 +108,8 @@
 </header>
 <style>
     img {
-       width: 6em;
-        margin:15px;
+    width: 6em;
+    margin:15px;
     }
     a {
         text-decoration: none;
@@ -117,10 +117,10 @@
         font-size:x-large;
         font-weight: 700;
         margin-right: 50px;
-        font-family: "Courier New";
+        font-family: "Raleway", sans serif;
     }
     a:hover{
-        color:  #5FC2BA;
+        color:#5FC2BA;
         transition: .3seconds;
     }
     .div-nav-search{
@@ -138,7 +138,7 @@
         padding: .5em 1em;
         cursor: pointer;
         border-radius: .5em;
-        background-color: yellow;
+        background-color:#0B162C ;
         color: white;
     }
     .nav-bar1{
@@ -160,6 +160,8 @@
     display: none;
     position: absolute;
     z-index: 1;
+    border-radius: 15px;
+    line-height:1.5em;
     }
     .dropdown-child ul {
     list-style: none;
@@ -180,6 +182,7 @@
     background-color: #F9F9F9;
     }
     .mainmenubtn {
+        width: 12em;
     display: inline-block;
     background-color: #0B162C;
     color: white;
@@ -187,25 +190,30 @@
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50px;
     border: solid 1px #CCC;
     }
     .mainmenubtn:hover {
-    background-color: #ddd;
+    background-color: #FFFFFF;
+    color:#0B162C
     }
     .dropdown:hover .dropdown-child {
     display: block;
     }
     .logout {
-    background-color: transparent;
-    color: #333;
+    text-align: center;
+    background-color:transparent;
+    color: #FFFFFF;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
     text-decoration: none;
     }
     .logout:hover {
+    font-size:large;
     color: red;
+    transition: .3seconds;
     }
 </style>
