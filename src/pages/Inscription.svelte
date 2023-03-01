@@ -11,6 +11,7 @@
     let first_name = '';
     let email = ''
     let password = ''
+    let confirmpassword = ''
     let description = ''
     let role ='0d2b02a6-7bd6-4b31-a279-3c2744f9797e'
 
@@ -19,12 +20,13 @@
         e.preventDefault()
 
 
-        if (email.length > 0 && password.length > 0 && first_name.length > 0 && description.length > 0 && role.length > 0) {
+        if (email.length > 0 && password.length > 0 && confirmpassword.length > 0 && first_name.length > 0 && description.length > 0 && role.length > 0) {
             getAPI().post('/users', {
                     first_name,
                     email,
                     description,
                     password,
+                    confirmpassword,
                     role
                 })
                 .then(function (result) {
@@ -87,7 +89,7 @@
                     <span class="form__line"></span>
                 </div>
                 <div class="form__group">
-                    <input required type="password" name="password" class="form__input" placeholder=" " bind:value={password}>
+                    <input required type="password" name="password" class="form__input" placeholder=" " bind:value={confirmpassword}>
                     <label for="password" class="form__label">Confirmer mot de passe</label>
                     <span class="form__line"></span>
                 </div>
