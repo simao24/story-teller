@@ -1,10 +1,40 @@
 <script>
     import imghomepage from "../assets/img-homepage.jpg"
+    import {getAPI,setToken} from "../utils/api";
     
+    let title = '';
+    let content = '';
+    let resume = '';
+    let image = '';
 
+  function addStory() {
+    // Envoyer les données de la nouvelle histoire via une requête HTTP POST
+      const data = {
+        title: title,
+        content: content,
+        resume: resume,
+        image: image
+    };
+        getAPI().post("/story/me", data)
+
+        .then(function(response) {
+            console.log(response);
+       
+            title = '';
+            content = '';
+            resume = '';
+            image = '';
+    })
+        .catch(function(error) {
+        console.log(error);
+      // Afficher un message d'erreur
+    });
+  }        
+                
 </script>
   
     <main>
+      
         
         <h1>DETAIL D'UNE HISTOIRE</h1>
         <div class="storydetails">
