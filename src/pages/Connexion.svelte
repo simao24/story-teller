@@ -134,10 +134,12 @@ body {
     margin-bottom: .6rem;
     color: #1C2942;
     font-weight: bold;
+    line-height: 55px;
 }
 
 .form__paragraph{
     font-weight: 300;
+    line-height: 35px;
     
 }
 

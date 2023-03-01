@@ -1,90 +1,93 @@
   <script>
+import { each } from "svelte/internal";
 
-import imghomepage from "../assets/img-homepage.jpg"
-    import {
-         link
-     } from "svelte-spa-router";
-    
-  </script> 
 
+  import imghomepage from "../assets/img-homepage.jpg"
+  import {getAPI,setToken} from "../utils/api";
   
-  <main aria-labelledby="title1">
+  
+  let stories = []
+
+  getAPI().get("/items/story")
+
+  .then(function(response) {
+    console.log(response);
+    stories = response.data.data
+
+  })
+              
+</script> 
+
+    <main aria-labelledby="title1">
     <div class="profile-area">
       <img src={imghomepage} alt="accueil">
 
-      <h3 class="profile-username"></h3>
+      <h3 class="profile-username">Pseudo</h3>
     </div>
   
     <div class="container-reading">
       <h1 id="title1">MES HISTOIRES</h1>
-  
+        {#each stories as story}
       <div class="card">
-        <img src="./src/assets/adventure-img.jpeg" alt="aventure au pole Nord" />
-        <a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link />
+        <img src={story.image} alt="aventure au pole Nord" />
+        <!-- <a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link /> -->
+       
         <div class="container">
-          <h4><b>Aventure au Pole Nord</b></h4>
+          <h4><b>{story.title}</b></h4>
           <span class="auteur">Auteur:</span>
-          <p>Frederic Wonderberg</p>
-          <span class="description">Description:</span>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui quaerat
-            amet perspiciatis, saepe ducimus quibusdam tempora voluptatum ea esse,
-            quis at quidem doloribus
-          </p>
-        </div>
+          
+          <span class="description">{story.content}</span>
+          <p>{story.resume}</p>
+          </div>
       </div>
-      <div class="card">
-        <img
-          src="./src/assets/Captura de Pantalla 2023-02-21 a las 11.16.21.png"
-          alt="Détective Loup"
-        />
-        <a href="/user/favoris" class="fa-regular fa-thumbs-up" use:link />
-        <div class="container">
-          <h4><b>Detective Loup</b></h4>
-          <span class="auteur">Auteur:</span>
-          <p>Marie-Anne Strump</p>
-          <span class="description">Description:</span>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui quaerat
-            amet perspiciatis, saepe ducimus quibusdam tempora voluptatum ea esse,
-            quis at quidem doloribus
-          </p>
-        </div>
-      </div>
-    </div>
-  </main>
+      {/each}
+      
+     </main>
   
   <style>
 
     main {
+     
       display: flex;
       justify-content: center;
     }
   
     .container-reading {
+
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 80%;
-      margin-left: 100px;
+      width: 100%;
+      margin-left: 50px;
       padding-left: 20px;
-      border-left: 1px solid #ccc;
+     
+
     }
   
+  
     .profile-area {
+      
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 1%;
+      border-left: 3px solid #ccc;
+      border-right:3px solid #ccc; ;
+      width: 13%;
       padding-right: 1px;
-      border-right: 1px #ccc;
+
+      background: linear-gradient(180deg, #6ed5cc, #479aaf, rgba(59,85,109,1))
+
     }
   
     .profile-area img {
+      margin-top: 1rem;
       margin-bottom: 1rem;
+      border-radius: 50%;
       width: 100px;
       height: 100px;
       object-fit: cover;
+   
     }
   
     .card {

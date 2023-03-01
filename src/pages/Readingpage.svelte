@@ -55,7 +55,7 @@
 
         <nav class="nav-categories">
             <ul>
-                <li class="menu-deroulant-categories"><a href="#" use:link>Catégories</a>
+                <li class="menu-deroulant-categories"><a href="/" use:link>Catégories</a>
                     <ul class="sous-menu">
                         <li><a href="#/aventure" use:link>Aventures</a></li>
                         <li><a href="#/Science-fiction" use:link>Science-fiction</a></li>
@@ -73,7 +73,8 @@
         <div class="card">
             
             <img src={imghomepage} alt="aventure au pole Nord">
-            <a href="/favorite" class="fa-regular fa-thumbs-up" use:link></a>
+            <a class="fa-regular fa-thumbs-up" onclick={() => addFavorite(story)}></a>
+
                         <div class="container">
                 <h4><b>{story.title}</b></h4>
                 <span class="auteur">Auteur:</span>
@@ -90,6 +91,8 @@
 </main>
 
 <style>
+ 
+
     img {
     width: 25%;
     height: 60%;
@@ -146,7 +149,7 @@
   
     .nav-categories ul ul li a {
       font-size: 14px;
-      color: #333;
+      color:  #333;
       text-decoration: none;
       display: block;
       padding: 10px 20px;
