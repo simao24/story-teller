@@ -108,7 +108,7 @@
 </header>
 <style>
     img {
-       width: 50%;
+       width: 6em;
         margin:15px;
     }
     a {
@@ -122,6 +122,9 @@
     a:hover{
         color:  #5FC2BA;
         transition: .3seconds;
+    }
+    .div-nav-search{
+        height: 3em;
     }
     #searchbar {
         width: auto;
