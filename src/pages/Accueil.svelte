@@ -62,7 +62,7 @@
     }
    
     .hand{
-        width: 60%;;
+        width: 60%;
     }
     h1{
     margin-top: 0;
@@ -151,16 +151,13 @@
     50% {
     border-color: transparent;
     }
-    }
-
-
-
-Resources
-       
+    }       
       
     
     h3{
     font-weight: 400;
+    padding-top: 25px;
+ 
     }
 
     .main__text{
@@ -174,7 +171,11 @@ Resources
     }
         
     p{
+        
     line-height: 30px;
+    text-align:justify;
+    vertical-align: auto;
+
           
     }
 

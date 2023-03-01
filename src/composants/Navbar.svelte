@@ -69,7 +69,7 @@
     </nav>
     <form action="recherche.php" class="header__search">
         <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
-        <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input">
+        <input type="text" id="recherche" name="recherche" placeholder="Rechercher" class="header__search-input">
     </form>
     <!-- Menu deroulant PSEUDO-->
     <menu class="dropdown">
@@ -107,55 +107,69 @@
 {/if}
 </header>
 <style>
+  
     img {
     width: 6em;
     margin:15px;
     }
+
+
     a {
-        text-decoration: none;
-        color: azure;
-        font-size:x-large;
-        font-weight: 700;
-        margin-right: 50px;
-        font-family: "Raleway", sans serif;
+    text-decoration: none;
+    color: azure;
+    font-size:x-large;
+    font-weight: 700;
+    margin-right: 50px;
+    font-family: "Raleway", sans serif;
     }
+
     a:hover{
-        color:#5FC2BA;
-        transition: .3seconds;
+    color:#5FC2BA;
+    transition: .3seconds;
     }
+
     .div-nav-search{
-        height: 3em;
+    height: 3em;
+
     }
+  
+
     #searchbar {
-        width: auto;
-        height: 20px;
-        border-radius:25px;
+    width: auto;
+    height: 20px;
+    border-radius:25px;
     }
+
     i {
-        color:white;
+    color:white;
     }
+
     .logout{
-        padding: .5em 1em;
-        cursor: pointer;
-        border-radius: .5em;
-        background-color:#0B162C ;
-        color: white;
+    padding: .5em 1em;
+    cursor: pointer;
+    border-radius: .5em;
+    background-color:#0B162C ;
+    color: white;
     }
+
     .nav-bar1{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
     }
+
     .div-nav-connexion {
-        color: beige;
+    color: beige;
     }
+
     .dropdown {
     position: relative;
     display: inline-block;
     margin-right: 13%;
     }
+
     .dropdown-child {
     display: none;
     position: absolute;
@@ -163,14 +177,17 @@
     border-radius: 15px;
     line-height:1.5em;
     }
+
     .dropdown-child ul {
     list-style: none;
     padding: 0;
     margin: 0;
     }
+
     .dropdown-child ul li {
     display: block;
     }
+
     .dropdown-child ul li a {
     display: block;
     padding: 5px 10px;
@@ -182,7 +199,7 @@
     background-color: #F9F9F9;
     }
     .mainmenubtn {
-        width: 12em;
+    width: 12em;
     display: inline-block;
     background-color: #0B162C;
     color: white;

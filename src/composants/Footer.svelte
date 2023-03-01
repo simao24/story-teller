@@ -92,7 +92,7 @@ export function scrollToTop() {
  ul {
    position: relative;
    display: flex;
-   transform: rotate(-25deg) skew(25deg);
+   
    transform-style: preserve-3d;
    align-items: center;
    justify-content: center;
@@ -102,8 +102,8 @@ ul li {
     
   position: relative;
   list-style: none;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   margin: 0px 20px;
 }
 ul li:before{
@@ -113,7 +113,7 @@ ul li:before{
   left: -5px;
   width: 100%;
   height: 10px;
-  background: #2a2a2a;
+  background: #1C2942;
   transform-origin: top;
   transform: skewX(-41deg);
 }
@@ -140,7 +140,7 @@ ul li span{
   justify-content: center;
   align-items: center;
   color: #fff;
-  font-size: 30px !important;
+  font-size: 25px !important;
   transition: 1.5s ease-out;
 }
 ul li:hover span {
@@ -172,13 +172,13 @@ ul li:nth-child(1):hover span{
   background: #52E19F !important;
 }
 ul li:nth-child(2):hover span{
-  background: #2C3456 !important;
+  background: rgba(3, 148, 245, 0.895) !important;
 }
 ul li:nth-child(3):hover span{
   background: #EA6E96 !important;
 }
 ul li:nth-child(4):hover span{
-  background: #FCEB00 !important;
+  background: rgba(47, 3, 245, 0.895) !important;
   
 }
 
