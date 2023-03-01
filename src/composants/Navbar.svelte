@@ -113,7 +113,8 @@
     <style>
        
         img {
-           width: 27%;
+           width: 6em;
+           height:6em;
             margin:15px; 
         }
 
