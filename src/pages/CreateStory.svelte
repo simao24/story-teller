@@ -176,15 +176,23 @@
 </body>
 <style>
 
-body {
 
-  background: #F2F3EB;
+
+body {
+ 
+  background-color: #e5e5f7;
+  background-image:  linear-gradient(#5FC2BA 2px, transparent 2px), linear-gradient(90deg, #5FC2BA 2px, transparent 2px), linear-gradient(#5FC2BA 1px, transparent 1px), linear-gradient(90deg, #5FC2BA 1px, #e5e5f7 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   font-family: 'Courier New', Courier, monospace;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
+
 #container{
   background-color: #FFFFFF;
+  
 }
 button {
   overflow: visible;
