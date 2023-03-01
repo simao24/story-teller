@@ -58,13 +58,18 @@
         }
       
         .profile-area {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 1%;
-          padding-right: 1px;
-          border-right: 1px #ccc;
-        }
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-left: 3px solid #ccc;
+      border-right:3px solid #ccc; ;
+      width: 13%;
+      padding-right: 1px;
+
+      background: linear-gradient(180deg, #6ed5cc, #479aaf, rgba(59,85,109,1))
+
+    }
       
         .profile-area img {
           margin-bottom: 1rem;
