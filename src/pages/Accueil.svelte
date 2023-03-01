@@ -65,8 +65,10 @@
         width: 60%;;
     }
     h1{
-     margin-top: 25px;
-    margin-bottom:55px;
+    margin-top: 0;
+    margin-bottom: 45px;
+    padding-top:35px;
+    line-height: 60px;
     }
 
     .waviy {
@@ -105,15 +107,18 @@
 
     .main__button{
     width: 80%;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-size: larger;
+    font-weight: 600;
     margin: 10px;
     border-radius: 5px;
+    padding: 15px 60px;
          
     }
     button:hover{
     color:  #5FC2BA;
+    font-size:x-large;
     font-weight: bolder;
     transition: .3seconds;
     }

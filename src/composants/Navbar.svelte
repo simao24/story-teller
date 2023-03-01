@@ -128,6 +128,7 @@
 
         a:hover{
             color:  #5FC2BA;
+            font-size: x-large;
             transition: .3seconds;
         }
 
