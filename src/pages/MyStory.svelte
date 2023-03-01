@@ -4,6 +4,8 @@ import imghomepage from "../assets/img-homepage.jpg"
     import {
          link
      } from "svelte-spa-router";
+
+     
     
   </script> 
 
@@ -12,7 +14,7 @@ import imghomepage from "../assets/img-homepage.jpg"
     <div class="profile-area">
       <img src={imghomepage} alt="accueil">
 
-      <h3 class="profile-username"></h3>
+      <h3 class="profile-username">Pseudo</h3>
     </div>
   
     <div class="container-reading">
@@ -57,34 +59,47 @@ import imghomepage from "../assets/img-homepage.jpg"
   <style>
 
     main {
+     
       display: flex;
       justify-content: center;
     }
   
     .container-reading {
+
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 80%;
-      margin-left: 100px;
+      width: 100%;
+      margin-left: 50px;
       padding-left: 20px;
-      border-left: 1px solid #ccc;
+     
+
     }
   
+  
     .profile-area {
+      
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 1%;
+      border-left: 3px solid #ccc;
+      border-right:3px solid #ccc; ;
+      width: 13%;
       padding-right: 1px;
-      border-right: 1px #ccc;
+
+      background: linear-gradient(180deg, #6ed5cc, #479aaf, rgba(59,85,109,1))
+
     }
   
     .profile-area img {
+      margin-top: 1rem;
       margin-bottom: 1rem;
+      border-radius: 50%;
       width: 100px;
       height: 100px;
       object-fit: cover;
+   
     }
   
     .card {
