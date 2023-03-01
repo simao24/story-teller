@@ -133,10 +133,11 @@
             transition: .3seconds;
         }
 
-       
+
         #searchbar {
-            width: auto;
-            height: 20px;
+
+            width: 100%;
+            border: none;
             border-radius:25px;
         }
 
@@ -155,9 +156,11 @@
         .nav-bar1 {
           width: 100%;
           display: flex;
+          flex-flow: row nowrap;
           align-items: center;
           justify-content: space-between;
           text-decoration: none;  
+          column-gap: 4em; 
         }
         
         .div-nav-connexion {
