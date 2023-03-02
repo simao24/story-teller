@@ -1,13 +1,18 @@
   <script>
+    import { link } from "svelte-spa-router";
 import { each } from "svelte/internal";
 
 
   import imghomepage from "../assets/img-homepage.jpg"
   import {getAPI,setToken} from "../utils/api";
+    import StoryDetail from "./StoryDetail.svelte";
   
   
   let stories = []
 
+  
+    
+    // Retrouver la liste d'histoires
   getAPI().get("/items/story")
 
   .then(function(response) {
@@ -15,7 +20,38 @@ import { each } from "svelte/internal";
     stories = response.data.data
 
   })
-              
+
+  function modifierHistoire(story){
+      //Afficher une boîte de dialogue ou un formulaire pour permettre à l'utilisateur de modifier les details d'une histoire
+      // Une fois les détails modifiés, envoyer une requete PUT a l'API pour mettre à jour l'histoire dans la BDD
+
+      getAPI().put(`/items/story/${story.id}, story`)
+        .then(response => {
+          console.log(response);
+          // mettre à jour la liste d'histoires avec la version mise à jour
+          stories = stories.map(s => s.id === story.id ? response.data : s)
+        })
+        .catch(error =>{
+          console.log(error)
+        })
+      }
+
+    // Function de suppression d'histoire
+    function supprimerHistoire(story) {
+      //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+      if (confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)){
+        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
+        getAPI().delete(`/items/story/${story.id}`)
+        .then(response => {
+          console.log(response)
+          //Mettre à jour la liste d'histoires en la filtrant pour enlever l'histoire
+          stories = stories.filter(s=> s.id !==story.id)
+        })
+        .catch(error => {
+          console.log(error)
+      })
+    }
+  }          
 </script> 
 
     <main aria-labelledby="title1">
@@ -29,20 +65,25 @@ import { each } from "svelte/internal";
       <h1 id="title1">MES HISTOIRES</h1>
         {#each stories as story}
       <div class="card">
+        
         <img src={story.image} alt="aventure au pole Nord" />
-        <!-- <a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link /> -->
+        <!--<a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link />-->
        
         <div class="container">
           <h4><b>{story.title}</b></h4>
+          <span class="auteur">Categorie:</span>
+          <p>{story.category.name}</p>
           <span class="auteur">Auteur:</span>
-          
-          <span class="description">{story.content}</span>
+          <p>{story.user.first_name}</p>
+          <span class="description">Resume:</span>
           <p>{story.resume}</p>
-          </div>
+        </div>
+        <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=>modifierHistoire(story)}></button>
+        <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
       </div>
       {/each}
-      
-     </main>
+      </div> 
+    </main>
   
   <style>
 
@@ -99,7 +140,12 @@ import { each } from "svelte/internal";
       border-radius: 10px;
       max-width: 600px;
     }
-  
+    button{
+      display: flex;
+      justify-content:left;
+     
+     
+    }
     .card img {
       margin-right: 1rem;
       width: 150px;

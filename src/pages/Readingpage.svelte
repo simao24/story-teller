@@ -11,7 +11,7 @@
     console.log(json);
     return json.data;
   }
-  
+ 
   // Ajouter une histoire aux favoris
   const addFavorite = (story) => {
     let favorites = [];
