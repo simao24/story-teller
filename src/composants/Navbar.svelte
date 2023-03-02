@@ -115,6 +115,7 @@
 
 
     a {
+    height: 3em;
     text-decoration: none;
     color: azure;
     font-size:x-large;
