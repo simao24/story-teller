@@ -1,25 +1,21 @@
 <script>
   import { link } from "svelte-spa-router";
-    import MyStory from "./MyStory.svelte";
-   
-    
-  let user = null;
+  import MyStory from "./MyStory.svelte";
+  import Swal from 'sweetalert2';
   import {
     getAPI,
-            getToken,
-            removeToken
-        } from '../utils/api';
+    getToken,
+    removeToken
+    } from '../utils/api';
 
-
-
- 
 
   // 1. Fonction pour envoyer les histoires écrites par l'utilisateur dans ma bdd
-
   
+  let user = null;
   let title ='';
   let resume='';
   let content='';
+
   // 1.1- Définir la fonction handleSubmit qui sera applée lorsque l'utilisateur soumettra le formulaire. 
   //Cette fonction effectuera une requête HTTP POST à notre API Directus pour enregistrer l'histoire dans notre bdd.
 
@@ -31,107 +27,23 @@
 
      
       console.log(reponse.data);// Affiche la réponse de l'API dans la console
+     
       content=''; // Efface le texte dans le textarea
-      title=''; //
-      resume=''; //
-
+      title=''; 
+      resume=''; 
+      Swal.fire({
+        icon:'success',
+        title:'Votre histoire a été enregistrée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+      });
   } catch(error){
     console.error(error);
   }
   }
- // recuperation d'histoires depuis notre BDD- tentative-
-
- /*const load_stories = async () => {
-        const token = localStorage.getItem('token');
-        const resa_ids = await get_resa_ids(token, user_id);
-        const newstory = await get_stories(token, resa_ids);
-        return newstory
-    }
-
-    // Fonction de récupération de la liste des ids de résa
-    const get_resa_ids = async (token, id) => {
-        // Création du endpoint avec filtre et fields
-        let endpoint = import.meta.env.VITE_API_URL+ "user/my-story?";
-        endpoint += "filter[user_id][_eq]=" + id;
-        endpoint += "&fields=user_id";
-
-        // Appel de la requête
-        const response = await fetch(endpoint, {
-            headers: {          
-                'Authorization': 'Bearer ' + token,
-            }
-        });
-        // Extraction du json de la réponse
-        const result = await response.json();
-
-        //Extraction des ids pour les mettre dans un tableau
-        let ids = [];
-        result.data.forEach(item => {
-            ids.push(item.user_id);
-        });
-        return ids;
-    }
-
-    // Fonction de récupération de la liste des commentaires
-      const get_stories = async (token, resa_ids) => {
-        let endpoint = import.meta.env.VITE_API_URL + "stories/my-story?";
-        endpoint += "filter[resa_id][_in]=" + resa_ids.join(',');
-
-        // Appel de la requête
-        const response = await fetch(endpoint, {
-            headers: {          
-                'Authorization': 'Bearer ' + token,
-            }
-        });
-        // Extraction du json de la réponse
-        const result = await response.json();
-        //Extraction et retour de la liste
-        return result.data;
-    }*/
-
-
-
 </script>
-<!--<main>
-
-    <section class="section-left">
-      {#if user }
-      <h4>{user.first_name}</h4>
-      {/if}
-    </section>
-    
-    <section class="section-centrale">
-      <h2>Mon profil</h2>
-      <form on:submit={handleSubmit}>
-        <label for="story">Écrire une histoire</label>
-        <input type="text" id="title" name="title" placeholder="Titre" class="create__story-title" bind:value={title}>
-        <label for="resume">Resume</label>
-        <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Entrez votre resume ici" bind:value={resume}></textarea>
-        <label for="category">Categorie</label>
-        <input type="text" id="category" name="category" placeholder="Categorie" class="create__story-categorie">
-        <label for="writemystory">Mon histoire</label>
-        <textarea id="story" name="story" rows="5" cols="33" placeholder="Entrez votre histoire ici" bind:value={content}></textarea>
-      
-        <button type="submit">Envoyer</button>
-    </form>
-  </section>
-
-    <section class="sec-histoire">
-      <div class="menu-deroulant-histoires">
-        <button aria-label="Ouvrir le menu des options pour cette histoire">
-          <i class="fas fa-ellipsis-v"></i>
-        </button>
-        <div class="sous-menu" role="menu">
 
 
-          <a href="/" role="menuitem" use:link>Modifier</a>
-          <a href="/" role="menuitem" use:link>Supprimer</a>
-          <a href="/" role="menuitem" use:link>Ajouter une image</a>
-
-        </div>
-      </div>
-    </section>
-</main>-->
 <body>
   <div id="container">
     <h1>&bull; Écrire une histoire &bull;</h1>
@@ -171,6 +83,7 @@
       <div class="submit">
         <input type="submit" value="Publier" id="form_button" />
       </div>
+
     </form><!-- // End form -->
   </div><!-- // End #container -->
 </body>
