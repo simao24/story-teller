@@ -6,11 +6,12 @@
   } from "svelte-spa-router";
 
   const get_stories = async () => {
-    const response = await fetch(import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields=*,user_id.*,category_id.*");
+    const response = await fetch(import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*");
     const json = await response.json();
+    console.log(json);
     return json.data;
   }
-
+  
   // Ajouter une histoire aux favoris
   const addFavorite = (story) => {
     let favorites = [];
@@ -77,11 +78,13 @@
 
                         <div class="container">
                 <h4><b>{story.title}</b></h4>
+                <span class="auteur">Categorie:</span>
+                <p>{story.category.name}</p>
                 <span class="auteur">Auteur:</span>
-                <p>{story.user_id.pseudo}</p>
+                <p>{story.user.first_name}</p>
                 <span class="description">Description:</span>
                 <p>{story.resume} </p>
-                {story.category_id.category}
+                <!--{story.category_id.category}-->
                 
             </div>
             </div>
