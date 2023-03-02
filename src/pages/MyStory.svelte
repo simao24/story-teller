@@ -9,7 +9,9 @@ import { each } from "svelte/internal";
   
   
   let stories = []
-
+  let editingStory=null;
+  let editedStory={title:"", category: {name:""}, resume:"", content:""}
+  let updateStory={title:"", category: {name:""}, resume:"", content:""}
   
     
     // Retrouver la liste d'histoires
@@ -22,6 +24,8 @@ import { each } from "svelte/internal";
   })
 
   function modifierHistoire(story){
+    editingStory=story;
+    editedStory={...story};
       //Afficher une boîte de dialogue ou un formulaire pour permettre à l'utilisateur de modifier les details d'une histoire
       // Une fois les détails modifiés, envoyer une requete PUT a l'API pour mettre à jour l'histoire dans la BDD
 
@@ -81,9 +85,28 @@ import { each } from "svelte/internal";
         <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=>modifierHistoire(story)}></button>
         <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
       </div>
+      {#if editingStory === story}
+        <div class="card">
+            <form on:submit|preventDefault={updateStory}>
+              <div class="container">
+                <h4><b>Modifier Histoire</b></h4>
+                <label for="title">Titre:</label>
+                <input type="text" id="title" bind:value={editedStory.title}/>
+                <label for="category">Catégorie:</label>
+                <input type="text" id="category" bind:value={editedStory.category.name}/>
+                <label for="resume">Résumé:</label>
+                <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
+                <label for="contenu">Contenu:</label>
+                <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
+                <button type="submit">Enregistrer</button>
+                <button type="button" on:click={()=>editingStory=null}>Annuler</button>
+              </div>
+            </form>
+        </div>
+        {/if}
       {/each}
-      </div> 
-    </main>
+    </div> 
+  </main>
   
   <style>
 
@@ -144,7 +167,7 @@ import { each } from "svelte/internal";
       display: flex;
       justify-content:left;
      
-     
+
     }
     .card img {
       margin-right: 1rem;
