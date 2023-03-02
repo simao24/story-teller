@@ -32,7 +32,7 @@
       favorites.push({
         id: story.id,
         title: story.title,
-        author: story.user_id.pseudo,
+        author: story.user.first_name,
         description: story.resume,
         image: imghomepage
       });
@@ -74,7 +74,7 @@
         <div class="card">
             
             <img src={imghomepage} alt="aventure au pole Nord">
-            <a class="fa-regular fa-thumbs-up" onclick={() => addFavorite(story)}></a>
+            <a class="fa-regular fa-thumbs-up" on:click={() => addFavorite(story)}></a>
 
                         <div class="container">
                 <h4><b>{story.title}</b></h4>
