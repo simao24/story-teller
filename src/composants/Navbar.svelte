@@ -26,7 +26,7 @@
             }
             getAPI().get('/users/me')
                     .then(function(response){
-                        console.log(response);
+                        // console.log(response);
                         user = response.data.data;
 
                         })

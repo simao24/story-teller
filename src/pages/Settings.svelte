@@ -70,15 +70,15 @@
   <p>
     <input type="text" id= "avatar" value={newAvatar} on:input={handleAvatarChange}/>
   </p>
-  <p>Pseudo</p>
+  <p>Pseudo: </p>
   <p>
     <input type="text" value={newFirstName} on:input={handleFirstNameChange} />
   </p>
-  <p>Email</p>
+  <p>Email: </p>
   <p>
     <input type="text" value={newEmail} on:input={handleEmailChange} />
   </p>
-  <p>Mot de passe</p>
+  <p>Mot de passe: </p>
   <p>
     <input type="password" value={newPassword} on:input={handlePasswordChange} />
   </p>
