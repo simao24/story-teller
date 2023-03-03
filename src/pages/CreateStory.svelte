@@ -2,6 +2,8 @@
   import { link } from "svelte-spa-router";
   import MyStory from "./MyStory.svelte";
   import Swal from 'sweetalert2';
+  
+
   import {
     getAPI,
     getToken,
@@ -9,8 +11,6 @@
     } from '../utils/api';
 
 
-  // 1. Fonction pour envoyer les histoires écrites par l'utilisateur dans ma bdd
-  
   let user = null;
   let title ='';
   let resume='';
@@ -37,6 +37,7 @@
         showConfirmButton:false,
         timer:1700
       });
+
   } catch(error){
     console.error(error);
   }
