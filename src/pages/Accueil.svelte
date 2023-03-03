@@ -31,8 +31,8 @@
         <div class="main__buttons">
           
 
-            <a href="/#/reading-page" use:link><button class="main__button">Lire</button></a>
-            <a href="/#/connexion" use:link><button class="main__button">Écrire</button></a>
+            <a href="/reading-page" use:link><button class="main__button">Lire</button></a>
+            <a href="/connexion" use:link><button class="main__button">Écrire</button></a>
         </div>
         <div id="scroll-text">
         <h3 class="main__subtitle">Votre histoire originale pourrait être le prochain best-seller</h3>

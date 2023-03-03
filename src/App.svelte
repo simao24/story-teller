@@ -26,14 +26,14 @@
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
-        "/#/connexion": Connexion,
+        "/connexion": Connexion,
         "/inscription": Inscription,
-        "/#/reading-page": Readingpage,
+        "/reading-page": Readingpage,
         "/settings": Settings,
         "/createStory": CreateStory,
         "/favorite": Favorite,
         "/my-story": MyStory,
-        "/story-detail": StoryDetail,
+        "/story-detail/:id": StoryDetail,
 
         "*": Error,
     };

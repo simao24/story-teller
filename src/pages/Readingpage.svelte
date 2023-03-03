@@ -77,15 +77,15 @@
             <a class="fa-regular fa-thumbs-up" on:click={() => addFavorite(story)}></a>
 
                         <div class="container">
+                          <span class="auteur">Categorie:</span>
                 <h4><b>{story.title}</b></h4>
-                <span class="auteur">Categorie:</span>
                 <p>{story.category.name}</p>
                 <span class="auteur">Auteur:</span>
                 <p>{story.user.first_name}</p>
                 <span class="description">Description:</span>
                 <p>{story.resume} </p>
                 <!--{story.category_id.category}-->
-                
+                <a href="/story-detail/{story.id}" use:link>voir le detail</a>
             </div>
             </div>
         {/each}
