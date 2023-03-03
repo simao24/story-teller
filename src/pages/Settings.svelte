@@ -1,16 +1,30 @@
 <script>
   import { link } from "svelte-spa-router";
   import {getAPI } from "../utils/api";
+  import Swal from 'sweetalert2';
   
 
     // Configuration de la requête
-            
+      let userInfos = "";     
       let newFirstName = "";
       let newEmail = "";
       let newPassword = "";
       let newAvatar = "";
       let message ="";
       let showMessage = null;
+
+      
+      
+       // Récupération des informations de l'utilisateur actuel
+       getAPI().get("/users/me")
+      .then(function(response) {
+        userInfos = response.data.data
+        console.log(userInfos);
+        
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   
       function handleFirstNameChange(event) {
         newFirstName = event.target.value;
@@ -65,12 +79,14 @@
 
 <div class="edit-container">
 <h2>Profil d'utilisateur</h2>
+
 <div class="edit-elements">
   <p>Photo de profil</p>
   <p>
     <input type="text" id= "avatar" value={newAvatar} on:input={handleAvatarChange}/>
   </p>
-  <p>Pseudo: </p>
+  <p>Pseudo est: </p>
+ 
   <p>
     <input type="text" value={newFirstName} on:input={handleFirstNameChange} />
   </p>
