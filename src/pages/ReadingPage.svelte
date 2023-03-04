@@ -75,9 +75,7 @@
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
-          <a
-            class="fa-regular fa-thumbs-up"
-            on:click={() => addFavorite(story)}
+          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}
           />
 
           <div class="container">
@@ -98,6 +96,16 @@
 </main>
 
 <style>
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
+    padding-top: 60px;
+
+  }
+  
+
   img {
     width: 25%;
     height: 60%;
@@ -105,12 +113,13 @@
     margin-right: 50px;
     border-radius: 25px;
   }
+  
 
   .container-reading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
   .nav-categories ul {
     list-style: none;
@@ -194,13 +203,15 @@
   }
 
   .card {
+    
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 2rem 0;
+    margin: 10px;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
-    max-width: 600px;
+    max-width: 400px;
   }
 
   .card img {
