@@ -1,54 +1,8 @@
 <script>
   import { link } from "svelte-spa-router";
   import {getAPI, getToken } from "../utils/api";
-  
-
-    // Configuration de la requête
-            
-      let newFirstName = "";
-      let newEmail = "";
-      let newPassword = "";
-      let newAvatar = "";
-      let message ="";
-      let showMessage = null;
-  
-      function handleFirstNameChange(event) {
-        newFirstName = event.target.value;
-      }
-      function handleEmailChange(event) {
-        newEmail = event.target.value;
-      }
-      function handlePasswordChange(event) {
-        newPassword = event.target.value;
-      }
-      function handleAvatarChange(event) {
-        newAvatar = event.target.value;
-      }
-      function handleEditClick() {
-        let data= {}
-        
-      if(newFirstName !=""){
-        data.first_name=newFirstName
-      }  
-      if(newEmail !=""){
-        data.email=newEmail
-      }  
-      if(newPassword !=""){
-        data.password=newPassword
-      }  
-      if(newAvatar !=""){
-        data.avatar=newAvatar
-      }  
-
-      getAPI().patch("/users/me", data)
-      .then(function(response) {
-        console.log(response);
-        newFirstName = "";
-        newEmail = "";
-        newPassword = "";
-        newAvatar = "";
-  import { getAPI } from "../utils/api";
-  import Swal from "sweetalert2";
+ 
+ import Swal from "sweetalert2";
 
   // Configuration de la requête
   let userInfos = {};
@@ -116,7 +70,7 @@
       });
                     }
 
-                    function handleDeleteUserClick() {
+  function handleDeleteUserClick() {
   const confirmDelete = confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
   if (confirmDelete) {
     
@@ -149,7 +103,7 @@ function deleteUser() {
   });
 }
 
-  }
+  
 </script>
 
 <div class="main-container">
@@ -204,7 +158,7 @@ function deleteUser() {
 
 
 <div class="delete-user-button">
-  <button on:click={handleDeleteUserClick}>Supprimer mon compte</button>
+  <button on:click={deleteUser}>Supprimer mon compte</button>
 </div>
 
 <style>
