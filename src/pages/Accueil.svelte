@@ -28,7 +28,7 @@
                 <a href="/reading-page" use:link
                     ><button class="main__button">Lire</button></a
                 >
-                <a href="/connexion" use:link
+                <a href="/createStory" use:link
                     ><button class="main__button">Écrire</button></a
                 >
             </div>

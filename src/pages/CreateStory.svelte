@@ -10,6 +10,10 @@
     removeToken
     } from '../utils/api';
 
+    const token=getToken ()
+    if(!token) {
+      location.href= "/#/connexion";
+    }
 
   let user = null;
   let title ='';

@@ -4,7 +4,7 @@
   
   export let params = {};
 
-  let story;
+  let story = {category:{}, user: {}};
   $: console.log("story : ", story);
 
   // recupérer le détail d'une histoire via une requête Get
@@ -13,7 +13,7 @@
 
   getAPI()
     .get(
-      `items/story/${params.id}?fields=title,content,resume,category.name,user.first_name`
+      `items/story/${params.id}?fields[]=*.*`
     )
 
     .then(function (response) {
@@ -28,7 +28,7 @@
 </script>
 
 <main>
-  {#if story !== undefined}
+  {#if story }
    
     <h1>DETAIL D'UNE HISTOIRE</h1>
     <div class="storydetails">
