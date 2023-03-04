@@ -39,11 +39,11 @@
 
       <div class="storydetail-infos">
         <span class="auteur">Categorie:</span>
-        <p>{story.category.name}</p>
+        <p>{story.category?.name}</p>
         <h4>{story.title}</h4>
 
         <span class="auteur">Auteur:</span>
-        <h3>{story.user.first_name}</h3>
+        <h3>{story.user?.first_name}</h3>
         <span class="description">resumé:</span>
         <p>{story.resume}</p>
         <span class="description">Content:</span>

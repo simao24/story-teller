@@ -86,7 +86,7 @@
           on:input={handleAvatarChange}
         />
       </p>
-      <p>Pseudo est:</p>
+      <p>Pseudo:</p>
 
       <p>
         <input
@@ -107,6 +107,8 @@
           on:input={handlePasswordChange}
         />
       </p>
+       
+      
     </div>
 
     <div class="edit-button">
