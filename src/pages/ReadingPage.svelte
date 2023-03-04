@@ -47,7 +47,6 @@
   }
 </script>
 
-
       
 <main aria-labelledby="title1">
     <div class="container-reading">
