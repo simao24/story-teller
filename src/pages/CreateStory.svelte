@@ -2,19 +2,25 @@
   import { link } from "svelte-spa-router";
   import MyStory from "./MyStory.svelte";
   import Swal from 'sweetalert2';
+  
+
   import {
     getAPI,
     getToken,
     removeToken
     } from '../utils/api';
 
+    const token=getToken ()
+    if(!token) {
+      location.href= "/#/connexion";
+    }
 
-  // 1. Fonction pour envoyer les histoires écrites par l'utilisateur dans ma bdd
-  
   let user = null;
   let title ='';
   let resume='';
   let content='';
+  let category ='';
+
 
   // 1.1- Définir la fonction handleSubmit qui sera applée lorsque l'utilisateur soumettra le formulaire. 
   //Cette fonction effectuera une requête HTTP POST à notre API Directus pour enregistrer l'histoire dans notre bdd.
@@ -22,7 +28,7 @@
   async function handleSubmit(event) {
     event.preventDefault();
       try{
-        const reponse = await getAPI().post('/items/story',{title, resume, content});
+        const reponse = await getAPI().post('/items/story',{title, resume, content, category});
        
 
      
@@ -37,6 +43,7 @@
         showConfirmButton:false,
         timer:1700
       });
+
   } catch(error){
     console.error(error);
   }
@@ -63,13 +70,14 @@
       
       <div class="subject">
         <label for="subject"></label>
-        <select placeholder="Categorie" name="subject" id="subject_input" required>
+        <select placeholder="Categorie" name="subject" id="subject_input" required bind:value={category}>
           <option disabled hidden selected>Categorie</option>
-          <option>Aventures</option>
-          <option>Science-fiction</option>
-          <option>Thriller</option>
-          <option>Horreur</option>
-          <option>Romantique</option>
+          <option value="10">Aventures</option>
+          <option value="15">Educatif</option>
+          <option value="11">Science-fiction</option>
+          <option value="12">Thriller</option>
+          <option value="14">Horreur</option>
+          <option value="13">Romantique</option>
         </select>
       </div>
       <div class="message">

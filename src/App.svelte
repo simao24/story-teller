@@ -7,7 +7,7 @@
     import Connexion from "./pages/Connexion.svelte";
     import Inscription from './pages/Inscription.svelte';
     import Navbar from "./composants/Navbar.svelte";
-    import Readingpage from "./pages/Readingpage.svelte";
+    import ReadingPage from "./pages/ReadingPage.svelte";
     import Settings from "./pages/Settings.svelte";
     import CreateStory from './pages/CreateStory.svelte';
     import MyStory from "./pages/MyStory.svelte";
@@ -26,14 +26,14 @@
     const routes = {
         "/": Accueil,
         "/connexion": Connexion,
-        "/#/connexion": Connexion,
+        "/connexion": Connexion,
         "/inscription": Inscription,
-        "/#/reading-page": Readingpage,
+        "/reading-page": ReadingPage,
         "/settings": Settings,
         "/createStory": CreateStory,
         "/favorite": Favorite,
         "/my-story": MyStory,
-        "/story-detail": StoryDetail,
+        "/story-detail/:id": StoryDetail,
 
         "*": Error,
     };

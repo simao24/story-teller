@@ -181,6 +181,12 @@ ul li:nth-child(4):hover span{
   background: rgba(47, 3, 245, 0.895) !important;
   
 }
+@media (max-width:425px){
+    .footer-nav{
+        font-size: 1.8rem;
+    }
+}
+
 
     </style> 
 
