@@ -1,6 +1,6 @@
 <script>
   import { link } from "svelte-spa-router";
-  import {getAPI } from "../utils/api";
+  import {getAPI, getToken } from "../utils/api";
   
 
     // Configuration de la requête
@@ -58,6 +58,39 @@
       });
                     }
 
+                    function handleDeleteUserClick() {
+  const confirmDelete = confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
+  if (confirmDelete) {
+    
+    deleteUser();
+  }
+}
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+
+function deleteUser() {
+  const token = parseJwt(getToken())
+  console.log(token);
+  getAPI().delete("/users/"+ token.id)
+  
+  .then(data => {
+    console.log('Utilisateur supprimé : ', data);
+    // Déconnecter l'utilisateur
+    localStorage.removeItem("token");
+    // Rediriger vers la page de connexion
+    window.location.href = "/#/connexion";
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
+}
+
 </script>
 <div class="main-container">
 
@@ -91,6 +124,11 @@
   {/if}
 </div>
 </div>
+</div>
+
+
+<div class="delete-user-button">
+  <button on:click={handleDeleteUserClick}>Supprimer mon compte</button>
 </div>
 
 <style>
