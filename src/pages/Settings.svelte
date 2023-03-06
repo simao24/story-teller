@@ -105,6 +105,8 @@ function deleteUser() {
 
   
 </script>
+<body>
+  
 
 <div class="main-container">
   <h1>Gestion de compte</h1>
@@ -161,7 +163,19 @@ function deleteUser() {
 
   
 </div>
+</body>
 <style>
+
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #e5e5f7;
+    opacity: 0.9;
+    background-image: radial-gradient(#5FC2BA 0.75px, #e5e5f7 0.75px);
+    background-size: 15px 15px;
+    min-height: 100vh;
+    margin-top: 0;
+    padding-top: 30px;
+}
   h1 {
     text-align: center;
     font-size: 30px;
@@ -176,7 +190,7 @@ function deleteUser() {
     margin-top: 0px;
     width: auto;
   }
-
+  
   .edit-container {
     display: flex;
     flex-direction: column;
