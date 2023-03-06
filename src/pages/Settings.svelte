@@ -146,21 +146,21 @@ function deleteUser() {
        
       
     </div>
-
-    <div class="edit-button">
-      <button id="valider" on:click={handleEditClick}>EDIT</button>
-      {#if showMessage}
-        <div class="message">{message}</div>
-      {/if}
+    <div class="delete-user-container">
+      
+        <button id="valider" on:click={handleEditClick}>Edit</button>
+        {#if showMessage}
+          <div class="message">{message}</div>
+        {/if}
+      
+      <div class="delete-user-button">
+        <button on:click={deleteUser}>Supprimer mon compte</button>
+      </div>
     </div>
   </div>
+
+  
 </div>
-
-
-<div class="delete-user-button">
-  <button on:click={deleteUser}>Supprimer mon compte</button>
-</div>
-
 <style>
   h1 {
     text-align: center;
@@ -209,18 +209,39 @@ function deleteUser() {
     margin-left: 40%;
   }
 
-  .edit-button {
+  .delete-user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 50%;
+ 
+}
+button{
+  background-color: #1C2942;
+  color:#5FC2BA;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 10px;
+  padding:10px 15px;
+}
+
+button:hover{
+  background-color: #5FC2BA;
+  color:#1C2942;
+}
+  /*.edit-button {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  }
+  }*/
   .message {
     position: absolute;
 
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
-    background-color: #3b556d;
+    background-color: #1C2942;
     color: white;
     border-radius: 5px;
     font-weight: bold;
