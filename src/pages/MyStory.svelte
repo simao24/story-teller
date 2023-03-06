@@ -28,8 +28,9 @@
     userInfos = response.data.data
 
   })
+// Finalement la modification/suppresion d'une histoire se fera depuis la page du détail d'une histoire
 
-  function modifierHistoire(event, story){
+ /* function modifierHistoire(event, story){
     const title  = event.target[0].value
     const category = event.target[1].value
     const resume = event.target[2].value
@@ -54,10 +55,10 @@
         .catch(error =>{
           console.log(error)
         })
-      }
+      }*/
 
     // Function de suppression d'histoire
-    function supprimerHistoire(story) {
+    /*function supprimerHistoire(story) {
       //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
       if (confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)){
         // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
@@ -72,7 +73,7 @@
           console.log(error)
       })
     }
-  }          
+  }       */   
 
 </script> 
 
@@ -101,8 +102,8 @@
           <p>{story.resume}</p>
           <a href="/story-detail/{story.id}" use:link>voir le detail</a>
         </div>
-        <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
-        <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
+        <!--<button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
+        <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>-->
       </div>
       {#if editingModeofStory}
         <div class="card">
@@ -117,7 +118,7 @@
                 <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
                 <label for="contenu">Contenu:</label>
                 <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
-                <button type="submit">Enregistrer</button>
+               <button type="submit">Enregistrer</button>
                 <button type="button" on:click={()=>editingModeofStory=false}>Annuler</button>
               </div>
             </form>
