@@ -123,8 +123,8 @@
 
       <div class="storydetail-infos">
         <span class="auteur">Categorie:</span>
-        <p>{story.category?.name}</p>
-        <h4>{story.title}</h4>
+        <h3>{story.category?.name}</h3>
+        <p>{story.title}</p>
 
         <span class="auteur">Auteur:</span>
         <h3>{story.user?.first_name}</h3>
@@ -141,7 +141,7 @@
         <div class="card">
             <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
               <div class="container">
-                <h4><b>Modifier Histoire</b></h4>
+                <h4><b>Modifier l'histoire</b></h4>
                 <label for="title">Titre:</label>
                 <input type="text" id="title" bind:value={editedStory.title}/>
                 <label for="category">Catégorie:</label>
@@ -161,14 +161,22 @@
 
 <style>
   main {
+    background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);
     display: flex;
     flex-direction: column;
     align-items: center;
+    
   }
+  .fa-regular, .fa-pen-to-square, .fa-xl{
+    background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);
 
+
+  }
   h1 {
     margin-top: 40px;
-    font-size: large;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: #1C2942;
   }
 
   .storydetails {
@@ -179,30 +187,46 @@
   }
 
   .storydetail-img {
+
     position: relative;
     margin-right: 20px;
     margin-top: 65px;
+    margin-bottom:30px;
+    
   }
 
   .storydetail-img img {
     width: 400px;
+    border-radius: 10px;
+    margin-right: 20px;
   }
   .storydetail-img i {
     position: absolute;
     bottom: -30px;
     right: -5px;
   }
+  .storydetail-infos span{
+    margin-bottom:10px;
+    font-size: larger;
+    font-weight: bold;
+    color: #1C2942;
+    text-decoration: underline;
+  }
   .storydetail-infos h4 {
-      margin: 0;
-    }
+    font-size: large;
+    margin: 0;
+  }
+
+ .storydetail-infos p {
+  font-size: large;
+    margin: 0.5rem 0;
+  }
   
     .storydetail-infos .auteur {
       margin-right: 0.5rem;
     }
   
-    .storydetail-infos p {
-      margin: 0.5rem 0;
-    }
+    
   
     .storydetail-infos .description {
       margin-top: 0.5rem;
@@ -235,7 +259,7 @@
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
       border-radius: 5px;
       padding: 20px;
-      font-family: Arial, sans-serif;
+      font-family: "Raleway", sans serif;
 }
 
 .container {
@@ -248,42 +272,48 @@
 
   h4 {
         margin-bottom: 20px;
+        font-size: larger;
+        text-decoration: underline;
   }
 
   label {
+        font-size: large;
         font-weight: bold;
         margin-bottom: 5px;
   }
 
   input[type="text"],
   textarea {
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    font-size: 16px;
   }
 
   button[type="submit"],
   button[type="button"] {
-  padding: 10px 20px;
-  margin-top: 20px;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  background-color: #1C2942;
-  color: #5FC2BA;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-right: 25px;
+    margin-left: 50px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #1C2942;
+    color: #5FC2BA;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
 
   }
 
   button[type="submit"]:hover,
   button[type="button"]:hover {
-  background-color: #5FC2BA;
-  color:#1C2942;
+    background-color: #5FC2BA;
+    color:#1C2942;
   }
+ 
 </style>
