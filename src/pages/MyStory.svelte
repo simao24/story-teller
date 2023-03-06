@@ -80,7 +80,7 @@
     <div class="profile-area">
       <img src={imghomepage} alt="accueil">
 
-      <h3 class="profile-username">Pseudo</h3>
+      <h3 class="profile-username">{userInfos.first_name}</h3>
     </div>
   
     <div class="container-reading">
