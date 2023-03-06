@@ -4,14 +4,21 @@
   import { link } from "svelte-spa-router";
 
   let stories = [];
+  let category ="";
+  
 
   const get_stories = async () => {
-    const response = await fetch(
-      import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
-    );
+   let url = "";
+    if (category=="") {
+      url = import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
+    }
+    else{
+      url= `${import.meta.env.VITE_API_URL_GET_ITEMS}/story/?filter[category][_eq]=${category}&fields[]=*.*`
+    }
+    const response = await fetch(url);
     const json = await response.json();
     console.log(json);
-    return json.data;
+    stories= json.data;
   };
 
   // Ajouter une histoire aux favoris
@@ -57,21 +64,31 @@
     <nav class="nav-categories">
       <ul>
         <li class="menu-deroulant-categories">
-          <a href="/" use:link>Catégories</a>
-          <ul class="sous-menu">
-            <li><a href="#/aventure" use:link>Aventures</a></li>
-            <li><a href="#/educatif" use:link>Educatif</a></li>
-            <li><a href="#/Science-fiction" use:link>Science-fiction</a></li>
-            <li><a href="#/Thriller" use:link>Thriller</a></li>
-            <li><a href="#/Romantique" use:link>Romantique</a></li>
-            <li><a href="#/Horreur" use:link>Horreur</a></li>
-          </ul>
+          <h2>categories</h2>
+          <!-- <a href="/" use:link>Catégories</a> -->
+          <!-- <ul class="sous-menu">
+            <li on:click={e=>category="10"}>Aventures</li>
+            <li on:click={e=>category="15"}>Educatif</li>
+            <li on:click={e=>category="11"}>Science-fiction</li>
+            <li on:click={e=>category="12"}>Thriller</li>
+            <li on:click={e=>category="13"}>Romantique</li>
+            <li on:click={e=>category="14"}>Horreur</li>
+          </ul> -->
+          <select bind:value={category} on:change={get_stories} name="" id="">
+           <option value="10">Aventures</option> 
+           <option value="15">Educatif</option> 
+           <option value="11">Sciences-fiction</option>
+           <option value="12">Thriller</option>  
+           <option value="13">Romantique</option> 
+           <option value="14">Horreur</option> 
+          </select>
+
         </li>
       </ul>
     </nav>
     {#await get_stories()}
       <p>Chargement de la liste...</p>
-    {:then stories}
+    {:then _}
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
