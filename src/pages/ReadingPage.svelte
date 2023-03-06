@@ -50,33 +50,32 @@
 </script>
 
 <main aria-labelledby="title1">
-  <h1 id="title1">HISTOIRES</h1>
-  <!-- Menu déroulant-->
-
-  <nav class="nav-categories">
-    <ul>
-      <li class="menu-deroulant-categories">
-        <a href="/" use:link>Catégories</a>
-        <ul class="sous-menu">
-          <li><a href="#/aventure" use:link>Aventures</a></li>
-          <li><a href="#/educatif" use:link>Educatif</a></li>
-          <li><a href="#/Science-fiction" use:link>Science-fiction</a></li>
-          <li><a href="#/Thriller" use:link>Thriller</a></li>
-          <li><a href="#/Romantique" use:link>Romantique</a></li>
-          <li><a href="#/Horreur" use:link>Horreur</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
   <div class="container-reading">
+    <h1 id="title1">HISTOIRES</h1>
+    <!-- Menu déroulant-->
+
+    <nav class="nav-categories">
+      <ul>
+        <li class="menu-deroulant-categories">
+          <a href="/" use:link>Catégories</a>
+          <ul class="sous-menu">
+            <li><a href="#/aventure" use:link>Aventures</a></li>
+            <li><a href="#/educatif" use:link>Educatif</a></li>
+            <li><a href="#/Science-fiction" use:link>Science-fiction</a></li>
+            <li><a href="#/Thriller" use:link>Thriller</a></li>
+            <li><a href="#/Romantique" use:link>Romantique</a></li>
+            <li><a href="#/Horreur" use:link>Horreur</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
     {#await get_stories()}
       <p>Chargement de la liste...</p>
     {:then stories}
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
-          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}
-          />
+          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}/>
 
           <div class="container">
             <span class="auteur">Categorie:</span>
@@ -113,9 +112,7 @@ main {
     margin-right: 50px;
     border-radius: 25px;
   }
-  h1 {
-    
-  }
+  
 
   .container-reading {
   display: flex;
@@ -213,7 +210,7 @@ main {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
-    max-width: 300px;
+    max-width: 400px;
   }
 
   .card img {

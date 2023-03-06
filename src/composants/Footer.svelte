@@ -59,7 +59,9 @@ export function scrollToTop() {
                 <p>© The Story Teller 2023</p>
             </div>
             
-            <button on:click={scrollToTop}>🔝</button>
+            <button class="scroll-to-top" on:click={scrollToTop}>
+              <span class="material-icons">&#128285;</span>
+            </button>
 
             
 </footer>
@@ -186,6 +188,28 @@ ul li:nth-child(4):hover span{
         font-size: 1.8rem;
     }
 }
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3B556D;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .material-icons {
+    color: #fff;
+    font-size: 24px;
+    vertical-align: middle;
+  }
+
+  .scroll-to-top:hover {
+    background-color: #555;
+  }
 
 
     </style> 
