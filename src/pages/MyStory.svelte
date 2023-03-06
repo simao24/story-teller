@@ -99,6 +99,7 @@
           <p>{userInfos.first_name}</p>
           <span class="description">Resume:</span>
           <p>{story.resume}</p>
+          <a href="/story-detail/{story.id}" use:link>voir le detail</a>
         </div>
         <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
         <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
