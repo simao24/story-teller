@@ -183,35 +183,31 @@ ul li:nth-child(4):hover span{
   background: rgba(47, 3, 245, 0.895) !important;
   
 }
-@media (max-width:425px){
-    .footer-nav{
-        font-size: 1.8rem;
-    }
+
+  @media (max-width: 450px) {
+  .footer-nav {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+  .social-media {
+    width: 100%;
+    height: 0.1rem;
+    display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  }
+  .contact,
+  .footer-name {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .scroll-to-top {
+    bottom: 40px;
+    right: 10px;
+    position: relative;
+  }
 }
-
-.scroll-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #3B556D;
-    border: none;
-    border-radius: 50%;
-    padding: 12px;
-    cursor: pointer;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .material-icons {
-    color: #fff;
-    font-size: 24px;
-    vertical-align: middle;
-  }
-
-  .scroll-to-top:hover {
-    background-color: #555;
-  }
-
-
     </style> 
 
 

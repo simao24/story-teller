@@ -67,10 +67,10 @@
             <img src={logo} alt="Story Teller logo">
          </a>
     </nav>
-    <form action="recherche.php" class="header__search">
+    <!-- <form action="recherche.php" class="header__search">
         <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
         <input type="text" id="recherche" name="recherche" placeholder="Rechercher" class="header__search-input">
-    </form>
+    </form> -->
     <!-- Menu deroulant PSEUDO-->
     <menu class="dropdown">
         {#if user }
@@ -95,10 +95,10 @@
             <img src={logo} alt="Logo de l'application">
         </a>
       </div>
-      <div class="div-nav-search">
+      <!-- <div class="div-nav-search">
         <i class="fa-solid fa-magnifying-glass fa-xl"></i>
         <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
-      </div>
+      </div> -->
       <div class="div-nav-connexion">
         <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
         use:link>Connexion</a>
@@ -234,6 +234,61 @@
     color: red;
     transition: .3seconds;
     }
-   
+
+    @media only screen and (max-width: 425px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img {
+    width: 3em;
+    margin:10px;
+    }
+
+  .nav-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .header__search {
+    width: 100%,
+  }
+
+  .dropdown {
+    margin-right: 0;
+  }
+
+  .mainmenubtn {
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+
+  .dropdown-child ul li {
+    margin-bottom: 0.5em;
+  }
+
+  .div-nav-logo img {
+    margin: 0;
+  }
+
+  .div-nav-search {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+
+  .div-nav-connexion {
+    margin-right: 100rem;
+    font-size: 20%;
+  }
+
+  #searchbar {
+    width: 5rem;
+  }
+}
+
 
 </style>
