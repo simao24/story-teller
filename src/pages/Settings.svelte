@@ -319,9 +319,52 @@ button:hover{
     transition: opacity 0.2s ease-in-out;
   }
 
-  @media (max-width: 425px) {
-    .main-container {
-      font-size: 1.8rem;
-    }
+
+@media screen and (max-width: 768px) {
+  .main-container {
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    width: 100%;
   }
+h1 {
+font-size: 1.5rem;
+padding: 1rem;
+}
+.edit-container {
+  width: 80%;
+  padding: 1rem;
+  border-radius: 0;
+  border: none;
+  width: 100%;
+}
+
+.edit-elements {
+  width: 100%;
+}
+
+.edit-elements input {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.delete-user-container {
+  width: 100%;
+  padding: 1rem;
+}
+
+#valider {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.delete-user-button button {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+}
 </style>
