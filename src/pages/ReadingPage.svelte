@@ -96,14 +96,15 @@
 
           <div class="container">
             <span class="auteur">Categorie:</span>
-            <h4><b>{story.title}</b></h4>
             <p>{story.category?.name}</p>
+            <span class="auteur">Titre:</span>
+            <h4>"{story.title}"</h4>
             <span class="auteur">Auteur:</span>
             <p>{story.user?.first_name}</p>
-            <span class="description">Description:</span>
-            <p>{story.resume}</p>
+            <span>Description:</span>
+            <p class="description">{story.resume}</p>
             <!--{story.category_id.category}-->
-            <a href="/story-detail/{story.id}" use:link>voir le detail</a>
+            <a href="/story-detail/{story.id}" use:link>voir le détail</a>
           </div>
         </div>
       {/each}
@@ -244,6 +245,8 @@ main {
 
   .card h4 {
     margin: 0;
+    font-style: italic;
+    font-weight: 500;
   }
 
   .card .auteur {
@@ -263,4 +266,8 @@ main {
     margin-right: 5px;
     display: inline-block;
   }
+  .description{
+      text-align: justify;
+      letter-spacing: 0.5px;
+    }
 </style>
