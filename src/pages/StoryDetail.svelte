@@ -35,6 +35,7 @@
       // Afficher un message d'erreur
     });
 
+
   
     
 
@@ -109,6 +110,21 @@
   }  
  
 
+
+    // Ajouter une histoire aux favoris
+    const addFavorite = (story) => {
+    getAPI().post("/items/favoris",{
+      story_id:story.id
+    }) 
+    .then(data => {
+    console.log(data);
+    alert("l'histoire est bien ajoutée à vos favoris")   
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
+  };
+
 </script>
 
 <main>
@@ -118,8 +134,9 @@
     <div class="storydetails">
       <div class="storydetail-img">
         <img src={imghomepage} alt="Image du livre" />
-        <i class="fa-solid fa-thumbs-up" />
-      </div>
+        <div class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}>
+        </div>
+        </div>
 
       <div class="storydetail-infos">
         <span class="auteur">Categorie:</span>
