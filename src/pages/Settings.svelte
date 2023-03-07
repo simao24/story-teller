@@ -1,8 +1,7 @@
 <script>
   import { link } from "svelte-spa-router";
   import {getAPI, getToken } from "../utils/api";
- 
- import Swal from "sweetalert2";
+  import Swal from "sweetalert2";
 
   // Configuration de la requête
   let userInfos = {};
@@ -58,12 +57,22 @@
 
     getAPI()
       .patch("/users/me", data)
+
+      //Ajout modale pour confirmer la modification
+      Swal.fire({
+        icon:'success',
+        title:'Votre modification a été enregistrée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
       .then(function (response) {
-        showMessage = true;
+        /*showMessage = true;
         message = "Modification enregistrée avec succès";
         setTimeout(() => {
           showMessage = false;
-        }, 2000);
+        }, 2000); */
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -87,22 +96,39 @@ const parseJwt = (token) => {
 
 
 function deleteUser() {
+  
   const token = parseJwt(getToken())
   console.log(token);
+  //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+  if (confirm(`Êtes-vous sûr de vouloir supprimer votre compte?"${newFirstName}?"`)){
+        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
   getAPI().delete("/users/"+ token.id)
+
+  //ajout d'une modale pour confirmer la suppression de compte
+
+  Swal.fire({
+        icon:'warning',
+        title:'Votre compte vient d\'être supprimée',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
   
   .then(data => {
+   
     console.log('Utilisateur supprimé : ', data);
     // Déconnecter l'utilisateur
     localStorage.removeItem("token");
+    
     // Rediriger vers la page de connexion
     window.location.href = "/#/connexion";
+    location.reload();
   })
   .catch(error => {
     console.log('Erreur : ', error);
   });
 }
-
+}
   
 </script>
 <body>
