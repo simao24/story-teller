@@ -96,7 +96,7 @@
 
           <div class="container">
             <span class="auteur">Categorie:</span>
-            <p>{story.category?.name}</p>
+            <p class="story-category">{story.category?.name}</p>
             <span class="auteur">Titre:</span>
             <h4>"{story.title}"</h4>
             <span class="auteur">Auteur:</span>
@@ -270,4 +270,7 @@ main {
       text-align: justify;
       letter-spacing: 0.5px;
     }
+  .story-category{
+    border-bottom: 2px solid rgb(163, 162, 162);
+  }
 </style>
