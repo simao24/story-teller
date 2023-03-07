@@ -95,7 +95,7 @@
         <!--<a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link />-->
        
         <div class="container">
-          <h4><b>{story.title}</b></h4>
+          <h4 class="container-title">"{story.title}"</h4>
           <span class="auteur">Categorie:</span>
           <p>{story.category.name}</p>
           <span class="auteur">Auteur:</span>
@@ -298,6 +298,16 @@
   
     .profile-area {
       position: relative;
+    }
+    .container-title {
+      font-size: large;
+      font-style: italic;
+      font-weight:900;
+      letter-spacing: 1px;
+      line-height: 20px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      border-bottom: 2px solid rgb(167, 159, 159);
     }
   </style>
   

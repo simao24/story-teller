@@ -135,7 +135,7 @@ function deleteUser() {
   
 
 <div class="main-container">
-  <h1>Gestion de compte</h1>
+  <h1 class="animate-charcter">Gestion de compte</h1>
 
   <div class="edit-container">
     <h2>Profil d'utilisateur</h2>
@@ -202,13 +202,43 @@ function deleteUser() {
     margin-top: 0;
     padding-top: 30px;
 }
-  h1 {
+
+ /*Animation pour h1*/
+
+ .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-content: center;
     text-align: center;
-    font-size: 30px;
-    margin-top: 20px;
-    padding: 25px;
-    width: auto;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 50px;
+    
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
   }
+}
 
   h2 {
     text-align: center;

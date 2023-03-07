@@ -114,7 +114,7 @@
 <main>
   {#if story }
    
-    <h1>DETAIL D'UNE HISTOIRE</h1>
+    <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
     <div class="storydetails">
       <div class="storydetail-img">
         <img src={imghomepage} alt="Image du livre" />
@@ -124,14 +124,16 @@
       <div class="storydetail-infos">
         <span class="auteur">Categorie:</span>
         <h3>{story.category?.name}</h3>
-        <p>{story.title}</p>
+        <span class="auteur">Titre:</span>
+        <p class="story-title-italique">{story.title}</p>
+       
 
         <span class="auteur">Auteur:</span>
         <h3>{story.user?.first_name}</h3>
-        <span class="description">resumé:</span>
-        <p>{story.resume}</p>
-        <span class="description">Content:</span>
-        <p>{story.content}</p>
+        <span>Resumé:</span>
+        <p class="description">{story.resume}</p>
+        <span>Content:</span>
+        <p class="description">{story.content}</p>
       </div>
       <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
       <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
@@ -169,9 +171,42 @@
   }
   .fa-regular, .fa-pen-to-square, .fa-xl{
     background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);
+    margin-left: 15px;
 
 
   }
+  /*Animation pour h1*/
+
+  .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 50px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
+  }
+}
+  
   h1 {
     margin-top: 40px;
     font-size: xx-large;
@@ -184,6 +219,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 80px;
+    margin-right: 55px;
+    margin-bottom: 25px;
+    line-height: 25px;
+
   }
 
   .storydetail-img {
@@ -199,6 +238,7 @@
     width: 400px;
     border-radius: 10px;
     margin-right: 20px;
+    margin-left: 25px;
   }
   .storydetail-img i {
     position: absolute;
@@ -206,8 +246,8 @@
     right: -5px;
   }
   .storydetail-infos span{
-    margin-bottom:10px;
-    font-size: larger;
+    margin-bottom:25px;
+    font-size: x-large;
     font-weight: bold;
     color: #1C2942;
     text-decoration: underline;
@@ -230,6 +270,12 @@
   
     .storydetail-infos .description {
       margin-top: 0.5rem;
+  
+    }
+    .description{
+      text-indent: 40px;
+      text-align: justify;
+      letter-spacing: 0.5px;
     }
   
     .auteur {
@@ -268,6 +314,9 @@
       justify-content: center;
       align-items: center;
       margin-top: 20px;
+}
+h3{
+  font-size: large;
 }
 
   h4 {
@@ -314,6 +363,13 @@
   button[type="button"]:hover {
     background-color: #5FC2BA;
     color:#1C2942;
+  }
+
+  .story-title-italique{
+    font-style: italic;
+    font-size: larger;
+    letter-spacing: 1px;
+
   }
  
 </style>
