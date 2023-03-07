@@ -2,14 +2,7 @@
   import { link } from "svelte-spa-router";
   import MyStory from "./MyStory.svelte";
   import Swal from 'sweetalert2';
-  
-
-  import {
-    getAPI,
-    getToken,
-    removeToken
-    } from '../utils/api';
-
+  import {getAPI,getToken,removeToken} from '../utils/api';
     const token=getToken ()
     if(!token) {
       location.href= "/#/connexion";
@@ -21,7 +14,6 @@
   let content='';
   let category ='';
 
-
   // 1.1- Définir la fonction handleSubmit qui sera applée lorsque l'utilisateur soumettra le formulaire. 
   //Cette fonction effectuera une requête HTTP POST à notre API Directus pour enregistrer l'histoire dans notre bdd.
 
@@ -29,9 +21,7 @@
     event.preventDefault();
       try{
         const reponse = await getAPI().post('/items/story',{title, resume, content, category});
-       
-
-     
+            
       console.log(reponse.data);// Affiche la réponse de l'API dans la console
      
       content=''; // Efface le texte dans le textarea
@@ -50,7 +40,6 @@
   }
 </script>
 
-
 <body>
   <div id="container">
     <h1>&bull; Écrire une histoire &bull;</h1>
@@ -66,8 +55,7 @@
         <label for="titre"></label>
         <input type="text" placeholder="Titre" name="name" id="name_input" required bind:value={title}>
       </div>
-     
-      
+         
       <div class="subject">
         <label for="subject"></label>
         <select placeholder="Categorie" name="subject" id="subject_input" required bind:value={category}>
@@ -92,8 +80,8 @@
         <input type="submit" value="Publier" id="form_button" />
       </div>
 
-    </form><!-- // End form -->
-  </div><!-- // End #container -->
+    </form>
+  </div>
 </body>
 <style>
 
@@ -110,26 +98,18 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-
 #container{
   background-color: #FFFFFF;
   
 }
-button {
-  overflow: visible;
-}
 
-
-button, select {
+ select {
   text-transform: none;
-
 }
-
-button, input, select, textarea {
+input, select, textarea {
   color: #1C2942;
   font: inherit;
   margin: 0;
-  
 }
 
 input {
@@ -162,14 +142,10 @@ h1 {
   text-transform: uppercase;
   margin-top: 20px;
 }
-
-
-
 .icon_wrapper {
   margin: 50px auto 0;
   width: 100%;
 }
-
 .icon {
   display: block;
   fill: #474544;
@@ -178,12 +154,8 @@ h1 {
   width: 50px;
 }
 
-.email {
-	float: right;
-	width: 45%;
-}
 
-input[type='text'], [type='email'], select, textarea {
+input[type='text'], select, textarea {
 	background: none;
   border: none;
 	border-bottom: solid 2px #474544;
@@ -324,7 +296,7 @@ textarea {
     width: 53px;
   }
   
-  input[type='text'], [type='email'], select, textarea {
+  input[type='text'], select, textarea {
     font-size: 0.875em;
   }
 }

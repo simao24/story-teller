@@ -71,9 +71,6 @@
         padding: 0;
     }
 
-    .hand {
-        width: 60%;
-    }
     h1 {
         margin-top: 0;
         margin-bottom: 45px;

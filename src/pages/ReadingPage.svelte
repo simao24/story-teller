@@ -1,12 +1,12 @@
 <script>
   import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
+  import { getAPI, setToken } from "../utils/api";
   import { link } from "svelte-spa-router";
 
   let stories = [];
   let category ="";
   
-
   const get_stories = async () => {
    let url = "";
     if (category=="") {
@@ -20,60 +20,30 @@
     console.log(json);
     stories= json.data;
   };
-
   // Ajouter une histoire aux favoris
   const addFavorite = (story) => {
-    let favorites = [];
-
-    // Récupérez les données stockées dans le local storage sous la clé "favorites"
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    // Si des favoris ont été trouvés, mettez à jour la liste des favoris
-    if (storedFavorites.length > 0) {
-      favorites = storedFavorites;
-    }
-
-    // Vérifiez si l'histoire existe déjà dans la liste des favoris
-    const exists = favorites.find((favorite) => favorite.id === story.id);
-
-    // Si l'histoire n'existe pas encore dans la liste des favoris, ajoutez-la
-    if (!exists) {
-      favorites.push({
-        id: story.id,
-        title: story.title,
-        author: story.user.first_name,
-        description: story.resume,
-        image: imghomepage,
-      });
-
-      // Stockez la liste des favoris mise à jour dans le local storage sous la clé "favorites"
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-
-      alert("Histoire ajoutée aux favoris !");
-    } else {
-      alert("Cette histoire est déjà dans vos favoris !");
-    }
+    getAPI().post("/items/favoris",{
+      story_id:story.id
+    }) 
+    .then(data => {
+    console.log(data);
+    alert("l'histoire est bien ajoutée à vos favoris")   
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
   };
+
 </script>
 
 <main aria-labelledby="title1">
   <div class="container-reading">
     <h1 id="title1">HISTOIRES</h1>
-    <!-- Menu déroulant-->
-
-    <nav class="nav-categories">
+      <nav class="nav-categories">
       <ul>
         <li class="menu-deroulant-categories">
           <h2>categories</h2>
-          <!-- <a href="/" use:link>Catégories</a> -->
-          <!-- <ul class="sous-menu">
-            <li on:click={e=>category="10"}>Aventures</li>
-            <li on:click={e=>category="15"}>Educatif</li>
-            <li on:click={e=>category="11"}>Science-fiction</li>
-            <li on:click={e=>category="12"}>Thriller</li>
-            <li on:click={e=>category="13"}>Romantique</li>
-            <li on:click={e=>category="14"}>Horreur</li>
-          </ul> -->
+          
           <select bind:value={category} on:change={get_stories} name="" id="">
            <option value="10">Aventures</option> 
            <option value="15">Educatif</option> 
@@ -92,7 +62,8 @@
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
-          <a class="fa-regular fa-thumbs-up"/>
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}></div>
 
           <div class="container">
             <span class="auteur">Categorie:</span>
@@ -149,19 +120,6 @@ main {
     position: relative;
     margin-right: 20px;
   }
-
-  .nav-categories ul li a {
-    display: block;
-    padding: 5px 10px;
-    color: #333;
-    font-size: 16px;
-    text-decoration: none;
-  }
-
-  .nav-categories ul li:hover > ul {
-    display: block;
-  }
-
   .nav-categories ul ul {
     display: none;
     position: absolute;
@@ -177,38 +135,6 @@ main {
     display: block;
     white-space: nowrap;
   }
-
-  .nav-categories ul ul li a {
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-    padding: 10px 20px;
-  }
-
-  /* Animation pour le lien de catégories */
-  .nav-categories a {
-    position: relative;
-  }
-
-  .nav-categories a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 0;
-    border-radius: 5px;
-    transition: opacity 0.9s ease;
-  }
-
-  .nav-categories a:hover::before {
-    opacity: 1;
-    animation: flicker 1s linear infinite;
-  }
-
   @keyframes flicker {
     0%,
     100% {

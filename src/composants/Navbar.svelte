@@ -139,9 +139,9 @@
     border-radius:25px;
     } */
 
-    i {
+    /* i {
     color:white;
-    }
+    } */
 
     .logout{
     padding: .5em 1em;

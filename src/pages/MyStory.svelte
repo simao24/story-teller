@@ -109,6 +109,7 @@
       </div>
       {#if editingModeofStory}
         <div class="card">
+            <!-- svelte-ignore missing-declaration -->
             <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
               <div class="container">
                 <h4><b>Modifier Histoire</b></h4>

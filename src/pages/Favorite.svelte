@@ -39,7 +39,8 @@
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
-          <a class="fa-regular fa-thumbs-up"/>
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}></div>
 
           <div class="container">
             <span class="auteur">Categorie:</span>
@@ -65,10 +66,7 @@ main {
     flex-direction: column;
     align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
     padding-top: 60px;
-
   }
-  
-
   img {
     width: 25%;
     height: 60%;
@@ -76,86 +74,13 @@ main {
     margin-right: 50px;
     border-radius: 25px;
   }
-  
-
   .container-reading {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-  .nav-categories ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-categories ul li {
-    display: inline-block;
-    position: relative;
-    margin-right: 20px;
-  }
-
-  .nav-categories ul li a {
-    display: block;
-    padding: 5px 10px;
-    color: #333;
-    font-size: 16px;
-    text-decoration: none;
-  }
-
-  .nav-categories ul li:hover > ul {
-    display: block;
-  }
-
-  .nav-categories ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-categories ul ul li {
-    display: block;
-    white-space: nowrap;
-  }
-
-  .nav-categories ul ul li a {
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-    padding: 10px 20px;
-  }
-
-  /* Animation pour le lien de catégories */
-  .nav-categories a {
-    position: relative;
-  }
-
-  .nav-categories a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 0;
-    border-radius: 5px;
-    transition: opacity 0.9s ease;
-  }
-
-  .nav-categories a:hover::before {
-    opacity: 1;
-    animation: flicker 1s linear infinite;
-  }
-
-  @keyframes flicker {
+@keyframes flicker {
     0%,
     100% {
       opacity: 1;
