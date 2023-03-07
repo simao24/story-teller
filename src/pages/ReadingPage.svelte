@@ -58,38 +58,32 @@
 
 <main aria-labelledby="title1">
   <div class="container-reading">
-    <h1 id="title1">HISTOIRES</h1>
+    <div class="container-reading-header">
+    <h1 class="animate-charcter">HISTOIRES</h1>
     <!-- Menu déroulant-->
 
     <nav class="nav-categories">
       <ul>
         <li class="menu-deroulant-categories">
-          <h2>categories</h2>
-          <!-- <a href="/" use:link>Catégories</a> -->
-          <!-- <ul class="sous-menu">
-            <li on:click={e=>category="10"}>Aventures</li>
-            <li on:click={e=>category="15"}>Educatif</li>
-            <li on:click={e=>category="11"}>Science-fiction</li>
-            <li on:click={e=>category="12"}>Thriller</li>
-            <li on:click={e=>category="13"}>Romantique</li>
-            <li on:click={e=>category="14"}>Horreur</li>
-          </ul> -->
-          <select bind:value={category} on:change={get_stories} name="" id="">
-           <option value="10">Aventures</option> 
-           <option value="15">Educatif</option> 
-           <option value="11">Sciences-fiction</option>
-           <option value="12">Thriller</option>  
-           <option value="13">Romantique</option> 
-           <option value="14">Horreur</option> 
+          <h2>Catégories</h2>
+          <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
+           <option class="select-menu-option" value="10">Aventures</option> 
+           <option class="select-menu-option" value="15">Educatif</option> 
+           <option class="select-menu-option" value="11">Sciences-fiction</option>
+           <option class="select-menu-option" value="12">Thriller</option>  
+           <option class="select-menu-option" value="13">Romantique</option> 
+           <option class="select-menu-option" value="14">Horreur</option> 
           </select>
 
         </li>
       </ul>
     </nav>
+  </div>
     {#await get_stories()}
       <p>Chargement de la liste...</p>
     {:then _}
       {#each stories as story}
+      <div >
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
           <a class="fa-regular fa-thumbs-up"/>
@@ -107,6 +101,7 @@
             <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
           </div>
         </div>
+      </div>
       {/each}
     {/await}
   </div>
@@ -119,9 +114,87 @@ main {
     flex-direction: column;
     align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
     padding-top: 60px;
+    background: linear-gradient(0deg, #5fc2ba, #afe1dd, rgba(234, 244, 244, 1), #ffffff);
+  }
+  .container-reading-header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 35px;
+    justify-content: space-between;
+  }
+  .container-reading-header h2{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color:#333;
+    padding-bottom: 15px;
+  }
+  .select-menu{
+    width: 300px;
+    height: 20px;
 
   }
-  
+ 
+
+  .select-menu-option{
+    background-color: #3B556D;
+    color:#ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+  }
+  .select-menu-option:hover{
+    background-color:#5FC2BA;
+    color:#1C2942;
+  }
+
+  /*Animation pour h1*/
+
+  .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 60px;
+    padding-bottom:25px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
+  }
+}
+  /*.container-cards{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width:max-content;
+  }*/
 
   img {
     width: 25%;
@@ -220,17 +293,28 @@ main {
   }
 
   .card {
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 320px;
+    height: 900px;
+    display: inline-block;
     margin: 10px;
-    padding: 1rem;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 10px;
-    max-width: 400px;
+    padding: 1rem;
+    max-width: 450px; 
+    background: linear-gradient(180deg, #ffffff, #f4fafa, #eaf4f4);
+    /*animation: myAnim 2s ease 0s 1 normal forwards;*/
+    animation: myAnim 1s ease 0s 1 normal forwards;
   }
+  @keyframes myAnim {
+	0% {
+		transform: scale(0.5);
+	}
 
+	100% {
+		transform: scale(1);
+	}
+}
   .card img {
     margin-right: 1rem;
     width: 150px;
