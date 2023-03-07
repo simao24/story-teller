@@ -95,10 +95,10 @@
             <img src={logo} alt="Logo de l'application">
         </a>
       </div>
-      <div class="div-nav-search">
+      <!-- <div class="div-nav-search">
         <i class="fa-solid fa-magnifying-glass fa-xl"></i>
         <input id="searchbar" on:input={search_something} type="text" name="search" placeholder="Rechercher">
-      </div>
+      </div> -->
       <div class="div-nav-connexion">
         <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
         use:link>Connexion</a>
@@ -128,17 +128,16 @@
     transition: .3seconds;
     }
 
-    .div-nav-search{
+    /* .div-nav-search{
     height: 3em;
 
-    }
+    } */
   
-
-    #searchbar {
+    /* #searchbar {
     width: auto;
     height: 20px;
     border-radius:25px;
-    }
+    } */
 
     i {
     color:white;
