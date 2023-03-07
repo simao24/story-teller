@@ -1,6 +1,4 @@
 <script>
-    import {link} from "svelte-spa-router";
-    import { push } from 'svelte-spa-router';
     import {getAPI,setToken} from "../utils/api";
 
     let email = ''

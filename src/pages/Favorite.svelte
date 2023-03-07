@@ -1,8 +1,7 @@
 <script>
-  import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
   import { link } from "svelte-spa-router";
-    import { getAPI } from "../utils/api";
+  import { getAPI } from "../utils/api";
 
   let stories = [];
   let category ="";

@@ -1,6 +1,4 @@
 <script>
-  import { link } from "svelte-spa-router";
-  import MyStory from "./MyStory.svelte";
   import Swal from 'sweetalert2';
   import {getAPI,getToken,removeToken} from '../utils/api';
     const token=getToken ()

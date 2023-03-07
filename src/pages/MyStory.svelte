@@ -1,16 +1,8 @@
   <script>
 // @ts-nocheck
-
-
-
-    import { link } from "svelte-spa-router";
-
-
-  import imghomepage from "../assets/img-homepage.jpg"
+  import { link } from "svelte-spa-router";
   import {getAPI,setToken} from "../utils/api";
-    import StoryDetail from "./StoryDetail.svelte";
-  
-  
+    
   let userInfos = {
     story: []
   };
@@ -109,7 +101,6 @@
       </div>
       {#if editingModeofStory}
         <div class="card">
-            <!-- svelte-ignore missing-declaration -->
             <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
               <div class="container">
                 <h4><b>Modifier Histoire</b></h4>
@@ -289,15 +280,7 @@
   }
 }
   
-    .divider {
-      border-left: 1px solid #ccc;
-      height: 100%;
-      position: absolute;
-      left: 18%;
-      top: 0;
-    }
-  
-    .profile-area {
+   .profile-area {
       position: relative;
     }
     .container-title {
