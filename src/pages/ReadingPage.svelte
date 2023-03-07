@@ -4,14 +4,21 @@
   import { link } from "svelte-spa-router";
 
   let stories = [];
+  let category ="";
+  
 
   const get_stories = async () => {
-    const response = await fetch(
-      import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
-    );
+   let url = "";
+    if (category=="") {
+      url = import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
+    }
+    else{
+      url= `${import.meta.env.VITE_API_URL_GET_ITEMS}/story/?filter[category][_eq]=${category}&fields[]=*.*`
+    }
+    const response = await fetch(url);
     const json = await response.json();
     console.log(json);
-    return json.data;
+    stories= json.data;
   };
 
   // Ajouter une histoire aux favoris
@@ -69,25 +76,61 @@
     </ul>
   </nav>
   <div class="container-reading">
+
+=======
+    <h1 id="title1">HISTOIRES</h1>
+    <!-- Menu déroulant-->
+
+    <nav class="nav-categories">
+      <ul>
+        <li class="menu-deroulant-categories">
+          <h2>categories</h2>
+          <!-- <a href="/" use:link>Catégories</a> -->
+          <!-- <ul class="sous-menu">
+            <li on:click={e=>category="10"}>Aventures</li>
+            <li on:click={e=>category="15"}>Educatif</li>
+            <li on:click={e=>category="11"}>Science-fiction</li>
+            <li on:click={e=>category="12"}>Thriller</li>
+            <li on:click={e=>category="13"}>Romantique</li>
+            <li on:click={e=>category="14"}>Horreur</li>
+          </ul> -->
+          <select bind:value={category} on:change={get_stories} name="" id="">
+           <option value="10">Aventures</option> 
+           <option value="15">Educatif</option> 
+           <option value="11">Sciences-fiction</option>
+           <option value="12">Thriller</option>  
+           <option value="13">Romantique</option> 
+           <option value="14">Horreur</option> 
+          </select>
+
+        </li>
+      </ul>
+    </nav>
+
     {#await get_stories()}
       <p>Chargement de la liste...</p>
-    {:then stories}
+    {:then _}
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
+
           <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}
           />
 
+          <a class="fa-regular fa-thumbs-up"/>
+
+
           <div class="container">
             <span class="auteur">Categorie:</span>
-            <h4><b>{story.title}</b></h4>
-            <p>{story.category?.name}</p>
+            <p class="story-category">{story.category?.name}</p>
+            <span class="auteur">Titre:</span>
+            <h4>"{story.title}"</h4>
             <span class="auteur">Auteur:</span>
             <p>{story.user?.first_name}</p>
-            <span class="description">Description:</span>
-            <p>{story.resume}</p>
+            <span>Description:</span>
+            <p class="description">{story.resume}</p>
             <!--{story.category_id.category}-->
-            <a href="/story-detail/{story.id}" use:link>voir le detail</a>
+            <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
           </div>
         </div>
       {/each}
@@ -230,6 +273,8 @@ main {
 
   .card h4 {
     margin: 0;
+    font-style: italic;
+    font-weight: 500;
   }
 
   .card .auteur {
@@ -248,5 +293,19 @@ main {
     font-weight: bold;
     margin-right: 5px;
     display: inline-block;
+  }
+  .description{
+      text-align: justify;
+      letter-spacing: 0.5px;
+    }
+  .story-category{
+    border-bottom: 2px solid rgb(163, 162, 162);
+  }
+  .story-detail-link{
+    font-size: large;
+    font-weight: 600;
+  }
+  .story-detail-link:hover{
+    color:rgb(5, 109, 81);
   }
 </style>

@@ -1,8 +1,7 @@
 <script>
   import { link } from "svelte-spa-router";
   import {getAPI, getToken } from "../utils/api";
- 
- import Swal from "sweetalert2";
+  import Swal from "sweetalert2";
 
   // Configuration de la requête
   let userInfos = {};
@@ -58,12 +57,22 @@
 
     getAPI()
       .patch("/users/me", data)
+
+      //Ajout modale pour confirmer la modification
+      Swal.fire({
+        icon:'success',
+        title:'Votre modification a été enregistrée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
       .then(function (response) {
-        showMessage = true;
+        /*showMessage = true;
         message = "Modification enregistrée avec succès";
         setTimeout(() => {
           showMessage = false;
-        }, 2000);
+        }, 2000); */
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -87,29 +96,46 @@ const parseJwt = (token) => {
 
 
 function deleteUser() {
+  
   const token = parseJwt(getToken())
   console.log(token);
+  //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+  if (confirm(`Êtes-vous sûr de vouloir supprimer votre compte?"${newFirstName}?"`)){
+        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
   getAPI().delete("/users/"+ token.id)
+
+  //ajout d'une modale pour confirmer la suppression de compte
+
+  Swal.fire({
+        icon:'warning',
+        title:'Votre compte vient d\'être supprimée',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
   
   .then(data => {
+   
     console.log('Utilisateur supprimé : ', data);
     // Déconnecter l'utilisateur
     localStorage.removeItem("token");
+    
     // Rediriger vers la page de connexion
     window.location.href = "/#/connexion";
+    location.reload();
   })
   .catch(error => {
     console.log('Erreur : ', error);
   });
 }
-
+}
   
 </script>
 <body>
   
 
 <div class="main-container">
-  <h1>Gestion de compte</h1>
+  <h1 class="animate-charcter">Gestion de compte</h1>
 
   <div class="edit-container">
     <h2>Profil d'utilisateur</h2>
@@ -176,13 +202,43 @@ function deleteUser() {
     margin-top: 0;
     padding-top: 30px;
 }
-  h1 {
+
+ /*Animation pour h1*/
+
+ .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-content: center;
     text-align: center;
-    font-size: 30px;
-    margin-top: 20px;
-    padding: 25px;
-    width: auto;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 50px;
+    
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
   }
+}
 
   h2 {
     text-align: center;
