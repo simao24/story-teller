@@ -92,7 +92,7 @@
       {#each stories as story}
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
-          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}/>
+          <a class="fa-regular fa-thumbs-up"/>
 
           <div class="container">
             <span class="auteur">Categorie:</span>
