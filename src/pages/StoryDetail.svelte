@@ -134,7 +134,7 @@
     <div class="storydetails">
       <div class="storydetail-img">
         <img src={imghomepage} alt="Image du livre" />
-        <div class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}>
+        <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}>
         </div>
         </div>
 
@@ -186,6 +186,14 @@
     align-items: center;
     
   }
+  .fa-thumbs-up {
+    color: #3B556D;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-right: 20px;
+}
   .fa-regular, .fa-pen-to-square, .fa-xl{
     background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);
     margin-left: 15px;
