@@ -67,10 +67,10 @@
             <img src={logo} alt="Story Teller logo">
          </a>
     </nav>
-    <form action="recherche.php" class="header__search">
+    <!-- <form action="recherche.php" class="header__search">
         <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
         <input type="text" id="recherche" name="recherche" placeholder="Rechercher" class="header__search-input">
-    </form>
+    </form> -->
     <!-- Menu deroulant PSEUDO-->
     <menu class="dropdown">
         {#if user }
