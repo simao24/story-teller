@@ -104,7 +104,7 @@
             <span>Description:</span>
             <p class="description">{story.resume}</p>
             <!--{story.category_id.category}-->
-            <a href="/story-detail/{story.id}" use:link>voir le détail</a>
+            <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
           </div>
         </div>
       {/each}
@@ -272,5 +272,12 @@ main {
     }
   .story-category{
     border-bottom: 2px solid rgb(163, 162, 162);
+  }
+  .story-detail-link{
+    font-size: large;
+    font-weight: 600;
+  }
+  .story-detail-link:hover{
+    color:rgb(5, 109, 81);
   }
 </style>
