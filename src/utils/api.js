@@ -22,7 +22,7 @@ export const getToken = function(){
 
 export const getTokenData = function(){
     let token = getToken();
-    return parseJwt(token)
+    if(token) return parseJwt(token)
 }
 
 export const getAPI = function(){

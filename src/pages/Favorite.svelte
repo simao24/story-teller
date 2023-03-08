@@ -2,7 +2,12 @@
   import imghomepage from "../assets/img-homepage.jpg";
   import { link } from "svelte-spa-router";
   import { getAPI, getTokenData } from "../utils/api";
-  import cat_educatif from "../assets/category/educatif.jpg";
+  import cat_educatif from "../assets/category/Educative-pic.jpg";
+  import cat_thriller from "../assets/category/thriller2.jpg";
+  import cat_romantique from "../assets/category/romantique.jpg";
+  import cat_sciencefiction from "../assets/category/sciencefiction.jpg";
+  import cat_horror from "../assets/category/horror2.jpg";
+  import cat_aventure from "../assets/category/aventure.jpg";
 
   let stories = [];
   let category ="";
@@ -20,13 +25,14 @@
   };
 
   const categoryImg = {
-    10: cat_educatif,
+    10: cat_aventure,
     15: cat_educatif,
-    11: cat_educatif,
-    12: cat_educatif,
-    13: cat_educatif,
-    14: cat_educatif
+    11: cat_sciencefiction,
+    12: cat_thriller,
+    13: cat_romantique,
+    14: cat_horror
   }
+
 
   const get_stories = async () => {
    let url = "";

@@ -91,7 +91,10 @@
 </nav>
 {/if}
 </header>
+
+
 <style>
+
 img {
 width: 6em;
 margin:15px;

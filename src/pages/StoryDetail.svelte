@@ -2,7 +2,18 @@
   import imghomepage from "../assets/img-homepage.jpg";
   import { getAPI, setToken, getTokenData } from "../utils/api";
   import Swal from 'sweetalert2';
+
+  import cat_educatif from "../assets/category/Educative-pic.jpg";
+  import cat_thriller from "../assets/category/thriller2.jpg";
+  import cat_romantique from "../assets/category/romantique.jpg";
+  import cat_sciencefiction from "../assets/category/sciencefiction.jpg";
+  import cat_horror from "../assets/category/horror2.jpg";
+  import cat_aventure from "../assets/category/aventure.jpg";
+  import { link } from "svelte-spa-router";
+
   export let params = {};
+
+
   let story = {category:{}, user: {}};
   $: console.log("story : ", story);
   let editingModeofStory = false;
@@ -10,6 +21,27 @@
   let updateStory={title:"", category: {name:""}, resume:"", content:""}
  
 
+  let stories = [];
+  let category ="";
+
+  const categoryStyles = {
+    10: 'category_tag--aventures',
+    15: 'category_tag--educatif',
+    11: 'category_tag--science-fiction',
+    12: 'category_tag--thriller',
+    13: 'category_tag--romantique',
+    14: 'category_tag--horreur',
+
+  };
+
+  const categoryImg = {
+    10: cat_aventure,
+    15: cat_educatif,
+    11: cat_sciencefiction,
+    12: cat_thriller,
+    13: cat_romantique,
+    14: cat_horror
+  }
   // recupérer le détail d'une histoire via une requête Get
   // dans le get api on recuperee de maniere dynamique la story avec ID, les `` en début de et fin string et le $ peu importe ou dans la string ${params.id}
   // l'id est recuperé grâce "/story-detail/:id" dans app.svelte et ce id se remplit grâce qu lien dans reading page.
@@ -106,7 +138,7 @@
   <div class="storydetails">
     <div class="storydetail-img">
       <!-- svelte-ignore a11y-img-redundant-alt -->
-      <img src={imghomepage} alt="Image du livre" />
+      <img src={categoryImg[story.category.id]} alt={story.category.name} />
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       {#if token}
         <div class="fa-regular fa-thumbs-up fa-2xl" on:click={() => addFavorite(story)}></div>
@@ -125,7 +157,7 @@
       <p class="description">{story.content}</p>
     </div>
     
-    {#if token.id == story.user}
+    {#if token?.id == story.user}
     <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
     <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
     {/if}
