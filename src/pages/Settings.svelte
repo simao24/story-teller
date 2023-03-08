@@ -264,37 +264,57 @@ button:hover{
   }
 
 
-@media screen and (max-width: 768px) {
-  .main-container {
+@media screen and (max-width: 767px) {
+
+  body {
+    width: 100%;
+    align-items: center;
+    background-image: radial-gradient(#5FC2BA 0.75px, #e5e5f7 0.75px);
+    background-size: 15px 15px;
+  }
+
+  /* h1 {
+text-align: center;
+} */
+  .edit-container {
     font-size: 1.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    margin: 0;
-    width: 100%;
+    /* height: 100vh; */
+    width: 50%;
+    margin-left: 20%;
+    margin-bottom: 1rem;
   }
-h1 {
-font-size: 1.5rem;
-padding: 1rem;
-}
-.edit-container {
+
+/* .edit-container {
   width: 80%;
   padding: 1rem;
   border-radius: 0;
   border: none;
   width: 100%;
-}
+  display: inline-flex;
+} */
 
-.edit-elements {
+.edit-elements p {
   width: 100%;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .edit-elements input {
   font-size: 1rem;
   padding: 0.5rem;
+  margin-left: -25%;
+  width: 100%;
+  height: 5%;
 }
+
+/* .edit-elements p {
+  font-size: 1rem;
+  padding: 0.5rem;
+} */
 
 .delete-user-container {
   width: 100%;
@@ -310,5 +330,12 @@ padding: 1rem;
   font-size: 1rem;
   padding: 0.5rem;
 }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  body {
+    width: 50%;
+    align-items: center;
+  } 
 }
 </style>

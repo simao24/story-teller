@@ -70,9 +70,8 @@ export function scrollToTop() {
 
 <style>   
 
-@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
- 
 
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 .footer-nav {
   background-color: #3B556D;
   color: #fff;
@@ -82,26 +81,19 @@ export function scrollToTop() {
   padding: 1rem;
   display: flex;
   align-items: center;
-  
 }
-
-
 * {
   padding: 0px;
   margin: 0px;
 }
-
  ul {
    position: relative;
    display: flex;
-   
    transform-style: preserve-3d;
    align-items: center;
    justify-content: center;
-   
 }
 ul li {
-    
   position: relative;
   list-style: none;
   width: 30px;
@@ -126,10 +118,9 @@ ul li:after{
   left: -9px;
   width: 9px;
   height: 100%;
-  background: #2a2a2a;
+  background: #2A2A2A;
   transform-origin: right;
   transform: skewY(-49deg);
-
 }
 ul li span{
   position: absolute;
@@ -138,7 +129,7 @@ ul li span{
   width: 100%;
   height: 100%;
   display: flex !important;
-  background: #2a2a2a;
+  background: #2A2A2A;
   justify-content: center;
   align-items: center;
   color: #fff;
@@ -181,33 +172,42 @@ ul li:nth-child(3):hover span{
 }
 ul li:nth-child(4):hover span{
   background: rgba(47, 3, 245, 0.895) !important;
-  
 }
 
-  @media (max-width: 450px) {
-  .footer-nav {
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-  }
-  .social-media {
-    width: 100%;
-    height: 0.1rem;
-    display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  }
-  .contact,
-  .footer-name {
-    margin-top: 1rem;
-    width: 100%;
-  }
-  .scroll-to-top {
-    bottom: 40px;
-    right: 10px;
-    position: relative;
-  }
+
+@media (max-width:425px){
+    .footer-nav{
+        font-size: 1.8rem;
+        
+    }
 }
-    </style> 
+.scroll-to-top {
+    /* position: fixed; */
+    margin-top: -15rem;
+    /* bottom: 20px; */
+    right: 5%;
+    background-color: #3B556D;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    width: 50px;
+    height: 50px;
+  }
+  .material-icons {
+    color: #fff;
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  .scroll-to-top:hover {
+    background-color: #555;
+  }
+
+  .contact, p{
+    font-size: 1rem;
+    margin: 0.6rem;
+  }
+    </style>
 
 

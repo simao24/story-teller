@@ -203,8 +203,11 @@
   }
 
   .main__button {
-    width: 1px;
-    margin: 0;
+    align-items: center;
+  }
+
+  .main__buttons  {
+    margin-left: 1rem;
   }
   .waviy {
     font-size: 2rem;
@@ -212,8 +215,30 @@
   }
 
   .main__subtitle {
-    font-size: 0.8rem;
-    width: 0.5rem;
+    font-size: 0.6rem;
+    width: auto;
+    word-wrap: break-word;
+    margin-bottom: -2rem;
+  }
+
+  .main__text-title {
+    font-size: 1.2rem;
+    margin-top: 0rem;
+    text-align: left;
+    margin-right: 20%;
+  }
+
+  .main__text-paragraph {
+    font-size: 0.7rem;
+    line-height: normal;
+    margin-bottom: 5rem;
+    margin-right: 20%;
+    text-align: left;
+  }
+
+  .main__image-text img {
+    /* height: 10rem; */
+    width: 35%;
   }
   /* Augmenter la taille de la police des titres */
   h1, h2, h3 {
