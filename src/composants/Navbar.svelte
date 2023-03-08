@@ -1,24 +1,11 @@
     <script>
         import logo from '../assets/logo-thestoryteller.png'
-        
-
-        import {
-            link
-        } from 'svelte-spa-router'
-        import {
-            getAPI,
-            getToken,
-            removeToken
-        } from '../utils/api';
-        import {
-            push
-        } from 'svelte-spa-router';
-
-        
+        import {link} from 'svelte-spa-router'
+        import {getAPI,getToken,removeToken} from '../utils/api';
+     
         let token = getToken()
         let user = null;
      
-
         //récuperer les données de l'utilisateur
         function getUserInfos(){
             if (!token) {
@@ -128,21 +115,6 @@
     transition: .3seconds;
     }
 
-    /* .div-nav-search{
-    height: 3em;
-
-    } */
-  
-    /* #searchbar {
-    width: auto;
-    height: 20px;
-    border-radius:25px;
-    } */
-
-    i {
-    color:white;
-    }
-
     .logout{
     padding: .5em 1em;
     cursor: pointer;
@@ -233,6 +205,7 @@
     transition: .3seconds;
     }
 
+ </style>
     @media only screen and (max-width: 425px) {
   .header {
     display: flex;
@@ -290,3 +263,4 @@
 
 
 </style>
+

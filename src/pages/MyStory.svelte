@@ -1,16 +1,8 @@
   <script>
 // @ts-nocheck
-
-
-
-    import { link } from "svelte-spa-router";
-
-
-  import imghomepage from "../assets/img-homepage.jpg"
+  import { link } from "svelte-spa-router";
   import {getAPI,setToken} from "../utils/api";
-    import StoryDetail from "./StoryDetail.svelte";
-  
-  
+    
   let userInfos = {
     story: []
   };
@@ -288,15 +280,7 @@
   }
 }
   
-    .divider {
-      border-left: 1px solid #ccc;
-      height: 100%;
-      position: absolute;
-      left: 18%;
-      top: 0;
-    }
-  
-    .profile-area {
+   .profile-area {
       position: relative;
     }
 

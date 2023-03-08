@@ -1,5 +1,4 @@
 <script>
-  import { link } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
   import { getAPI, setToken } from "../utils/api";
   import Swal from 'sweetalert2';
@@ -64,8 +63,10 @@
         
         .then(response => {
           location.reload();
+          // @ts-ignore
           console.log('reponse axios : ', response.data.data);
           // mettre à jour la liste d'histoires avec la version mise à jour
+          // @ts-ignore
           story.story = story.story.map(s => s.id === story.id ? response.data.data : s)
           story =  {...story}
         
@@ -133,7 +134,9 @@
     <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
     <div class="storydetails">
       <div class="storydetail-img">
+        <!-- svelte-ignore a11y-img-redundant-alt -->
         <img src={imghomepage} alt="Image du livre" />
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}>
         </div>
         </div>
@@ -280,11 +283,11 @@
     margin-right: 20px;
     margin-left: 25px;
   }
-  .storydetail-img i {
+  /* .storydetail-img i {
     position: absolute;
     bottom: -30px;
     right: -5px;
-  }
+  } */
   .storydetail-infos span{
     margin-bottom:25px;
     font-size: x-large;
@@ -292,10 +295,10 @@
     color: #1C2942;
     text-decoration: underline;
   }
-  .storydetail-infos h4 {
+  /* .storydetail-infos h4 {
     font-size: large;
     margin: 0;
-  }
+  } */
 
  .storydetail-infos p {
   font-size: large;
