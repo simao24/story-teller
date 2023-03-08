@@ -1,74 +1,41 @@
 <script>
-  import { link } from "svelte-spa-router";
-  import { getAPI, getToken } from "../utils/api";
-  import Swal from "sweetalert2";
+  import imghomepage from "../assets/img-homepage.jpg";
+  import { getAPI, setToken } from "../utils/api";
+  import Swal from 'sweetalert2';
+  export let params = {};
+  let story = {category:{}, user: {}};
+  $: console.log("story : ", story);
+  let editingModeofStory = false;
+  let editedStory={title:"", category: {name:""}, resume:"", content:""}
+  let updateStory={title:"", category: {name:""}, resume:"", content:""}
+ 
 
-  // Configuration de la requête
-  let userInfos = {};
-  let newFirstName = "";
-  let newEmail = "";
-  let newPassword = "";
-  let newAvatar = "";
-  let message = "";
-  let showMessage = null;
-
-  // Récupération des informations de l'utilisateur actuel
+  // recupérer le détail d'une histoire via une requête Get
+  // dans le get api on recuperee de maniere dynamique la story avec ID, les `` en début de et fin string et le $ peu importe ou dans la string ${params.id}
+  // l'id est recuperé grâce "/story-detail/:id" dans app.svelte et ce id se remplit grâce qu lien dans reading page.
   getAPI()
-    .get("/users/me")
+    .get(
+      `items/story/${params.id}?fields[]=*.*`
+    )
     .then(function (response) {
-      userInfos = response.data.data;
-      console.log(userInfos);
-      newFirstName = userInfos.first_name;
-      newEmail = userInfos.email;
-
-      //  newAvatar = "";
+      // console.log();
+      // return response.data.data
+      story = response.data.data;
     })
     .catch(function (error) {
       console.log(error);
+      // Afficher un message d'erreur
     });
-
-  function handleFirstNameChange(event) {
-    newFirstName = event.target.value;
-  }
-  function handleEmailChange(event) {
-    newEmail = event.target.value;
-  }
-  function handlePasswordChange(event) {
-    newPassword = event.target.value;
-  }
-  function handleAvatarChange(event) {
-    newAvatar = event.target.value;
-  }
-  function handleEditClick() {
-    let data = {};
-
-    if (newFirstName != "") {
-      data.first_name = newFirstName;
-    }
-    if (newEmail != "") {
-      data.email = newEmail;
-    }
-    if (newPassword != "") {
-      data.password = newPassword;
-    }
-    if (newAvatar != "") {
-      data.avatar = newAvatar;
-    }
-
-
-    getAPI()
-      .patch("/users/me", data)
-      .then(function (response) {
-        showMessage = true;
-        message = "Modification enregistrée avec succès";
-        setTimeout(() => {
-          showMessage = false;
-        }, 2000);
-
+    //Afficher la possibilité de modifer/supprimer une histoire
+    function modifierHistoire(event, story){
+    const title  = event.target[0].value
+    const category = event.target[1].value
+    const resume = event.target[2].value
+    const content = event.target[3].value
       getAPI().patch(`/items/story/${story.id}?fields=*, category.name`, {
         title,
-        category: 10, 
-        resume, 
+        category: 10,
+        resume,
         content,
       })
       Swal.fire({
@@ -77,8 +44,7 @@
         showConfirmButton:false,
         timer:1700
         
-      }) 
-        
+      })
         .then(response => {
           location.reload();
           // @ts-ignore
@@ -87,23 +53,17 @@
           // @ts-ignore
           story.story = story.story.map(s => s.id === story.id ? response.data.data : s)
           story =  {...story}
-        
-       
-
-          
         })
         .catch(error =>{
           console.log(error)
         })
       }
-
     // Function de suppression d'histoire
     function supprimerHistoire(story) {
       //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
       if (confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)){
         // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
         getAPI().delete(`/items/story/${story.id}`)
-
         //Modale pour confirmer la suppression d'une histoire
         Swal.fire({
         icon:'warning',
@@ -111,110 +71,34 @@
         showConfirmButton:false,
         timer:1700
         })
-    
         .then(response => {
           location.reload();
           console.log(response)
           //Mettre à jour la liste d'histoires en la filtrant pour enlever l'histoire
           story.story = story.story.filter(s => s.id !== story.id)
           story = {...story}
-         
-           
-     
         })
         .catch(error => {
           console.log(error)
-
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  function handleDeleteUserClick() {
-    const confirmDelete = confirm(
-      "Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible."
-    );
-    if (confirmDelete) {
-      deleteUser();
     }
   }
-  const parseJwt = (token) => {
-    try {
-      return JSON.parse(atob(token.split(".")[1]));
-    } catch (e) {
-      return null;
-    }
+    // Ajouter une histoire aux favoris
+    const addFavorite = (story) => {
+    getAPI().post("/items/favoris",{
+      story_id:story.id
+    })
+    .then(data => {
+    console.log(data);
+    alert("l'histoire est bien ajoutée à vos favoris")
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
   };
-
-  function deleteUser() {
-    const token = parseJwt(getToken());
-    console.log(token);
-    getAPI()
-      .delete("/users/" + token.id)
-
-      .then((data) => {
-        console.log("Utilisateur supprimé : ", data);
-        // Déconnecter l'utilisateur
-        localStorage.removeItem("token");
-        // Rediriger vers la page de connexion
-        window.location.href = "/#/connexion";
-      })
-      .catch((error) => {
-        console.log("Erreur : ", error);
-      });
-  }
 </script>
-
-
-<body>
-  <div class="main-container">
-    <h1>Gestion de compte</h1>
-
-    <div class="edit-container">
-      <h2>Profil d'utilisateur</h2>
-
-      <div class="edit-elements">
-        <p>Photo de profil</p>
-        <p>
-          <input
-            type="text"
-            id="avatar"
-            value={newAvatar}
-            on:input={handleAvatarChange}
-          />
-        </p>
-        <p>Pseudo:</p>
-
-        <p>
-          <input
-            type="text"
-            value={newFirstName}
-            on:input={handleFirstNameChange}
-          />
-        </p>
-        <p>Email:</p>
-        <p>
-          <input type="text" value={newEmail} on:input={handleEmailChange} />
-        </p>
-        <p>Mot de passe:</p>
-        <p>
-          <input
-            type="password"
-            value={newPassword}
-            on:input={handlePasswordChange}
-          />
-        </p>
-      </div>
-      <div class="delete-user-container">
-        <button id="valider" on:click={handleEditClick}>Edit</button>
-        {#if showMessage}
-          <div class="message">{message}</div>
-        {/if}
-
 <main>
   {#if story }
-   
     <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
     <div class="storydetails">
       <div class="storydetail-img">
@@ -224,46 +108,63 @@
         <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}>
         </div>
         </div>
-
-
-        <div class="delete-user-button">
-          <button on:click={deleteUser}>Supprimer mon compte</button>
-        </div>
+      <div class="storydetail-infos">
+        <span class="auteur">Categorie:</span>
+        <h3>{story.category?.name}</h3>
+        <span class="auteur">Titre:</span>
+        <p class="story-title-italique">{story.title}</p>
+        <span class="auteur">Auteur:</span>
+        <h3>{story.user?.first_name}</h3>
+        <span>Resumé:</span>
+        <p class="description">{story.resume}</p>
+        <span>Content:</span>
+        <p class="description">{story.content}</p>
       </div>
+      <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
+      <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
     </div>
-  </div>
-</body>
-
+  {/if}
+  {#if editingModeofStory}
+        <div class="card">
+            <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
+              <div class="container">
+                <h4><b>Modifier l'histoire</b></h4>
+                <label for="title">Titre:</label>
+                <input type="text" id="title" bind:value={editedStory.title}/>
+                <label for="category">Catégorie:</label>
+                <input type="text" id="category" bind:value={editedStory.category.name}/>
+                <label for="resume">Résumé:</label>
+                <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
+                <label for="contenu">Contenu:</label>
+                <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
+              </div>
+              <button type="submit">Enregistrer</button>
+              <button type="button" on:click={()=>editingModeofStory=false}>Annuler</button>
+            </form>
+        </div>
+        {/if}
+</main>
 <style>
-  body {
-    font-family: "Courier New", Courier, monospace;
-    background-color: #e5e5f7;
-    opacity: 0.9;
-    background-image: radial-gradient(#5fc2ba 0.75px, #e5e5f7 0.75px);
-    background-size: 15px 15px;
-    min-height: 100vh;
-    margin-top: 0;
-    padding-top: 30px;
+  main {
+    background: linear-gradient(0deg, #5FC2BA, #ACCBD4, #ECEFF2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  h1 {
-    text-align: center;
-    font-size: 30px;
+  .fa-thumbs-up {
+    color: #3B556D;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
     margin-top: 20px;
-
-    padding: 25px;
-    width: auto;
-
     margin-right: 20px;
 }
   .fa-regular, .fa-pen-to-square, .fa-xl{
-    /*background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);*/
+    /*background: linear-gradient(0deg, #5FC2BA, #ACCBD4, #ECEFF2);*/
     background-color: white;
     margin-left: 15px;
-
-
   }
   /*Animation pour h1*/
-
   .animate-charcter{
     font-family: "Raleway", sans serif;
     margin-top:25px;
@@ -287,32 +188,21 @@
     display: inline-block;
     font-size: 50px;
 }
-
 @keyframes textclip {
   to {
     background-position: 100% center;
-
   }
-
-  h2 {
-    text-align: center;
-    font-size: 25px;
-    margin-top: 0px;
-    width: auto;
+}
+  h1 {
+    margin-top: 40px;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: #1C2942;
   }
-
-  .edit-container {
+  .storydetails {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-
-    border: 1px solid black;
-    border-radius: 15px;
-    width: 50%;
-    height: auto;
-    padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-
     margin-top: 80px;
     margin-left:55px;
     margin-right: 55px;
@@ -322,56 +212,28 @@
     line-height: 25px;
     border: 1px solid gray;
     box-shadow: 2px #3B556D;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     -webkit-box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
     -moz-box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
     box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
   }
-
   .storydetails:hover{
     -webkit-box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
   -moz-box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
   box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
-
   }
-
-  .edit-elements {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 10px;
-    margin: 10px;
-    width: 100%;
+  .storydetail-img {
+    position: relative;
+    margin-right: 20px;
+    margin-top: 65px;
+    margin-bottom:30px;
   }
-
-  .edit-elements p {
-    text-align: left;
-  }
-
-  .edit-elements input {
-    /* text-align: right; */
-    width: 50%;
-    height: 50%;
+  .storydetail-img img {
+    width: 400px;
     border-radius: 10px;
-    margin-left: 40%;
+    margin-right: 20px;
+    margin-left: 25px;
   }
-
-
-  .delete-user-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    width: 50%;
-  }
-  button {
-    background-color: #1c2942;
-    color: #5fc2ba;
-    font-size: large;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px 15px;
-  }
-
   /* .storydetail-img i {
     position: absolute;
     bottom: -30px;
@@ -388,102 +250,132 @@
     font-size: large;
     margin: 0;
   } */
-
-
-  button:hover {
-    background-color: #5fc2ba;
-    color: #1c2942;
+ .storydetail-infos p {
+  font-size: large;
+    margin: 0.5rem 0;
   }
-  /*.edit-button {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }*/
-  .message {
-    position: absolute;
-
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    background-color: #1c2942;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
+    .storydetail-infos .auteur {
+      margin-right: 0.5rem;
+    }
+    .storydetail-infos .description {
+      margin-top: 0.5rem;
+    }
+    .description{
+      text-indent: 40px;
+      text-align: justify;
+      letter-spacing: 0.5px;
+    }
+    .auteur {
+      font-weight: bold;
+      margin-right: 5px;
+      display: inline-block;
+    }
+      /* Media query pour écran inférieur à 768px */
+  @media screen and (max-width: 768px) {
+    .storydetails {
+      flex-direction: column; /* Changement de direction */
+      margin-top: 40px; /* Modification de la marge */
+    }
+    .storydetail-img {
+      margin-right: 0; /* Suppression de la marge */
+      margin-top: 0; /* Suppression de la marge */
+    }
+    .storydetail-infos {
+      margin-top: 40px; /* Modification de la marge */
+    }
+    .storydetail-img img {
+      max-width: 100%; /* Modification de la largeur */
+      height: auto; /* Ajout de height:auto */
+    }
   }
-
-  @media screen and (max-width: 767px) {
-    body {
-      width: 100%;
-      align-items: center;
-      background-image: radial-gradient(#5fc2ba 0.75px, #e5e5f7 0.75px);
-      background-size: 15px 15px;
-    }
-
-    /* h1 {
-  text-align: center;
-  } */
-    .edit-container {
-      font-size: 1.8rem;
+    /*.card {
       display: flex;
-      justify-content: center;
       align-items: center;
-      flex-direction: column;
-      /* height: 100vh; */
-      width: 50%;
-      margin-left: 20%;
-      margin-bottom: 1rem;
-    }
-
-    /* .edit-container {
-    width: 80%;
-    padding: 1rem;
-    border-radius: 0;
-    border: none;
-    width: 100%;
-    display: inline-flex;
-  } */
-
-    .edit-elements p {
-      width: 100%;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .edit-elements input {
-      font-size: 1rem;
-      padding: 0.5rem;
-      margin-left: -25%;
-      width: 100%;
-      height: 5%;
-    }
-
-    /* .edit-elements p {
-    font-size: 1rem;
-    padding: 0.5rem;
-  } */
-
-    .delete-user-container {
-      width: 100%;
+      margin: 2rem 0;
       padding: 1rem;
-    }
-
-    #valider {
-      font-size: 1rem;
-      padding: 0.5rem;
-    }
-
-    .delete-user-button button {
-      font-size: 1rem;
-      padding: 0.5rem;
-    }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    body {
-      width: 50%;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      max-width: 600px;
+    }*/
+    /*formulaire modification*/
+    .card {
+      width: 30%;
+      display:flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      padding: 20px;
+      font-family: "Raleway", sans serif;
+}
+.container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-    }
+      margin-top: 20px;
+}
+h3{
+  font-size: large;
+}
+  h4 {
+        margin-bottom: 20px;
+        font-size: larger;
+        text-decoration: underline;
+  }
+  label {
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 5px;
+  }
+  input[type="text"],
+  textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    font-size: 16px;
+  }
+  button[type="submit"],
+  button[type="button"] {
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-right: 25px;
+    margin-left: 50px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #1C2942;
+    color: #5FC2BA;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  button[type="submit"]:hover,
+  button[type="button"]:hover {
+    background-color: #5FC2BA;
+    color:#1C2942;
+  }
+  .story-title-italique{
+    font-style: italic;
+    font-size: larger;
+    letter-spacing: 1px;
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
