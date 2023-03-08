@@ -1,6 +1,6 @@
 <script>
   import imghomepage from "../assets/img-homepage.jpg";
-  import { getAPI, setToken } from "../utils/api";
+  import { getAPI, setToken, getTokenData } from "../utils/api";
   import Swal from 'sweetalert2';
   export let params = {};
   let story = {category:{}, user: {}};
@@ -15,7 +15,7 @@
   // l'id est recuperé grâce "/story-detail/:id" dans app.svelte et ce id se remplit grâce qu lien dans reading page.
   getAPI()
     .get(
-      `items/story/${params.id}?fields[]=*.*`
+      `items/story/${params.id}?fields[]=*.*.*`
     )
     .then(function (response) {
       // console.log();
@@ -96,53 +96,60 @@
     console.log('Erreur : ', error);
   });
   };
+
+  const token = getTokenData();
+  
 </script>
 <main>
-  {#if story }
-    <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
-    <div class="storydetails">
-      <div class="storydetail-img">
-        <!-- svelte-ignore a11y-img-redundant-alt -->
-        <img src={imghomepage} alt="Image du livre" />
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}>
-        </div>
-        </div>
-      <div class="storydetail-infos">
-        <span class="auteur">Categorie:</span>
-        <h3>{story.category?.name}</h3>
-        <span class="auteur">Titre:</span>
-        <p class="story-title-italique">{story.title}</p>
-        <span class="auteur">Auteur:</span>
-        <h3>{story.user?.first_name}</h3>
-        <span>Resumé:</span>
-        <p class="description">{story.resume}</p>
-        <span>Content:</span>
-        <p class="description">{story.content}</p>
-      </div>
-      <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
-      <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
+  {#if story}
+  <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
+  <div class="storydetails">
+    <div class="storydetail-img">
+      <!-- svelte-ignore a11y-img-redundant-alt -->
+      <img src={imghomepage} alt="Image du livre" />
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      {#if token}
+        <div class="fa-regular fa-thumbs-up fa-2xl" on:click={() => addFavorite(story)}></div>
+      {/if}
     </div>
+    <div class="storydetail-infos">
+      <span class="auteur">Categorie:</span>
+      <h3>{story.category?.name}</h3>
+      <span class="auteur">Titre:</span>
+      <p class="story-title-italique">{story.title}</p>
+      <span class="auteur">Auteur:</span>
+      <h3>{story.user?.first_name}</h3>
+      <span>Resumé:</span>
+      <p class="description">{story.resume}</p>
+      <span>Content:</span>
+      <p class="description">{story.content}</p>
+    </div>
+    
+    {#if token.id == story.user}
+    <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
+    <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
+    {/if}
+  </div>
   {/if}
   {#if editingModeofStory}
-        <div class="card">
-            <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
-              <div class="container">
-                <h4><b>Modifier l'histoire</b></h4>
-                <label for="title">Titre:</label>
-                <input type="text" id="title" bind:value={editedStory.title}/>
-                <label for="category">Catégorie:</label>
-                <input type="text" id="category" bind:value={editedStory.category.name}/>
-                <label for="resume">Résumé:</label>
-                <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
-                <label for="contenu">Contenu:</label>
-                <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
-              </div>
-              <button type="submit">Enregistrer</button>
-              <button type="button" on:click={()=>editingModeofStory=false}>Annuler</button>
-            </form>
-        </div>
-        {/if}
+    <div class="card">
+        <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
+          <div class="container">
+            <h4><b>Modifier l'histoire</b></h4>
+            <label for="title">Titre:</label>
+            <input type="text" id="title" bind:value={editedStory.title}/>
+            <label for="category">Catégorie:</label>
+            <input type="text" id="category" bind:value={editedStory.category.name}/>
+            <label for="resume">Résumé:</label>
+            <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
+            <label for="contenu">Contenu:</label>
+            <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
+          </div>
+          <button type="submit">Enregistrer</button>
+          <button type="button" on:click={()=>editingModeofStory=false}>Annuler</button>
+        </form>
+    </div>
+  {/if}
 </main>
 <style>
   main {

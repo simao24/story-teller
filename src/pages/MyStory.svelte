@@ -2,6 +2,7 @@
 // @ts-nocheck
   import { link } from "svelte-spa-router";
   import {getAPI,setToken} from "../utils/api";
+  import imghomepage from "../assets/img-homepage.jpg";
     
   let userInfos = {
     story: [],

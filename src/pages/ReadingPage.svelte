@@ -1,6 +1,7 @@
 <script>
   import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
+  import cat_educatif from "../assets/category/educatif.jpg";
   import { link } from "svelte-spa-router";
 
   let stories = [];
@@ -15,28 +16,18 @@
 
   };
 
-
-
-  // function pour afficher une image par categorie
-
-  function getCategoryImage(category) {
-  switch(category) {
-    case '10':
-      return '../assets/pexels-nina-uhlikova-725255(1).jpg'; // Aventures
-    case '11':
-      return 'https://www.pexels.com/fr-fr/photo/personne-en-veste-en-cuir-noir-portant-des-lunettes-noires-7672279/'; // Sciences-fiction
-    case '12':
-      return 'https://www.pexels.com/fr-fr/photo/mode-homme-gens-femme-7319478/'; // Thriller
-    case '13':
-      return 'https://www.pexels.com/fr-fr/photo/homme-femme-coucher-lit-414032/'; // Romantique
-    case '14':
-      return 'https://www.pexels.com/fr-fr/photo/sorciere-tenant-des-portes-en-bois-5407936/'; // Horreur
-    case '15':
-      return 'https://www.pexels.com/fr-fr/photo/photo-de-livre-de-lecture-fille-3755707/'; // Educatif
-    default:
-      return 'https://picsum.photos/id/1011/800/450'; // Default image
+  const categoryImg = {
+    10: cat_educatif,
+    15: cat_educatif,
+    11: cat_educatif,
+    12: cat_educatif,
+    13: cat_educatif,
+    14: cat_educatif
   }
-}
+
+
+
+
 
   const get_stories = async () => {
    let url = "";
@@ -123,7 +114,7 @@
       <article>
         <div class="article-wrapper">
           <figure>
-            <img src={getCategoryImage(story.category.id)} alt={story.category.name} />
+            <img src={categoryImg[story.category.id]} alt={story.category.name} />
           </figure>
           <div class="article-body">
             <h2>"{story.title}"</h2>
@@ -172,13 +163,13 @@ figure > img{
     height: fit-content;
     margin-left: 0px;
     margin-right: 0px;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .category_tag--aventures{
   background-color: #FF8A65;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -186,7 +177,7 @@ figure > img{
 .category_tag--romantique{
   background-color: #E91E63;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -195,7 +186,7 @@ figure > img{
   background-color: #0D47A1;
   color: white;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -208,7 +199,7 @@ figure > img{
 .category_tag--educatif{
   background-color: #d4f756;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -216,7 +207,7 @@ figure > img{
   background-color: #111111;
   color:white;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
