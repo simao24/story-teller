@@ -204,4 +204,63 @@
     color: red;
     transition: .3seconds;
     }
+
  </style>
+    @media only screen and (max-width: 425px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img {
+    width: 3em;
+    margin:10px;
+    }
+
+  .nav-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .header__search {
+    width: 100%,
+  }
+
+  .dropdown {
+    margin-right: 0;
+  }
+
+  .mainmenubtn {
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+
+  .dropdown-child ul li {
+    margin-bottom: 0.5em;
+  }
+
+  .div-nav-logo img {
+    margin: 0;
+  }
+
+  .div-nav-search {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+
+  .div-nav-connexion {
+    margin-right: 100rem;
+    font-size: 20%;
+  }
+
+  #searchbar {
+    width: 5rem;
+  }
+}
+
+
+</style>
+
