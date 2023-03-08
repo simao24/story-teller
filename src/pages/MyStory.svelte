@@ -196,7 +196,7 @@
     object-fit: cover;
   }
 
-}
+
   
    .profile-area {
       position: relative;

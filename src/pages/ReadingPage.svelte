@@ -4,7 +4,6 @@
   import { link } from "svelte-spa-router";
 
   let stories = [];
-
   let category ="";
   const categoryStyles = {
     10: 'category_tag--aventures',
@@ -39,14 +38,18 @@
   }
 }
 
-
   const get_stories = async () => {
-    const response = await fetch(
-      import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
-    );
+   let url = "";
+    if (category=="") {
+      url = import.meta.env.VITE_API_URL_GET_ITEMS + "/story?fields[]=*.*"
+    }
+    else{
+      url= `${import.meta.env.VITE_API_URL_GET_ITEMS}/story/?filter[category][_eq]=${category}&fields[]=*.*`
+    }
+    const response = await fetch(url);
     const json = await response.json();
     console.log(json);
-    return json.data;
+    stories= json.data;
   };
 
   // Ajouter une histoire aux favoris
@@ -89,38 +92,9 @@
 <!--template cards-->
 <main aria-labelledby="title1">
   <div class="container-reading">
-
-    {#await get_stories()}
-      <p>Chargement de la liste...</p>
-    {:then stories}
-
     <div class="container-reading-header">
     <h1 class="animate-charcter">HISTOIRES</h1>
-<<<<<<< HEAD
     <!-- Menu déroulant-->
-=======
-
-    <!-- Menu déroulant-->
-
-
-    <h1 id="title1">HISTOIRES</h1>
-
-      <nav class="nav-categories">
-      <ul>
-        <li class="menu-deroulant-categories">
-          <h2>categories</h2>
-          
-          <select bind:value={category} on:change={get_stories} name="" id="">
-           <option value="10">Aventures</option> 
-           <option value="15">Educatif</option> 
-           <option value="11">Sciences-fiction</option>
-           <option value="12">Thriller</option>  
-           <option value="13">Romantique</option> 
-           <option value="14">Horreur</option> 
-
-<!-- Menu déroulant-->
-
->>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
 
     <nav class="nav-categories">
       <ul>
@@ -145,7 +119,6 @@
       {#await get_stories()}
       <p>Chargement de la liste...</p>
       {:then _}
-
       {#each stories as story}
       <article>
         <div class="article-wrapper">
@@ -167,45 +140,6 @@
                 <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
             </a>
-<<<<<<< HEAD
-=======
-
-
-        <div class="card">
-          <img src={imghomepage} alt="aventure au pole Nord" />
-
-          <a
-            class="fa-regular fa-thumbs-up"
-            on:click={() => addFavorite(story)}
-          />
-
-
-
-
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}></div>
-
-          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)} />
-
-
-
-
-          <div class="container">
-            <span class="auteur">Categorie:</span>
-            <h4><b>{story.title}</b></h4>
-            <p>{story.category?.name}</p>
-            <span class="auteur">Auteur:</span>
-            <p>{story.user?.first_name}</p>
-            <span class="description">Description:</span>
-            <p>{story.resume}</p>
-            <!--{story.category_id.category}-->
-
-            <a href="/story-detail/{story.id}" use:link>voir le detail</a>
-
-            <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
-
-
->>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
           </div>
         </div>
       </article>
@@ -216,9 +150,6 @@
 
 </main>
 <style>
-
-  main {
-
   .articles {
     animation: myAnim 1s ease 0s 1 normal forwards;
   }
@@ -455,14 +386,10 @@ body {
 /*fin des styles pour le template des cartes*/
 
 main {
-
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
     padding-top: 60px;
-
-  }
-
     background: linear-gradient(0deg, #5fc2ba, #afe1dd, rgba(234, 244, 244, 1), #ffffff);
   }
   .container-reading-header{
@@ -546,7 +473,6 @@ main {
     max-width:max-content;
   }*/
 
-
   img {
     width: 25%;
     height: 60%;
@@ -554,17 +480,13 @@ main {
     margin-right: 50px;
     border-radius: 25px;
   }
-
-  h1 {
-  }
-
   
 
   .container-reading {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
   .nav-categories ul {
     list-style: none;
@@ -610,68 +532,23 @@ main {
   }
 
   .card {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     width: 320px;
     height: 900px;
     display: inline-block;
-
     margin: 10px;
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 10px;
-
-    max-width: 300px;
-  }
-
-  .card img {
-    margin-right: 1rem;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-  }
-
-  .card .container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card h4 {
-    margin: 0;
-  }
-
-  .card .auteur {
-    margin-right: 0.5rem;
-  }
-
-  .card p {
-    margin: 0.5rem 0;
-  }
-
-  .card .description {
-    margin-top: 0.5rem;
-
     padding: 1rem;
     max-width: 450px; 
     background: linear-gradient(180deg, #ffffff, #f4fafa, #eaf4f4);
     /*animation: myAnim 2s ease 0s 1 normal forwards;*/
     animation: myAnim 1s ease 0s 1 normal forwards;
-
   }
   @keyframes myAnim {
     0% {
         transform: scale(0.5);
     }
-
-
-  .auteur {
-    font-weight: bold;
-    margin-right: 5px;
-    display: inline-block;
-  }
 
     100% {
         transform: scale(1);
@@ -679,5 +556,4 @@ main {
 }
  
   
-
 </style>

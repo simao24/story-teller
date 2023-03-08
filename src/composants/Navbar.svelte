@@ -1,5 +1,4 @@
 <script>
-<<<<<<< HEAD
   import logo from '../assets/logo-thestoryteller.png'
   import {
       link
@@ -46,54 +45,6 @@
       showDropdown = !showDropdown;
   }
 </script>
-=======
-        import logo from '../assets/logo-thestoryteller.png'
-        import {
-            link
-        } from 'svelte-spa-router'
-        import {
-            getAPI,
-            getToken,
-            removeToken
-        } from '../utils/api';
-        import {
-            push
-        } from 'svelte-spa-router';
-        let token = getToken()
-        let user = null;
-        //récuperer les données de l'utilisateur
-        function getUserInfos(){
-            if (!token) {
-                return
-            }
-            getAPI().get('/users/me')
-                    .then(function(response){
-                        // console.log(response);
-                        user = response.data.data;
-                        })
-                    .catch(function(err){
-                        removeToken();
-                        location.href = '/#/connexion';
-                        //a chaque fois que directus envoie un message d'erreur on supprime le token et
-                        //cela redirige vers la page de connexion
-                    })
-        }
-        getUserInfos();
-        function signoutHandle() {
-            console.log('plouf')
-            //script de déconnexion
-            removeToken ()
-            //push ("/")
-            location.href = '/'
-        }
-        function search_something() {
-        }
-        let showDropdown = false;
-        function toggleDropdown() {
-            showDropdown = !showDropdown;
-        }
-    </script>
->>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
 <header class="header">
 {#if user}
 <nav class="nav-bar" aria-label="header navigation">
