@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
   import logo from '../assets/logo-thestoryteller.png'
   import {
       link
@@ -45,6 +46,54 @@
       showDropdown = !showDropdown;
   }
 </script>
+=======
+        import logo from '../assets/logo-thestoryteller.png'
+        import {
+            link
+        } from 'svelte-spa-router'
+        import {
+            getAPI,
+            getToken,
+            removeToken
+        } from '../utils/api';
+        import {
+            push
+        } from 'svelte-spa-router';
+        let token = getToken()
+        let user = null;
+        //récuperer les données de l'utilisateur
+        function getUserInfos(){
+            if (!token) {
+                return
+            }
+            getAPI().get('/users/me')
+                    .then(function(response){
+                        // console.log(response);
+                        user = response.data.data;
+                        })
+                    .catch(function(err){
+                        removeToken();
+                        location.href = '/#/connexion';
+                        //a chaque fois que directus envoie un message d'erreur on supprime le token et
+                        //cela redirige vers la page de connexion
+                    })
+        }
+        getUserInfos();
+        function signoutHandle() {
+            console.log('plouf')
+            //script de déconnexion
+            removeToken ()
+            //push ("/")
+            location.href = '/'
+        }
+        function search_something() {
+        }
+        let showDropdown = false;
+        function toggleDropdown() {
+            showDropdown = !showDropdown;
+        }
+    </script>
+>>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
 <header class="header">
 {#if user}
 <nav class="nav-bar" aria-label="header navigation">
@@ -92,6 +141,7 @@
 {/if}
 </header>
 <style>
+<<<<<<< HEAD
 img {
 width: 6em;
 margin:15px;
@@ -244,5 +294,159 @@ font-size: 20%;
 #searchbar {
 width: 5rem;
 }
+=======
+    img {
+    width: 6em;
+    margin:15px;
+    }
+    a {
+    text-decoration: none;
+    color: azure;
+    font-size:x-large;
+    font-weight: 700;
+    margin-right: 50px;
+    font-family: "Raleway", sans serif;
+    }
+    a:hover{
+    color:#5FC2BA;
+    transition: .3seconds;
+    }
+    /* .div-nav-search{
+    height: 3em;
+    } */
+    /* #searchbar {
+    width: auto;
+    height: 20px;
+    border-radius:25px;
+    } */
+    i {
+    color:white;
+    }
+    .logout{
+    padding: .5em 1em;
+    cursor: pointer;
+    border-radius: .5em;
+    background-color:#0B162C ;
+    color: white;
+    }
+    .nav-bar1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    }
+    .div-nav-connexion {
+    color: beige;
+    }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 13%;
+    }
+    .dropdown-child {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    border-radius: 15px;
+    line-height:1.5em;
+    }
+    .dropdown-child ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+    .dropdown-child ul li {
+    display: block;
+    }
+    .dropdown-child ul li a {
+    display: block;
+    padding: 5px 10px;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    }
+    .dropdown-child ul li:hover {
+    background-color: #F9F9F9;
+    }
+    .mainmenubtn {
+    width: 12em;
+    display: inline-block;
+    background-color: #0B162C;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    border: solid 1px #CCC;
+    }
+    .mainmenubtn:hover {
+    background-color: #FFFFFF;
+    color:#0B162C
+    }
+    .dropdown:hover .dropdown-child {
+    display: block;
+    }
+    .logout {
+    text-align: center;
+    background-color:transparent;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    }
+    .logout:hover {
+    font-size:large;
+    color: red;
+    transition: .3seconds;
+    }
+    @media only screen and (max-width: 425px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  img {
+    width: 3em;
+    margin:10px;
+    }
+  .nav-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  .header__search {
+    width: 100%,
+  }
+  .dropdown {
+    margin-right: 0;
+  }
+  .mainmenubtn {
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  .dropdown-child ul li {
+    margin-bottom: 0.5em;
+  }
+  .div-nav-logo img {
+    margin: 0;
+  }
+  .div-nav-search {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+  .div-nav-connexion {
+    margin-right: 100rem;
+    font-size: 20%;
+  }
+  #searchbar {
+    width: 5rem;
+  }
+>>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
 }
 </style>
