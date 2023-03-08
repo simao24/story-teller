@@ -1,7 +1,6 @@
 <script>
   import { link } from "svelte-spa-router";
   import { getAPI, getToken } from "../utils/api";
-
   import Swal from "sweetalert2";
 
   // Configuration de la requête
@@ -56,6 +55,7 @@
       data.avatar = newAvatar;
     }
 
+
     getAPI()
       .patch("/users/me", data)
       .then(function (response) {
@@ -64,6 +64,67 @@
         setTimeout(() => {
           showMessage = false;
         }, 2000);
+
+      getAPI().patch(`/items/story/${story.id}?fields=*, category.name`, {
+        title,
+        category: 10, 
+        resume, 
+        content,
+      })
+      Swal.fire({
+        icon:'success',
+        title:'Votre histoire a été enregistrée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
+        
+        .then(response => {
+          location.reload();
+          // @ts-ignore
+          console.log('reponse axios : ', response.data.data);
+          // mettre à jour la liste d'histoires avec la version mise à jour
+          // @ts-ignore
+          story.story = story.story.map(s => s.id === story.id ? response.data.data : s)
+          story =  {...story}
+        
+       
+
+          
+        })
+        .catch(error =>{
+          console.log(error)
+        })
+      }
+
+    // Function de suppression d'histoire
+    function supprimerHistoire(story) {
+      //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+      if (confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)){
+        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
+        getAPI().delete(`/items/story/${story.id}`)
+
+        //Modale pour confirmer la suppression d'une histoire
+        Swal.fire({
+        icon:'warning',
+        title:'Votre histoire a été supprimée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+        })
+    
+        .then(response => {
+          location.reload();
+          console.log(response)
+          //Mettre à jour la liste d'histoires en la filtrant pour enlever l'histoire
+          story.story = story.story.filter(s => s.id !== story.id)
+          story = {...story}
+         
+           
+     
+        })
+        .catch(error => {
+          console.log(error)
+
       })
       .catch(function (error) {
         console.log(error);
@@ -104,6 +165,7 @@
       });
   }
 </script>
+
 
 <body>
   <div class="main-container">
@@ -150,6 +212,20 @@
           <div class="message">{message}</div>
         {/if}
 
+<main>
+  {#if story }
+   
+    <h1 class="animate-charcter">DETAIL D'UNE HISTOIRE</h1>
+    <div class="storydetails">
+      <div class="storydetail-img">
+        <!-- svelte-ignore a11y-img-redundant-alt -->
+        <img src={imghomepage} alt="Image du livre" />
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}>
+        </div>
+        </div>
+
+
         <div class="delete-user-button">
           <button on:click={deleteUser}>Supprimer mon compte</button>
         </div>
@@ -173,8 +249,49 @@
     text-align: center;
     font-size: 30px;
     margin-top: 20px;
+
     padding: 25px;
     width: auto;
+
+    margin-right: 20px;
+}
+  .fa-regular, .fa-pen-to-square, .fa-xl{
+    /*background: linear-gradient(0deg, #5fc2ba, #accbd4, #eceff2);*/
+    background-color: white;
+    margin-left: 15px;
+
+
+  }
+  /*Animation pour h1*/
+
+  .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 50px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
+
   }
 
   h2 {
@@ -188,12 +305,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     border: 1px solid black;
     border-radius: 15px;
     width: 50%;
     height: auto;
     padding: 20px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+    margin-top: 80px;
+    margin-left:55px;
+    margin-right: 55px;
+    margin-bottom: 25px;
+    padding-top: 25px;
+    padding-right: 25px;
+    line-height: 25px;
+    border: 1px solid gray;
+    box-shadow: 2px #3B556D;
+    background-color: #ffffff;
+    -webkit-box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
+    -moz-box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
+    box-shadow: 14px 11px 29px 0px rgba(59,85,109,0.82);
+  }
+
+  .storydetails:hover{
+    -webkit-box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
+  -moz-box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
+  box-shadow: 34px -25px 29px -21px rgba(59,85,109,0.82);
+
   }
 
   .edit-elements {
@@ -216,6 +355,7 @@
     margin-left: 40%;
   }
 
+
   .delete-user-container {
     display: flex;
     justify-content: space-between;
@@ -231,6 +371,24 @@
     border-radius: 10px;
     padding: 10px 15px;
   }
+
+  /* .storydetail-img i {
+    position: absolute;
+    bottom: -30px;
+    right: -5px;
+  } */
+  .storydetail-infos span{
+    margin-bottom:25px;
+    font-size: x-large;
+    font-weight: bold;
+    color: #1C2942;
+    text-decoration: underline;
+  }
+  /* .storydetail-infos h4 {
+    font-size: large;
+    margin: 0;
+  } */
+
 
   button:hover {
     background-color: #5fc2ba;

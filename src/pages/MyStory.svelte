@@ -1,12 +1,8 @@
-<script>
-  // @ts-nocheck
-
+  <script>
+// @ts-nocheck
   import { link } from "svelte-spa-router";
-
-  import imghomepage from "../assets/img-homepage.jpg";
-  import { getAPI, setToken } from "../utils/api";
-  import StoryDetail from "./StoryDetail.svelte";
-
+  import {getAPI,setToken} from "../utils/api";
+    
   let userInfos = {
     story: [],
   };
@@ -199,6 +195,13 @@
     height: 100px;
     object-fit: cover;
   }
+
+}
+  
+   .profile-area {
+      position: relative;
+    }
+
 
   .card {
     display: flex;
