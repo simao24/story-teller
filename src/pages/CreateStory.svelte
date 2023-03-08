@@ -1,13 +1,6 @@
 <script>
   import Swal from 'sweetalert2';
-  
-
-  import {
-    getAPI,
-    getToken,
-    removeToken
-    } from '../utils/api';
-
+  import {getAPI,getToken,removeToken} from '../utils/api';
     const token=getToken ()
     if(!token) {
       location.href= "/#/connexion";
@@ -72,7 +65,6 @@
       <div class="message">
         <label for="message"></label>
         <textarea name="message" placeholder="Mon histoire" id="message_input" cols="30" rows="5" required bind:value={content}></textarea>
-        
       </div>
       <div class="submit">
         <input type="submit" value="Publier" id="form_button" />
