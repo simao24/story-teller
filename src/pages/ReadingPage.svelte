@@ -5,7 +5,38 @@
 
   let stories = [];
   let category ="";
-  
+  const categoryStyles = {
+    10: 'category_tag--aventures',
+    15: 'category_tag--educatif',
+    11: 'category_tag--science-fiction',
+    12: 'category_tag--thriller',
+    13: 'category_tag--romantique',
+    14: 'category_tag--horreur',
+
+  };
+
+
+
+  // function pour afficher une image par categorie
+
+  function getCategoryImage(category) {
+  switch(category) {
+    case '10':
+      return '../assets/pexels-nina-uhlikova-725255(1).jpg'; // Aventures
+    case '11':
+      return 'https://www.pexels.com/fr-fr/photo/personne-en-veste-en-cuir-noir-portant-des-lunettes-noires-7672279/'; // Sciences-fiction
+    case '12':
+      return 'https://www.pexels.com/fr-fr/photo/mode-homme-gens-femme-7319478/'; // Thriller
+    case '13':
+      return 'https://www.pexels.com/fr-fr/photo/homme-femme-coucher-lit-414032/'; // Romantique
+    case '14':
+      return 'https://www.pexels.com/fr-fr/photo/sorciere-tenant-des-portes-en-bois-5407936/'; // Horreur
+    case '15':
+      return 'https://www.pexels.com/fr-fr/photo/photo-de-livre-de-lecture-fille-3755707/'; // Educatif
+    default:
+      return 'https://picsum.photos/id/1011/800/450'; // Default image
+  }
+}
 
   const get_stories = async () => {
    let url = "";
@@ -56,6 +87,9 @@
   };
 </script>
 
+
+
+<!--template cards-->
 <main aria-labelledby="title1">
   <h1 id="title1">HISTOIRES</h1>
   <!-- Menu déroulant-->
@@ -77,40 +111,64 @@
   </nav>
   <div class="container-reading">
 
-=======
+    <div class="container-reading-header">
+    <h1 class="animate-charcter">HISTOIRES</h1>
+
     <h1 id="title1">HISTOIRES</h1>
+
     <!-- Menu déroulant-->
 
     <nav class="nav-categories">
       <ul>
         <li class="menu-deroulant-categories">
-          <h2>categories</h2>
-          <!-- <a href="/" use:link>Catégories</a> -->
-          <!-- <ul class="sous-menu">
-            <li on:click={e=>category="10"}>Aventures</li>
-            <li on:click={e=>category="15"}>Educatif</li>
-            <li on:click={e=>category="11"}>Science-fiction</li>
-            <li on:click={e=>category="12"}>Thriller</li>
-            <li on:click={e=>category="13"}>Romantique</li>
-            <li on:click={e=>category="14"}>Horreur</li>
-          </ul> -->
-          <select bind:value={category} on:change={get_stories} name="" id="">
-           <option value="10">Aventures</option> 
-           <option value="15">Educatif</option> 
-           <option value="11">Sciences-fiction</option>
-           <option value="12">Thriller</option>  
-           <option value="13">Romantique</option> 
-           <option value="14">Horreur</option> 
+          <h2>Catégories</h2>
+          <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
+           <option class="select-menu-option" value="10">Aventures</option> 
+           <option class="select-menu-option" value="15">Educatif</option> 
+           <option class="select-menu-option" value="11">Science-fiction</option>
+           <option class="select-menu-option" value="12">Thriller</option>  
+           <option class="select-menu-option" value="13">Romantique</option> 
+           <option class="select-menu-option" value="14">Horreur</option> 
           </select>
 
         </li>
       </ul>
     </nav>
 
+  </div>
+</div>
+
+    <section class="articles">
+      {#await get_stories()}
+
+
     {#await get_stories()}
+
       <p>Chargement de la liste...</p>
-    {:then _}
+      {:then _}
       {#each stories as story}
+
+      <article>
+        <div class="article-wrapper">
+          <figure>
+            <img src={getCategoryImage(story.category.id)} alt={story.category.name} />
+          </figure>
+          <div class="article-body">
+            <h2>"{story.title}"</h2>
+            <div class="tags">
+              <p class={categoryStyles[story.category?.id]}>{story.category?.name}</p>
+            </div>
+            <p class="auteur-name">Auteur: {story.user?.first_name} </p>
+            <p>
+              {story.resume}
+            </p>
+            <a href="/story-detail/{story.id}" class="read-more" use:link>
+              Voir plus <span class="sr-only">Détail de l'histoire</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
 
@@ -131,23 +189,339 @@
             <p class="description">{story.resume}</p>
             <!--{story.category_id.category}-->
             <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
+
           </div>
         </div>
-      {/each}
-    {/await}
-  </div>
-</main>
+      </article>
+  {/each}
+  {/await}
+      
+    </section>
 
+</main>
 <style>
+  .articles {
+    animation: myAnim 1s ease 0s 1 normal forwards;
+  }
+  @keyframes myAnim {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.auteur-name{
+  font-weight: 600;
+
+}
+figure > img{
+  width: fit-content;
+    height: fit-content;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 50px;
+}
+
+.category_tag--aventures{
+  background-color: #FF8A65;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: .25em .5em;
+  width:fit-content;
+}
+
+.category_tag--romantique{
+  background-color: #E91E63;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: .25em .5em;
+  width:fit-content;
+}
+
+.category_tag--science-fiction{
+  background-color: #0D47A1;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: .25em .5em;
+  width:fit-content;
+}
+.category_tag--thriller{
+  background-color: #0da18d;
+  font-weight: bold;
+  padding: .25em .5em;
+  width:fit-content;
+}
+.category_tag--educatif{
+  background-color: #d4f756;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: .25em .5em;
+  width:fit-content;
+}
+.category_tag--horreur{
+  background-color: #111111;
+  color:white;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: .25em .5em;
+  width:fit-content;
+}
+
+img {
+  max-width: 100%;
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  transition: transform 0.4s ease-in-out;
+}
+/* Style pour le template des cartes */
+
+article {
+  --img-scale: 1.001;
+  --title-color: black;
+  --link-icon-translate: -20px;
+  --link-icon-opacity: 0;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: none;
+  background: #fff;
+  transform-origin: center;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+article a::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0;
+  cursor: pointer;
+  content: "";
+}
+
+/* basic article elements styling */
+article h2 {
+  margin: 0 0 18px 0;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.06em;
+  color: var(--title-color);
+  transition: color 0.3s ease-out;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+article img {
+  max-width: 100%;
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  transition: transform 0.4s ease-in-out;
+}
+
+.article-body {
+  padding: 24px;
+}
+
+article a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #28666e;
+}
+
+article a:focus {
+  outline: 1px dotted #28666e;
+}
+
+article a .icon {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  transform: translateX(var(--link-icon-translate));
+  opacity: var(--link-icon-opacity);
+  transition: all 0.3s;
+}
+
+/* using the has() relational pseudo selector to update our custom properties */
+article:has(:hover, :focus) {
+  --img-scale: 1.1;
+  --title-color: #28666e;
+  --link-icon-translate: 0;
+  --link-icon-opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.article-body p{
+  line-height: 20px;
+  margin-bottom:20px;
+}
+
+/************************ 
+Generic layout (demo looks)
+**************************/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 48px 0;
+  font-family: "Figtree", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  background-image: linear-gradient(45deg, #7c9885, #b5b682);
+  min-height: 100vh;
+}
+
+.articles {
+  display: grid;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+@media screen and (max-width: 960px) {
+  article {
+    container: card/inline-size;
+  }
+  .article-body p {
+    display: none;
+  }
+}
+
+/*@container card (min-width: 380px) {
+  .article-wrapper {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+  }
+  .article-body {
+    padding-left: 0;
+  }
+  figure {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  figure img {
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+} */
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
+/*fin des styles pour le template des cartes*/
 
 main {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
     padding-top: 60px;
+    background: linear-gradient(0deg, #5fc2ba, #afe1dd, rgba(234, 244, 244, 1), #ffffff);
+  }
+  .container-reading-header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 35px;
+    margin-left: 1000px;
+    justify-content: space-between;
+  }
+  .container-reading-header h2{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color:#333;
+    padding-bottom: 15px;
+  }
+  .select-menu{
+    width: 300px;
+    height: 20px;
 
   }
-  
+ 
+
+  .select-menu-option{
+    background-color: #3B556D;
+    color:#ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+  }
+  .select-menu-option:hover{
+    background-color:#5FC2BA;
+    color:#1C2942;
+  }
+
+  /*Animation pour h1*/
+
+  .animate-charcter{
+    font-family: "Raleway", sans serif;
+    margin-top:25px;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #0B162C 0%,
+      #1C2942 29%,
+      #3B556D 67%,
+      #5FC2BA 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    font-size: 60px;
+    padding-bottom:25px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
+  }
+}
+  /*.container-cards{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width:max-content;
+  }*/
 
   img {
     width: 25%;
@@ -178,17 +552,7 @@ main {
     margin-right: 20px;
   }
 
-  .nav-categories ul li a {
-    display: block;
-    padding: 5px 10px;
-    color: #333;
-    font-size: 16px;
-    text-decoration: none;
-  }
-
-  .nav-categories ul li:hover > ul {
-    display: block;
-  }
+ 
 
   .nav-categories ul ul {
     display: none;
@@ -206,36 +570,8 @@ main {
     white-space: nowrap;
   }
 
-  .nav-categories ul ul li a {
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-    padding: 10px 20px;
-  }
 
-  /* Animation pour le lien de catégories */
-  .nav-categories a {
-    position: relative;
-  }
-
-  .nav-categories a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 0;
-    border-radius: 5px;
-    transition: opacity 0.9s ease;
-  }
-
-  .nav-categories a:hover::before {
-    opacity: 1;
-    animation: flicker 1s linear infinite;
-  }
+ 
 
   @keyframes flicker {
     0%,
@@ -248,14 +584,20 @@ main {
   }
 
   .card {
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 320px;
+    height: 900px;
+    display: inline-block;
     margin: 10px;
-    padding: 1rem;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 10px;
+
+    padding: 1rem;
+    max-width: 450px; 
+    background: linear-gradient(180deg, #ffffff, #f4fafa, #eaf4f4);
+    /*animation: myAnim 2s ease 0s 1 normal forwards;*/
+    animation: myAnim 1s ease 0s 1 normal forwards;
+
     max-width: 300px;
   }
 
@@ -307,5 +649,17 @@ main {
   }
   .story-detail-link:hover{
     color:rgb(5, 109, 81);
+
   }
+  @keyframes myAnim {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+ 
+  
 </style>
