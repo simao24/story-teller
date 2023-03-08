@@ -1,10 +1,11 @@
 <script>
-  import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
+  import { getAPI, setToken } from "../utils/api";
   import { link } from "svelte-spa-router";
 
   let stories = [];
   let category ="";
+
   const categoryStyles = {
     10: 'category_tag--aventures',
     15: 'category_tag--educatif',
@@ -51,40 +52,20 @@
     console.log(json);
     stories= json.data;
   };
-
   // Ajouter une histoire aux favoris
   const addFavorite = (story) => {
-    let favorites = [];
-
-    // Récupérez les données stockées dans le local storage sous la clé "favorites"
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    // Si des favoris ont été trouvés, mettez à jour la liste des favoris
-    if (storedFavorites.length > 0) {
-      favorites = storedFavorites;
-    }
-
-    // Vérifiez si l'histoire existe déjà dans la liste des favoris
-    const exists = favorites.find((favorite) => favorite.id === story.id);
-
-    // Si l'histoire n'existe pas encore dans la liste des favoris, ajoutez-la
-    if (!exists) {
-      favorites.push({
-        id: story.id,
-        title: story.title,
-        author: story.user.first_name,
-        description: story.resume,
-        image: imghomepage,
-      });
-
-      // Stockez la liste des favoris mise à jour dans le local storage sous la clé "favorites"
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-
-      alert("Histoire ajoutée aux favoris !");
-    } else {
-      alert("Cette histoire est déjà dans vos favoris !");
-    }
+    getAPI().post("/items/favoris",{
+      story_id:story.id
+    }) 
+    .then(data => {
+    console.log(data);
+    alert("l'histoire est bien ajoutée à vos favoris")   
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
   };
+
 </script>
 
 
@@ -94,7 +75,27 @@
   <div class="container-reading">
     <div class="container-reading-header">
     <h1 class="animate-charcter">HISTOIRES</h1>
+<<<<<<< HEAD
     <!-- Menu déroulant-->
+=======
+
+    <h1 id="title1">HISTOIRES</h1>
+
+      <nav class="nav-categories">
+      <ul>
+        <li class="menu-deroulant-categories">
+          <h2>categories</h2>
+          
+          <select bind:value={category} on:change={get_stories} name="" id="">
+           <option value="10">Aventures</option> 
+           <option value="15">Educatif</option> 
+           <option value="11">Sciences-fiction</option>
+           <option value="12">Thriller</option>  
+           <option value="13">Romantique</option> 
+           <option value="14">Horreur</option> 
+
+<!-- Menu déroulant-->
+>>>>>>> 71a3a86433aee606ed8685c1a67595897397ef55
 
     <nav class="nav-categories">
       <ul>
@@ -107,6 +108,8 @@
            <option class="select-menu-option" value="12">Thriller</option>  
            <option class="select-menu-option" value="13">Romantique</option> 
            <option class="select-menu-option" value="14">Horreur</option> 
+
+
           </select>
 
         </li>
@@ -140,6 +143,33 @@
                 <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
             </a>
+<<<<<<< HEAD
+=======
+
+        <div class="card">
+          <img src={imghomepage} alt="aventure au pole Nord" />
+
+
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <div class="fa-regular fa-thumbs-up fa-2xl"on:click={() => addFavorite(story)}></div>
+
+          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)} />
+
+
+
+          <div class="container">
+            <span class="auteur">Categorie:</span>
+            <p class="story-category">{story.category?.name}</p>
+            <span class="auteur">Titre:</span>
+            <h4>"{story.title}"</h4>
+            <span class="auteur">Auteur:</span>
+            <p>{story.user?.first_name}</p>
+            <span>Description:</span>
+            <p class="description">{story.resume}</p>
+            <!--{story.category_id.category}-->
+            <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
+
+>>>>>>> 71a3a86433aee606ed8685c1a67595897397ef55
           </div>
         </div>
       </article>
@@ -500,7 +530,6 @@ main {
     margin-right: 20px;
   }
 
- 
 
   .nav-categories ul ul {
     display: none;
@@ -518,8 +547,6 @@ main {
     white-space: nowrap;
   }
 
-
- 
 
   @keyframes flicker {
     0%,

@@ -1,12 +1,5 @@
 <script>
-    import {
-        link,
-    } from "svelte-spa-router";
-    import { push } from 'svelte-spa-router';
-    import {
-        getAPI,
-        setToken
-    } from "../utils/api";
+    import {getAPI,setToken} from "../utils/api";
 
     let first_name = '';
     let email = ''
@@ -15,11 +8,8 @@
     let description = ''
     let role ='0d2b02a6-7bd6-4b31-a279-3c2744f9797e'
 
-
     function signin(e) {
         e.preventDefault()
-
-
         if (email.length > 0 && password.length > 0 && confirmpassword.length > 0 && first_name.length > 0 && description.length > 0 && role.length > 0) {
             getAPI().post('/users', {
                     first_name,
@@ -37,23 +27,7 @@
                 .catch(function () {
                     console.log('error')
                 })
-            /*fetch('https://w5sbygse.directus.app/auth/login', {
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            })
-            .then((response) => response.json())
-            .then(function(data){
-                console.log('ok', data)
-            })
-            .catch(function(){
-                console.log('error')
-            })*/
+            
         } else {
             //  alert('champs vides')
         }
@@ -95,18 +69,6 @@
                 </div>
                 <input type="submit" class="form__submit" value="S'inscrire">
             </div>
-
-            <!--<label for="email">email</label>
-            <input required type="name" name="email" id="email" placeholder="mon email">
-
-            <label for="password">Mot de passe</label>
-            <input required type="password" name="password" id="password" placeholder="***********">
-
-            <label for="confirm">Confirmer le mot de passe</label>
-            <input required type="confirm" name="confirm" id="confirm" placeholder="***********">
-
-            <input type="submit" class="form__submit" value="S'inscrire">
- -->
         </form>
 </body>
 
@@ -144,15 +106,6 @@ body {
     color: #48968f;
     text-shadow: 2px #1C2942;
     font-weight: bold;
-    
-
-}
-
-
-
-.form__link{
-    font-weight: 600;
-    color:rgb(0, 102, 255);
 }
 .form__container{
     margin-top: 3rem;
@@ -232,17 +185,9 @@ body {
     transition: transform .4s;
 }
 
-.form__input:focus + .form__line,
-.form__input:not(:placeholder-shown) + .form__line{
-    transform: scale(1);
-
-}
-
 @media (max-width:425px){
     .form__title{
         font-size: 1.8rem;
     }
 }
-
-
 </style>
