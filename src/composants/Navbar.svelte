@@ -1,5 +1,5 @@
 <script>
-<<<<<<< HEAD
+
     import logo from '../assets/logo-thestoryteller.png'
     import {
         link
@@ -91,12 +91,12 @@
   function toggleDropdown() {
       showDropdown = !showDropdown;
   }
->>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
+
 </script>
 <header class="header">
 {#if user}
 <nav class="nav-bar" aria-label="header navigation">
-<<<<<<< HEAD
+
     <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
         <img src={logo} alt="Story Teller logo">
      </a>
@@ -137,7 +137,7 @@
     <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
     use:link>Connexion</a>
   </div>
-=======
+
   <a href="/" class="header__logo" title="The Story Teller" aria-label="accueil du site" use:link>
       <img src={logo} alt="Story Teller logo">
    </a>
@@ -178,21 +178,24 @@
   <a href="/connexion" class="connexion" title="link connexion" aria-label="lien vers la page de connexion"
   use:link>Connexion</a>
 </div>
->>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
+
 </nav>
 {/if}
 </header>
+
+
 <style>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
-=======
->>>>>>> 8a8fa5009032ab48996fb1415ef833384b5826e9
+
+
+
 img {
 width: 6em;
 margin:15px;
+}
+.header__logo img{
+    object-fit: contain;
+    object-position: center;
+    height: 6em;
 }
 a {
 text-decoration: none;
@@ -342,10 +345,7 @@ font-size: 20%;
 #searchbar {
 width: 5rem;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+
     img {
     width: 6em;
     margin:15px;
@@ -498,9 +498,5 @@ width: 5rem;
   #searchbar {
     width: 5rem;
   }
->>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
->>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
-=======
->>>>>>> 8a8fa5009032ab48996fb1415ef833384b5826e9
-}
+
 </style>

@@ -56,6 +56,11 @@
 </body>
 <style>
     body {
+      /*background-image: url(../assets/book-table.jpeg);
+      height:10%;
+      background-size: cover;
+      background-position: top left;*/
+  
         background: linear-gradient(
             45deg,
             #5FC2BA,
