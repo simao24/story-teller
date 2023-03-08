@@ -299,6 +299,91 @@
     .profile-area {
       position: relative;
     }
+
+
+    /* Styles pour les écrans de petite taille (jusqu'à 768px de largeur) */
+@media only screen and (max-width: 768px) {
+  /* Ajouter des styles pour l'en-tête */
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Modifier les styles pour le logo */
+  header .logo {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  /* Modifier les styles pour la navigation */
+  header nav {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* Modifier les styles pour les liens de navigation */
+  header nav a {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  /* Ajouter des styles pour le contenu principal */
+  main {
+    padding: 20px;
+  }
+
+  /* Modifier les styles pour les articles */
+  article {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+}
+
+/* Styles pour les écrans de grande taille (à partir de 769px de largeur) */
+@media only screen and (min-width: 769px) {
+  /* Ajouter des styles pour l'en-tête */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+  }
+
+  /* Modifier les styles pour le logo */
+  header .logo {
+    font-size: 3rem;
+  }
+
+  /* Modifier les styles pour la navigation */
+  header nav {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Modifier les styles pour les liens de navigation */
+  header nav a {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  /* Ajouter des styles pour le contenu principal */
+  main {
+    padding: 40px;
+  }
+
+  /* Modifier les styles pour les articles */
+  article {
+    margin-bottom: 40px;
+    padding: 40px;
+  }
+}
+
+
     .container-title {
       font-size: large;
       font-style: italic;
@@ -309,5 +394,6 @@
       padding-bottom: 25px;
       border-bottom: 2px solid rgb(167, 159, 159);
     }
+
   </style>
   

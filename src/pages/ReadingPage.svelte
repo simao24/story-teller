@@ -91,9 +91,31 @@
 
 <!--template cards-->
 <main aria-labelledby="title1">
+  <h1 id="title1">HISTOIRES</h1>
+  <!-- Menu déroulant-->
+
+  <nav class="nav-categories">
+    <ul>
+      <li class="menu-deroulant-categories">
+        <a href="/" use:link>Catégories</a>
+        <ul class="sous-menu">
+          <li><a href="#/aventure" use:link>Aventures</a></li>
+          <li><a href="#/educatif" use:link>Educatif</a></li>
+          <li><a href="#/Science-fiction" use:link>Science-fiction</a></li>
+          <li><a href="#/Thriller" use:link>Thriller</a></li>
+          <li><a href="#/Romantique" use:link>Romantique</a></li>
+          <li><a href="#/Horreur" use:link>Horreur</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
   <div class="container-reading">
+
     <div class="container-reading-header">
     <h1 class="animate-charcter">HISTOIRES</h1>
+
+    <h1 id="title1">HISTOIRES</h1>
+
     <!-- Menu déroulant-->
 
     <nav class="nav-categories">
@@ -112,14 +134,20 @@
         </li>
       </ul>
     </nav>
+
   </div>
 </div>
 
     <section class="articles">
       {#await get_stories()}
+
+
+    {#await get_stories()}
+
       <p>Chargement de la liste...</p>
       {:then _}
       {#each stories as story}
+
       <article>
         <div class="article-wrapper">
           <figure>
@@ -140,6 +168,28 @@
                 <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
             </a>
+
+        <div class="card">
+          <img src={imghomepage} alt="aventure au pole Nord" />
+
+          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}
+          />
+
+          <a class="fa-regular fa-thumbs-up"/>
+
+
+          <div class="container">
+            <span class="auteur">Categorie:</span>
+            <p class="story-category">{story.category?.name}</p>
+            <span class="auteur">Titre:</span>
+            <h4>"{story.title}"</h4>
+            <span class="auteur">Auteur:</span>
+            <p>{story.user?.first_name}</p>
+            <span>Description:</span>
+            <p class="description">{story.resume}</p>
+            <!--{story.category_id.category}-->
+            <a href="/story-detail/{story.id}" class="story-detail-link" use:link>voir le détail</a>
+
           </div>
         </div>
       </article>
@@ -480,7 +530,9 @@ main {
     margin-right: 50px;
     border-radius: 25px;
   }
-  
+  h1 {
+    
+  }
 
   .container-reading {
   display: flex;
@@ -539,11 +591,65 @@ main {
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 10px;
+
     padding: 1rem;
     max-width: 450px; 
     background: linear-gradient(180deg, #ffffff, #f4fafa, #eaf4f4);
     /*animation: myAnim 2s ease 0s 1 normal forwards;*/
     animation: myAnim 1s ease 0s 1 normal forwards;
+
+    max-width: 300px;
+  }
+
+  .card img {
+    margin-right: 1rem;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card h4 {
+    margin: 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .card .auteur {
+    margin-right: 0.5rem;
+  }
+
+  .card p {
+    margin: 0.5rem 0;
+  }
+
+  .card .description {
+    margin-top: 0.5rem;
+  }
+
+  .auteur {
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  .description{
+      text-align: justify;
+      letter-spacing: 0.5px;
+    }
+  .story-category{
+    border-bottom: 2px solid rgb(163, 162, 162);
+  }
+  .story-detail-link{
+    font-size: large;
+    font-weight: 600;
+  }
+  .story-detail-link:hover{
+    color:rgb(5, 109, 81);
+
   }
   @keyframes myAnim {
 	0% {
