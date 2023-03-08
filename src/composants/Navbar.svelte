@@ -184,9 +184,12 @@
 </header>
 <style>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
+=======
+>>>>>>> 8a8fa5009032ab48996fb1415ef833384b5826e9
 img {
 width: 6em;
 margin:15px;
@@ -339,6 +342,7 @@ font-size: 20%;
 #searchbar {
 width: 5rem;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -496,5 +500,7 @@ width: 5rem;
   }
 >>>>>>> c526b541dea7a14cb1c96d998026f2c074f1e142
 >>>>>>> 1809ea95f247c2f050b24ae5b1f44ee53221b89a
+=======
+>>>>>>> 8a8fa5009032ab48996fb1415ef833384b5826e9
 }
 </style>
