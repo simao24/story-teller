@@ -1,11 +1,10 @@
 <script>
+  import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
-  import { getAPI, setToken } from "../utils/api";
   import { link } from "svelte-spa-router";
 
   let stories = [];
   let category ="";
-
   const categoryStyles = {
     10: 'category_tag--aventures',
     15: 'category_tag--educatif',
@@ -52,20 +51,40 @@
     console.log(json);
     stories= json.data;
   };
+
   // Ajouter une histoire aux favoris
   const addFavorite = (story) => {
-    getAPI().post("/items/favoris",{
-      story_id:story.id
-    }) 
-    .then(data => {
-    console.log(data);
-    alert("l'histoire est bien ajoutée à vos favoris")   
-  })
-  .catch(error => {
-    console.log('Erreur : ', error);
-  });
-  };
+    let favorites = [];
 
+    // Récupérez les données stockées dans le local storage sous la clé "favorites"
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Si des favoris ont été trouvés, mettez à jour la liste des favoris
+    if (storedFavorites.length > 0) {
+      favorites = storedFavorites;
+    }
+
+    // Vérifiez si l'histoire existe déjà dans la liste des favoris
+    const exists = favorites.find((favorite) => favorite.id === story.id);
+
+    // Si l'histoire n'existe pas encore dans la liste des favoris, ajoutez-la
+    if (!exists) {
+      favorites.push({
+        id: story.id,
+        title: story.title,
+        author: story.user.first_name,
+        description: story.resume,
+        image: imghomepage,
+      });
+
+      // Stockez la liste des favoris mise à jour dans le local storage sous la clé "favorites"
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+      alert("Histoire ajoutée aux favoris !");
+    } else {
+      alert("Cette histoire est déjà dans vos favoris !");
+    }
+  };
 </script>
 
 
@@ -88,8 +107,6 @@
            <option class="select-menu-option" value="12">Thriller</option>  
            <option class="select-menu-option" value="13">Romantique</option> 
            <option class="select-menu-option" value="14">Horreur</option> 
-
-
           </select>
 
         </li>
@@ -483,6 +500,7 @@ main {
     margin-right: 20px;
   }
 
+ 
 
   .nav-categories ul ul {
     display: none;
@@ -500,6 +518,8 @@ main {
     white-space: nowrap;
   }
 
+
+ 
 
   @keyframes flicker {
     0%,

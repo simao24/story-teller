@@ -1,13 +1,11 @@
 <script>
     import {getAPI,setToken} from "../utils/api";
-
     let first_name = '';
     let email = ''
     let password = ''
     let confirmpassword = ''
     let description = ''
     let role ='0d2b02a6-7bd6-4b31-a279-3c2744f9797e'
-
     function signin(e) {
         e.preventDefault()
         if (email.length > 0 && password.length > 0 && confirmpassword.length > 0 && first_name.length > 0 && description.length > 0 && role.length > 0) {
@@ -22,26 +20,19 @@
                 .then(function (result) {
                     console.log(result);
                     location.href = '/#/connexion'
-                
                 })
                 .catch(function () {
                     console.log('error')
                 })
-            
         } else {
             //  alert('champs vides')
         }
-
     }
 </script>
-
 <body aria-labelledby="title1">
-  
-
      <form action="#" class="form" aria-label="Informations de connexion" on:submit={signin}>
          <h2 class="form__title">Inscription</h2>
             <div class="form__container">
-           
                 <div class="form__group">
                     <input required type="pseudo" name="pseudo" class="form__input" placeholder=" " bind:value={first_name}>
                     <label for="pseudo" class="form__label">Pseudo</label>
@@ -71,27 +62,23 @@
             </div>
         </form>
 </body>
-
 <style>
-    
     * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #e5e5f7;
+    background-color: #E5E5F7;
     opacity: 0.7;
-    background-image: radial-gradient(#5FC2BA 0.75px, #e5e5f7 0.75px);
+    background-image: radial-gradient(#5FC2BA 0.75px, #E5E5F7 0.75px);
     background-size: 15px 15px;
     display: flex;
     min-height: 100vh;
 }
-
 .form{
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     margin:auto;
     width:90%;
     max-width: 400px;
@@ -103,7 +90,7 @@ body {
 .form__title{
     font-size: 2rem ;
     margin-bottom: .6rem;
-    color: #48968f;
+    color: #48968F;
     text-shadow: 2px #1C2942;
     font-weight: bold;
 }
@@ -111,14 +98,11 @@ body {
     margin-top: 3rem;
     display:grid;
     gap: 2.5em;
-
 }
-
 .form__group{
     position: relative;
     --color:#5757577e;
 }
-
 .form__input{
     width: 100%;
     background: none;
@@ -130,17 +114,14 @@ body {
     border-bottom: 1px solid var(--color);
     font-family: 'Courier New', Courier, monospace;
 }
-
 .form__input:not(:placeholder-shown){
     color:#1C2942;
 }
-
 .form__input:focus + .form__label{
     transform:translateY(-12px) scale(.7);
     transform-origin: left top;
     color:#5FC2BA;
 }
-
 .form__label{
     color: var(--color);
     cursor: pointer;
@@ -151,28 +132,22 @@ body {
     transition: transform .5s, color .3s;
     font-size: 20px;
     font-weight: bold;
-
 }
-
 .form__submit{
     background-color:  #1C2942;
-    color: #ffffff;
+    color: #FFFFFF;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
     font-size: 1rem;
     padding: .8em 0;
     border: none;
     border-radius: .5em;
-
-
 }
-
 .form__submit:hover{
     background-color: #5FC2BA;
     transition: .3s;
     color:  #1C2942;
 }
-
 .form__line{
     position: absolute;
     bottom: 0;
@@ -181,10 +156,9 @@ body {
     height: 1px;
     background-color:  #1C2942;
     transform: scale(0);
-    transform:left bottom; 
+    transform:left bottom;
     transition: transform .4s;
 }
-
 @media (max-width:425px){
     .form__title{
         font-size: 1.8rem;
