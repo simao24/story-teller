@@ -47,8 +47,8 @@
                     </h3>
                     <p class="main__text-paragraph">
                         Story Teller est un site de lecture en ligne où vous
-                        pouvez découvrir de nouveaux récits <br /> et partager
-                        vos propres histoires avec la communauté. <br />
+                        pouvez découvrir <br> de nouveaux récits et partager
+                        vos propres histoires avec la communauté. <br>
                         Rejoignez-nous dès maintenant pour une expérience de lecture
                         unique.
                     </p>
@@ -175,7 +175,11 @@
     }
 
     .main__text-title {
-        font-weight: 500;
+        font-weight: 600;
+    }
+    .main__text-paragraph{
+        text-align: justify;
+
     }
 
     p {

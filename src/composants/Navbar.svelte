@@ -115,7 +115,6 @@
 
 
     a {
-    height: 3em;
     text-decoration: none;
     color: azure;
     font-size:x-large;
@@ -129,17 +128,16 @@
     transition: .3seconds;
     }
 
-    .div-nav-search{
+    /* .div-nav-search{
     height: 3em;
 
-    }
+    } */
   
-
-    #searchbar {
+    /* #searchbar {
     width: auto;
     height: 20px;
     border-radius:25px;
-    }
+    } */
 
     i {
     color:white;
