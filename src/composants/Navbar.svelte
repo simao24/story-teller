@@ -92,10 +92,17 @@
 {/if}
 </header>
 
+
 <style>
+
 img {
 width: 6em;
 margin:15px;
+}
+.header__logo img{
+    object-fit: contain;
+    object-position: center;
+    height: 6em;
 }
 a {
 text-decoration: none;
@@ -247,7 +254,6 @@ width: 5rem;
 }
 }
 </style>
-
 
 
 
