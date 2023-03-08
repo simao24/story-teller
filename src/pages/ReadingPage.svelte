@@ -139,9 +139,6 @@
 </div>
 
     <section class="articles">
-      {#await get_stories()}
-
-
     {#await get_stories()}
 
       <p>Chargement de la liste...</p>
@@ -172,10 +169,7 @@
         <div class="card">
           <img src={imghomepage} alt="aventure au pole Nord" />
 
-          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)}
-          />
-
-          <a class="fa-regular fa-thumbs-up"/>
+          <a class="fa-regular fa-thumbs-up"on:click={() => addFavorite(story)} />
 
 
           <div class="container">
@@ -195,10 +189,10 @@
       </article>
   {/each}
   {/await}
-      
     </section>
 
 </main>
+
 <style>
   .articles {
     animation: myAnim 1s ease 0s 1 normal forwards;
