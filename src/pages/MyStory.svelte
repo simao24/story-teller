@@ -4,90 +4,103 @@
   import {getAPI,setToken} from "../utils/api";
     
   let userInfos = {
-    story: []
+    story: [],
   };
   let editingModeofStory = false;
-  let editedStory={title:"", category: {name:""}, resume:"", content:""}
-  let updateStory={title:"", category: {name:""}, resume:"", content:""}
-  
-  
-  $ : console.log('user : ', userInfos)
-    
-    // Retrouver la liste d'histoires
-  getAPI().get("/users/me?fields=first_name, story.*, story.category.name")
+  let editedStory = {
+    title: "",
+    category: { name: "" },
+    resume: "",
+    content: "",
+  };
+  let updateStory = {
+    title: "",
+    category: { name: "" },
+    resume: "",
+    content: "",
+  };
 
-  .then(function(response) {
-    userInfos = response.data.data
+  $: console.log("user : ", userInfos);
 
-  })
-// Finalement la modification/suppresion d'une histoire se fera depuis la page du détail d'une histoire
+  // Retrouver la liste d'histoires
+  getAPI()
+    .get("/users/me?fields=first_name, story.*, story.category.name")
 
- /* function modifierHistoire(event, story){
-    const title  = event.target[0].value
-    const category = event.target[1].value
-    const resume = event.target[2].value
-    const content = event.target[3].value
+    .then(function (response) {
+      userInfos = response.data.data;
+    });
+
+  function modifierHistoire(event, story) {
+    const title = event.target[0].value;
+    const category = event.target[1].value;
+    const resume = event.target[2].value;
+    const content = event.target[3].value;
     // editingStory=story;
     // editedStory={...story};
     //   //Afficher une boîte de dialogue ou un formulaire pour permettre à l'utilisateur de modifier les details d'une histoire
     //   // Une fois les détails modifiés, envoyer une requete PUT a l'API pour mettre à jour l'histoire dans la BDD
 
-      getAPI().patch(`/items/story/${story.id}?fields=*, category.name`, {
+    getAPI()
+      .patch(`/items/story/${story.id}?fields=*, category.name`, {
         title,
-        category: 10, 
-        resume, 
+        category: 10,
+        resume,
         content,
       })
-        .then(response => {
-          console.log('reponse axios : ', response.data.data);
-          // mettre à jour la liste d'histoires avec la version mise à jour
-          userInfos.story = userInfos.story.map(s => s.id === story.id ? response.data.data : s)
-          userInfos =  {...userInfos}
-        })
-        .catch(error =>{
-          console.log(error)
-        })
-      }*/
-
-    // Function de suppression d'histoire
-    /*function supprimerHistoire(story) {
-      //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
-      if (confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)){
-        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
-        getAPI().delete(`/items/story/${story.id}`)
-        .then(response => {
-          console.log(response)
-          //Mettre à jour la liste d'histoires en la filtrant pour enlever l'histoire
-          userInfos.story = userInfos.story.filter(s => s.id !== story.id)
-          userInfos = {...userInfos}
-        })
-        .catch(error => {
-          console.log(error)
+      .then((response) => {
+        console.log("reponse axios : ", response.data.data);
+        // mettre à jour la liste d'histoires avec la version mise à jour
+        userInfos.story = userInfos.story.map((s) =>
+          s.id === story.id ? response.data.data : s
+        );
+        userInfos = { ...userInfos };
       })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // Function de suppression d'histoire
+  function supprimerHistoire(story) {
+    //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+    if (
+      confirm(`Êtes-vous sûr de vouloir supprimer l'histoire "${story.title}?"`)
+    ) {
+      // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
+      getAPI()
+        .delete(`/items/story/${story.id}`)
+        .then((response) => {
+          console.log(response);
+          //Mettre à jour la liste d'histoires en la filtrant pour enlever l'histoire
+          userInfos.story = userInfos.story.filter((s) => s.id !== story.id);
+          userInfos = { ...userInfos };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }       */   
+  }
+</script>
 
-</script> 
+<main aria-labelledby="title1">
+  <div class="profile-area">
+    <img src={imghomepage} alt="accueil" />
 
-    <main aria-labelledby="title1" class="confetti">
-    <div class="profile-area">
-     <!-- <img src={imghomepage} alt="accueil"> -->
-     <img class="avatar" src="https://i.imgur.com/xASbbpf.gif" alt="Unicorn Avatar">
-     
+    <h3 class="profile-username">{userInfos.first_name}</h3>
+  </div>
 
-      <h3 class="profile-username">{userInfos.first_name}</h3>
-    </div>
-  
-    <div class="container-reading">
-      <h1 class="animate-charcter">MES HISTOIRES</h1>
-        {#each userInfos.story as story}
+  <div class="container-reading">
+    <h1 id="title1">MES HISTOIRES</h1>
+    {#each userInfos.story as story}
       <div class="card">
-        
-        <img src='https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80' alt="aventure au pole Nord" />
+        <img
+          src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
+          alt="aventure au pole Nord"
+        />
         <!--<a href="#/user/favoris" class="fa-regular fa-thumbs-up" use:link />-->
-       
+
         <div class="container">
-          <h4 class="container-title">"{story.title}"</h4>
+          <h4><b>{story.title}</b></h4>
           <span class="auteur">Categorie:</span>
           <p>{story.category.name}</p>
           <span class="auteur">Auteur:</span>
@@ -96,188 +109,93 @@
           <p>{story.resume}</p>
           <a href="/story-detail/{story.id}" use:link>voir le detail</a>
         </div>
-        <!--<button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
-        <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>-->
+        <button
+          class="fa-regular fa-pen-to-square fa-xl"
+          on:click={() => (editingModeofStory = true)}
+        />
+        <button
+          class="fa-regular fa-trash-can fa-xl"
+          on:click={() => supprimerHistoire(story)}
+        />
       </div>
       {#if editingModeofStory}
         <div class="card">
-            <form on:submit|preventDefault={(event) => modifierHistoire(event, story)}>
-              <div class="container">
-                <h4><b>Modifier Histoire</b></h4>
-                <label for="title">Titre:</label>
-                <input type="text" id="title" bind:value={editedStory.title}/>
-                <label for="category">Catégorie:</label>
-                <input type="text" id="category" bind:value={editedStory.category.name}/>
-                <label for="resume">Résumé:</label>
-                <textarea id="resume" cols="3" rows="3" bind:value={editedStory.resume}></textarea>
-                <label for="contenu">Contenu:</label>
-                <textarea id="contenu" cols="3" rows="3" bind:value={editedStory.content}></textarea>
-               <button type="submit">Enregistrer</button>
-                <button type="button" on:click={()=>editingModeofStory=false}>Annuler</button>
-              </div>
-            </form>
+          <form
+            on:submit|preventDefault={(event) => modifierHistoire(event, story)}
+          >
+            <div class="container">
+              <h3 class="title_modify">Modifier l'histoire</h3>
+              <label for="title">Titre:</label>
+              <input type="text" id="title" bind:value={editedStory.title} />
+              <label for="category">Catégorie:</label>
+              <input
+                type="text"
+                id="category"
+                bind:value={editedStory.category.name}
+              />
+              <label for="resume">Résumé:</label>
+              <textarea
+                id="resume"
+                cols="3"
+                rows="3"
+                bind:value={editedStory.resume}
+              />
+              <label for="contenu">Contenu:</label>
+              <textarea
+                id="contenu"
+                cols="3"
+                rows="3"
+                bind:value={editedStory.content}
+              />
+              <button type="submit">Enregistrer</button>
+              <button
+                type="button"
+                on:click={() => (editingModeofStory = false)}>Annuler</button
+              >
+            </div>
+          </form>
         </div>
-        {/if}
-      {/each}
-    </div> 
-  </main>
-  
-  <style>
+      {/if}
+    {/each}
+  </div>
+</main>
 
-    main {
-     
-      display: flex;
-      justify-content: center;
-  
-
-    }
-
-  .confetti { 
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1500 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath fill=%22%23fff%22 d=%22M0 0h1500v1000H0z%22%2F%3E%3Crect x=%22907%22 y=%22392%22 width=%228%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-1.00678 -.08982 -.37466 -1.0267 2111.64 1120.657)%22%2F%3E%3Crect x=%22412%22 y=%22229%22 width=%225%22 height=%2210%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.08794 .97949 -1.00225 .2082 597.73 -242.44)%22%2F%3E%3Crect x=%22504%22 y=%22907%22 width=%226%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.8812 .37742 -.4685 -.93415 1364.944 1638.71)%22%2F%3E%3Crect x=%22452%22 y=%22271%22 width=%228%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.01529 1.01404 -.98696 -.05314 685.733 -89.221)%22%2F%3E%3Crect x=%22206%22 y=%22497%22 width=%229%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.07327 .41301 -.01064 .92764 126.022 -13.026)%22%2F%3E%3Crect x=%22157%22 y=%22213%22 width=%229%22 height=%2212%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.86084 .47206 -.49938 -.88781 438.283 320.219)%22%2F%3E%3Crect x=%221015%22 y=%22720%22 width=%227%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.42532 .70808 -.98696 -.70808 2439.907 576.535)%22%2F%3E%3Crect x=%22101%22 y=%22655%22 width=%228%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.87163 .19665 -.601 -1.01168 719.229 1346.315)%22%2F%3E%3Crect x=%22661%22 y=%22932%22 width=%229%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.1392 .9927 -.99027 -.12189 1656.23 406.112)%22%2F%3E%3Crect x=%221271%22 y=%22970%22 width=%228%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.9848 .38298 -.17365 .9479 189.372 -166.276)%22%2F%3E%3Crect x=%2276%22 y=%22356%22 width=%226%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.98971 .07014 -.1035 -1.00306 168.73 725.866)%22%2F%3E%3Crect x=%221420%22 y=%22635%22 width=%227%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.67958 .6846 -.73194 .73415 802.894 -680.113)%22%2F%3E%3Crect x=%22189%22 y=%22741%22 width=%228%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.63153 .83526 -.77125 .5634 801.968 141.68)%22%2F%3E%3Crect x=%22530%22 y=%22931%22 width=%228%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.398 .81697 -.93488 .59356 1124.158 -129.46)%22%2F%3E%3Crect x=%22418%22 y=%22124%22 width=%229%22 height=%2223%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.0697 .99708 -.99063 -.17581 575.574 -195.028)%22%2F%3E%3Crect x=%22122%22 y=%2247%22 width=%227%22 height=%2216%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.0333 .3962 .03346 .9806 2.574 -5.442)%22%2F%3E%3Crect x=%221025%22 y=%22687%22 width=%228%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.94627 .51574 -.36408 .85834 399.06 -378.677)%22%2F%3E%3Crect x=%22549%22 y=%22697%22 width=%227%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.22477 .97496 -.97379 -.22509 1384.63 302.663)%22%2F%3E%3Crect x=%2230%22 y=%22389%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.85706 .59685 -.49582 -.8215 285.759 698.53)%22%2F%3E%3Crect x=%221093%22 y=%22790%22 width=%227%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.21234 .8868 -.99497 -.55413 2180.614 599.95)%22%2F%3E%3Crect x=%22910%22 y=%22936%22 width=%228%22 height=%2221%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.02673 .15646 .09104 .98784 138.736 -147.446)%22%2F%3E%3Crect x=%22307%22 y=%22296%22 width=%225%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.81691 .45461 -.59639 -.89223 803.188 414.53)%22%2F%3E%3Crect x=%22314%22 y=%22350%22 width=%225%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.35632 .9347 -.9186 .39676 571.881 -137.491)%22%2F%3E%3Crect x=%22224%22 y=%22775%22 width=%229%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.58335 .56227 -.91364 -.8336 1340.012 1332.166)%22%2F%3E%3Crect x=%22196%22 y=%22987%22 width=%228%22 height=%2219%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.04705 .93715 -1.08513 -.35974 1621.069 1185.046)%22%2F%3E%3Crect x=%221069%22 y=%22655%22 width=%228%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.64535 1.01364 -.83756 .23402 1086.089 -274.788)%22%2F%3E%3Crect x=%22743%22 y=%22341%22 width=%227%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.86988 .80017 -.57012 .62516 373.687 -334.127)%22%2F%3E%3Crect x=%22418%22 y=%2288%22 width=%226%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.98542 .29525 -.16386 .9657 31.307 -180.208)%22%2F%3E%3Crect x=%221151%22 y=%22141%22 width=%229%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.9491 .27631 -.3092 .9636 80.214 -233.145)%22%2F%3E%3Crect x=%22755%22 y=%2262%22 width=%229%22 height=%2221%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.37881 .85926 -.93618 .5163 537.966 -670.65)%22%2F%3E%3Crect x=%22275%22 y=%22839%22 width=%225%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.20997 .7892 -1.0846 -.68604 1484.083 1290.54)%22%2F%3E%3Crect x=%22476%22 y=%22382%22 width=%226%22 height=%226%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.59924 .79235 -.79389 .61905 526.889 -283.217)%22%2F%3E%3Crect x=%22366%22 y=%2224%22 width=%229%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.76693 .6019 -.64364 .79876 103.4 -210.401)%22%2F%3E%3Crect x=%22593%22 y=%2298%22 width=%225%22 height=%226%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.96967 .27602 -.24135 .96258 48.546 -191.797)%22%2F%3E%3Crect x=%22466%22 y=%22138%22 width=%229%22 height=%2222%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.0101 .93064 -1.07003 -.41435 690.198 -135.674)%22%2F%3E%3Crect x=%221032%22 y=%22209%22 width=%226%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.58929 .65967 -.838 .75887 591.377 -739.339)%22%2F%3E%3Crect x=%221366%22 y=%22138%22 width=%225%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.70943 .57631 -.6834 -.85442 2404.143 -179.514)%22%2F%3E%3Crect x=%221385%22 y=%22361%22 width=%227%22 height=%2219%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.52379 .98297 -.9155 .19107 1127.525 -992.383)%22%2F%3E%3Crect x=%22907%22 y=%22745%22 width=%227%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.7881 .34333 -.74742 -.94328 2477.023 1229.38)%22%2F%3E%3Crect x=%221430%22 y=%22798%22 width=%225%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.07486 .27716 .1404 .96656 90.216 -219.542)%22%2F%3E%3Crect x=%22417%22 y=%22850%22 width=%225%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.72813 .68575 -.67742 .73538 779.643 -105.12)%22%2F%3E%3Crect x=%2286%22 y=%2282%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.98437 .5201 -.28445 -.8656 192.775 110.039)%22%2F%3E%3Crect x=%22821%22 y=%22799%22 width=%226%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.78691 .67169 -.61484 -.74598 1980.467 780.83)%22%2F%3E%3Crect x=%221121%22 y=%2255%22 width=%228%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.74707 .39676 -.76043 -.9347 2071.226 -130.936)%22%2F%3E%3Crect x=%22472%22 y=%22122%22 width=%228%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.66115 .6625 -.74885 -.76213 901.409 -159.342)%22%2F%3E%3Crect x=%22376%22 y=%22320%22 width=%229%22 height=%2219%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.55425 .7211 -.85155 .69635 413.002 -200.933)%22%2F%3E%3Crect x=%22173%22 y=%22533%22 width=%226%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.91821 .44005 -.38987 -.90223 565.183 928.65)%22%2F%3E%3Crect x=%2227%22 y=%22153%22 width=%229%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.8988 .71316 -.43837 .76477 72.45 24.332)%22%2F%3E%3Crect x=%22344%22 y=%22846%22 width=%227%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.8957 .54472 -.45653 -.8388 975.19 1378.655)%22%2F%3E%3Crect x=%22191%22 y=%22498%22 width=%226%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.47056 .92177 -.88513 -.39127 713.3 510.817)%22%2F%3E%3Crect x=%22778%22 y=%22809%22 width=%225%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.88893 .39222 -.45537 .92402 318.21 -175.847)%22%2F%3E%3Crect x=%22256%22 y=%2260%22 width=%228%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.01848 .98354 -1.01281 -.20906 338.715 -149.803)%22%2F%3E%3Crect x=%22908%22 y=%22137%22 width=%229%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.1908 .98496 -.98163 .17367 879.741 -763.855)%22%2F%3E%3Crect x=%221223%22 y=%22105%22 width=%225%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.41425 .80648 -.92779 .60773 825.757 -1117.233)%22%2F%3E%3Crect x=%22607%22 y=%22679%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.8203 .64633 -.56962 .77026 622.407 -300.43)%22%2F%3E%3Crect x=%22802%22 y=%22176%22 width=%228%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.48455 .87515 -.87407 -.4851 1350.808 -402.483)%22%2F%3E%3Crect x=%22892%22 y=%22287%22 width=%225%22 height=%225%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.70612 .7576 -.70615 .65857 460.891 -500.562)%22%2F%3E%3Crect x=%221136%22 y=%22823%22 width=%225%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.43057 .89162 -.89261 -.47409 2483.965 43.21)%22%2F%3E%3Crect x=%22399%22 y=%22960%22 width=%227%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.71934 .8215 -.69466 .59685 785.395 130.565)%22%2F%3E%3Crect x=%22534%22 y=%22468%22 width=%226%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.00014 1.00137 -.99863 0 985.53 -34.094)%22%2F%3E%3Crect x=%221309%22 y=%22710%22 width=%226%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.13191 .91 -1.03456 -.44384 2388.711 47.67)%22%2F%3E%3Crect x=%22135%22 y=%22341%22 width=%227%22 height=%2220%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.76516 .67076 -.64104 .74496 293.405 -13.067)%22%2F%3E%3Crect x=%22431%22 y=%22869%22 width=%227%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.87232 .486 -.48393 -.87676 1297.407 1405.306)%22%2F%3E%3Crect x=%221097%22 y=%22307%22 width=%228%22 height=%2223%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.9276 .76897 -.52209 .64524 364.94 -637.322)%22%2F%3E%3Crect x=%22174%22 y=%22788%22 width=%229%22 height=%2226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.80923 .5163 -.59008 .85926 377.866 33.056)%22%2F%3E%3Crect x=%22159%22 y=%22317%22 width=%229%22 height=%2223%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.83863 .68673 -.52478 .7627 179.58 3.422)%22%2F%3E%3Crect x=%221305%22 y=%22858%22 width=%229%22 height=%2224%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.99035 .24225 -.15582 .97163 260.822 -361.175)%22%2F%3E%3Crect x=%221273%22 y=%22835%22 width=%226%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.14083 .96185 -.99928 .2758 1854.334 -661.742)%22%2F%3E%3Crect x=%2239%22 y=%22915%22 width=%229%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.5535 .83526 -.82389 -.5634 938.805 1398.21)%22%2F%3E%3Crect x=%221227%22 y=%22935%22 width=%227%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.1401 1.01865 -.99889 -.12508 2043.944 92.7)%22%2F%3E%3Crect x=%22458%22 y=%22372%22 width=%225%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.66536 .95295 -.73911 .44437 422.83 -80.29)%22%2F%3E%3Crect x=%22990%22 y=%2292%22 width=%228%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.05909 .42268 -.09462 .90645 -9.74 -393.628)%22%2F%3E%3Crect x=%22592%22 y=%22254%22 width=%227%22 height=%227%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.75914 .74416 -.66025 -.67005 1201.761 -44.321)%22%2F%3E%3Crect x=%22460%22 y=%22976%22 width=%225%22 height=%225%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.71814 .52298 -.71692 -.87039 1570.274 1669.849)%22%2F%3E%3Crect x=%221331%22 y=%22651%22 width=%229%22 height=%2219%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.92316 .7862 -.49733 .6597 584.557 -516.867)%22%2F%3E%3Crect x=%221042%22 y=%22506%22 width=%228%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.97799 -.05473 -.38868 -1.04426 2385.41 1425.744)%22%2F%3E%3Crect x=%22520%22 y=%22526%22 width=%227%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.43296 .92252 -.89122 .41073 706.54 -96.468)%22%2F%3E%3Crect x=%22199%22 y=%22289%22 width=%225%22 height=%226%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.80054 .67005 -.60333 .74416 226.93 -49.75)%22%2F%3E%3Crect x=%22749%22 y=%22635%22 width=%226%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.99907 -.05314 -.24638 -1.01404 1755.662 1460.537)%22%2F%3E%3Crect x=%221408%22 y=%22769%22 width=%228%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.46656 .70149 -.94241 -.7264 3006.327 543.324)%22%2F%3E%3Crect x=%221030%22 y=%22614%22 width=%229%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.64279 .84497 -.76604 .54873 846.782 -465.958)%22%2F%3E%3Crect x=%22930%22 y=%22734%22 width=%227%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.36933 .86245 -.91038 -.58173 1883.582 637.015)%22%2F%3E%3Crect x=%22539%22 y=%22695%22 width=%228%22 height=%2221%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.1995 1.0049 -.98816 .0351 1305.563 78.013)%22%2F%3E%3Crect x=%22885%22 y=%22300%22 width=%227%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.54974 .99324 -.88996 .21112 757.162 -482.06)%22%2F%3E%3Crect x=%221053%22 y=%22520%22 width=%227%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.00593 .22499 -.08757 .97452 120.557 -242.697)%22%2F%3E%3Crect x=%22844%22 y=%2260%22 width=%227%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.98893 -.03555 -.19199 -1.0181 1705.893 324.026)%22%2F%3E%3Crect x=%22525%22 y=%22920%22 width=%228%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.81499 .51117 -.5447 -.88537 1318.373 1586.946)%22%2F%3E%3Crect x=%221087%22 y=%22955%22 width=%225%22 height=%226%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.811 .64279 -.58922 -.76604 2470.56 991.553)%22%2F%3E%3Crect x=%22673%22 y=%2297%22 width=%229%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.99068 .07063 .00823 1.01 4.254 -156.174)%22%2F%3E%3Crect x=%22346%22 y=%22571%22 width=%227%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.25882 .94783 -.96593 -.32636 998.262 459.812)%22%2F%3E%3Crect x=%22802%22 y=%22961%22 width=%228%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.7063 .6597 -.67411 -.7862 1845.806 1386.08)%22%2F%3E%3Crect x=%22584%22 y=%22322%22 width=%227%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.24053 .93395 -.96363 -.41582 1029.064 40.569)%22%2F%3E%3Crect x=%221227%22 y=%22147%22 width=%229%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.89868 .81648 -.54757 .61526 284.588 -683.324)%22%2F%3E%3Crect x=%22829%22 y=%2277%22 width=%229%22 height=%2224%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1 .46947 -.24933 .88295 44.38 -380.887)%22%2F%3E%3Crect x=%221262%22 y=%22255%22 width=%226%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.8527 .32801 -.57225 -.95262 2552.953 253.925)%22%2F%3E%3Crect x=%22482%22 y=%22371%22 width=%229%22 height=%2224%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.93091 .57788 -.40097 .8253 292.22 -273.967)%22%2F%3E%3Crect x=%22824%22 y=%22854%22 width=%225%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.35003 .98829 -.9564 .15653 1548.623 -122.408)%22%2F%3E%3Crect x=%22458%22 y=%2280%22 width=%227%22 height=%2216%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.331 .87515 -.95918 .4851 383.051 -374.688)%22%2F%3E%3Crect x=%22420%22 y=%22448%22 width=%225%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.40347 .80059 -.94505 -.60328 1108.402 420.791)%22%2F%3E%3Crect x=%221239%22 y=%22701%22 width=%229%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.73045 .68293 -.68096 .73236 850.26 -725.175)%22%2F%3E%3Crect x=%221361%22 y=%22350%22 width=%229%22 height=%2225%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.98416 .15797 -.1165 -.9974 2653.845 700.254)%22%2F%3E%3Crect x=%22648%22 y=%22481%22 width=%228%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.40576 .9657 -.91146 -.29525 1367.804 -89.839)%22%2F%3E%3Crect x=%22780%22 y=%22843%22 width=%227%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.83152 .64436 -.56097 -.76792 1885.101 946.622)%22%2F%3E%3Crect x=%22208%22 y=%22474%22 width=%225%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.02955 .90093 -.51556 .52015 428.167 101.523)%22%2F%3E%3Crect x=%221477%22 y=%22292%22 width=%228%22 height=%2219%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.60585 .84423 -.7603 .59114 694.693 -757.776)%22%2F%3E%3Crect x=%22991%22 y=%22510%22 width=%225%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.41618 1 -.94151 -.14054 1839.095 -545.749)%22%2F%3E%3Crect x=%221211%22 y=%22535%22 width=%226%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.25834 .9406 -.964 -.36106 2037.573 -255.804)%22%2F%3E%3Crect x=%22416%22 y=%22296%22 width=%226%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.89121 .34223 -.47343 -.94027 970.121 462.049)%22%2F%3E%3Crect x=%22400%22 y=%22464%22 width=%225%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.61387 .92742 -.81769 -.39367 981.91 231.62)%22%2F%3E%3Crect x=%22239%22 y=%22659%22 width=%227%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.32894 .6687 -1.10344 -.79692 1312.595 1106.82)%22%2F%3E%3Crect x=%22446%22 y=%22720%22 width=%228%22 height=%2221%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.26249 1.01543 -.9848 0 1230.552 194.21)%22%2F%3E%3Crect x=%22448%22 y=%22959%22 width=%227%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.024 1.03018 -.96734 -.14478 1223.275 770.2)%22%2F%3E%3Crect x=%2244%22 y=%22366%22 width=%225%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.5281 .8636 -.84062 -.5189 330.683 530.585)%22%2F%3E%3Crect x=%22513%22 y=%22584%22 width=%225%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.37287 .83082 -.92265 -.62607 1237.843 676.47)%22%2F%3E%3Crect x=%221471%22 y=%22849%22 width=%228%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.91829 .73147 -.5108 .6821 827.345 -781.044)%22%2F%3E%3Crect x=%221266%22 y=%22758%22 width=%226%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.8678 .40773 -.5035 -.91578 2875.674 862.296)%22%2F%3E%3Crect x=%22163%22 y=%22885%22 width=%226%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.99208 .1046 -.1219 -.99513 485.872 1756.495)%22%2F%3E%3Crect x=%221318%22 y=%22266%22 width=%226%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.80552 .86113 -.65792 -.5381 2557.608 -952.889)%22%2F%3E%3Crect x=%22618%22 y=%22333%22 width=%227%22 height=%2220%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.99863 0 -.01737 -1.00137 1234.99 719.042)%22%2F%3E%3Crect x=%22241%22 y=%22390%22 width=%227%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.90415 .43944 -.42183 .90099 168.274 -51.286)%22%2F%3E%3Crect x=%22565%22 y=%2253%22 width=%229%22 height=%2222%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.00069 1.00737 -.99264 .07044 631.517 -594.242)%22%2F%3E%3Crect x=%2236%22 y=%22696%22 width=%229%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.01842 .08737 .19481 .99863 12.383 .263)%22%2F%3E%3Crect x=%22813%22 y=%22565%22 width=%226%22 height=%2210%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.85002 .32681 -.59123 -.94913 1971.29 915.717)%22%2F%3E%3Crect x=%22318%22 y=%22275%22 width=%229%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.85662 .56131 -.46247 .86435 118.801 -62.564)%22%2F%3E%3Crect x=%22457%22 y=%22804%22 width=%227%22 height=%2219%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.63303 .89395 -.78204 -.47532 1362.337 715.574)%22%2F%3E%3Crect x=%22806%22 y=%22588%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.34658 .99572 -.95559 .13994 1167.805 -208.76)%22%2F%3E%3Crect x=%2267%22 y=%22102%22 width=%227%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.96126 0 -.55438 -1.0403 230.853 236.487)%22%2F%3E%3Crect x=%22388%22 y=%2227%22 width=%225%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-1.02846 .26281 .03327 -.98083 795.732 -110.078)%22%2F%3E%3Crect x=%22542%22 y=%22506%22 width=%227%22 height=%2213%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.59414 .94454 -.81867 .38162 673.381 -92.29)%22%2F%3E%3Crect x=%22448%22 y=%22565%22 width=%225%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.59231 1.02284 -.85177 .21741 741.642 121.452)%22%2F%3E%3Crect x=%22192%22 y=%22281%22 width=%229%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.83024 .47409 -.54787 -.89162 575.985 420.23)%22%2F%3E%3Crect x=%221164%22 y=%22913%22 width=%227%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.1231 .99756 -1.01321 .08728 2107.78 -385.676)%22%2F%3E%3Crect x=%221029%22 y=%22902%22 width=%225%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.6171 .69988 -.7898 .72474 1098.454 -598.64)%22%2F%3E%3Crect x=%22898%22 y=%22680%22 width=%229%22 height=%2225%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.98983 .85065 -.45642 .61803 534.775 -209.96)%22%2F%3E%3Crect x=%22521%22 y=%22244%22 width=%227%22 height=%2216%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.5105 .97542 -.88841 -.26136 994.245 -267.457)%22%2F%3E%3Crect x=%22381%22 y=%22589%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.43271 .68712 -.99132 -.73685 1339.565 821.06)%22%2F%3E%3Crect x=%22888%22 y=%22357%22 width=%229%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.00489 .06993 .06993 1 0 0)%22%2F%3E%3Crect x=%22223%22 y=%22805%22 width=%228%22 height=%2212%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.28739 .99708 -1.0536 -.17581 1275.172 763.2)%22%2F%3E%3Crect x=%221320%22 y=%22220%22 width=%225%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.51938 .58073 -.98023 -.82936 2377.543 -149.684)%22%2F%3E%3Crect x=%22831%22 y=%22242%22 width=%228%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.3276 .89155 -.95472 -.45427 1385.605 -410.763)%22%2F%3E%3Crect x=%22935%22 y=%22434%22 width=%225%22 height=%225%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.40162 .69476 -1.00865 -.74504 1920.087 292.602)%22%2F%3E%3Crect x=%22335%22 y=%22322%22 width=%229%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.07211 .8834 -1.08865 -.5308 831.303 295.253)%22%2F%3E%3Crect x=%22520%22 y=%22746%22 width=%228%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.13802 .87971 -1.0538 -.52859 1563.463 815.615)%22%2F%3E%3Crect x=%2263%22 y=%22221%22 width=%229%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.309 .93415 -.95188 .35859 242.652 84.903)%22%2F%3E%3Crect x=%221279%22 y=%22124%22 width=%225%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.73164 .5201 -.70505 -.8656 2335.906 -248.542)%22%2F%3E%3Crect x=%22511%22 y=%22176%22 width=%228%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.70154 .61576 -.7261 .78813 264.31 -287.65)%22%2F%3E%3Crect x=%22288%22 y=%22105%22 width=%229%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.64646 .53024 -.85138 -.84857 619.624 63.082)%22%2F%3E%3Crect x=%22335%22 y=%22709%22 width=%226%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.16576 .89934 -1.03108 -.43864 1324.045 734.294)%22%2F%3E%3Crect x=%22122%22 y=%22754%22 width=%229%22 height=%2219%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.9847 .877 -.50079 .56952 584.292 256.404)%22%2F%3E%3Crect x=%22505%22 y=%22925%22 width=%227%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.92558 .48481 -.39288 .87462 501.72 -129.734)%22%2F%3E%3Crect x=%221125%22 y=%22235%22 width=%229%22 height=%2221%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.42602 .84072 -.9128 -.54597 1857.472 -491.074)%22%2F%3E%3Crect x=%22580%22 y=%22221%22 width=%228%22 height=%2210%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.62394 .95058 -.74767 .46363 351.226 -232.834)%22%2F%3E%3Crect x=%22706%22 y=%22637%22 width=%225%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.67793 .95853 -.72714 .44697 678.84 -80.67)%22%2F%3E%3Crect x=%22394%22 y=%22391%22 width=%225%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.95499 .54873 -.35184 .84497 277.115 -204.785)%22%2F%3E%3Crect x=%22480%22 y=%22467%22 width=%225%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.43348 1.0267 -.93608 .08982 779.511 56.345)%22%2F%3E%3Crect x=%22630%22 y=%22532%22 width=%226%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.36775 .98616 -.9492 .17389 1034.95 -214.203)%22%2F%3E%3Crect x=%22644%22 y=%22372%22 width=%227%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.1051 1 -1.03213 -.30573 1027.284 40.762)%22%2F%3E%3Crect x=%221170%22 y=%22204%22 width=%228%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.19888 .90374 -1.0095 -.44079 1669.951 -637.92)%22%2F%3E%3Crect x=%221389%22 y=%22533%22 width=%229%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.06078 .35102 .0656 .96441 47.774 -148.102)%22%2F%3E%3Crect x=%221330%22 y=%22937%22 width=%225%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.95825 .24285 -.27452 -.974 2812.93 1656.444)%22%2F%3E%3Crect x=%22179%22 y=%22201%22 width=%226%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.41744 .98163 -.93758 .1908 346.142 -12.367)%22%2F%3E%3Crect x=%22284%22 y=%22326%22 width=%227%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.4671 .88632 -.8799 .47126 412.11 -55.446)%22%2F%3E%3Crect x=%22520%22 y=%22865%22 width=%225%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.3146 .99863 -.97385 .08737 1346.688 306.918)%22%2F%3E%3Crect x=%22396%22 y=%2264%22 width=%227%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.97526 .0872 -.31943 -.9968 826.202 89.987)%22%2F%3E%3Crect x=%221123%22 y=%22409%22 width=%225%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.67765 .74504 -.7103 .69476 545.028 -493.555)%22%2F%3E%3Crect x=%22840%22 y=%22129%22 width=%226%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.85286 .68712 -.54077 .73685 207.516 -646.96)%22%2F%3E%3Crect x=%22863%22 y=%22379%22 width=%229%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.0816 .33705 .1743 .97887 15.976 -51.835)%22%2F%3E%3Crect x=%22412%22 y=%22888%22 width=%225%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.22571 .83756 -1.02996 -.60852 1585.058 1197.894)%22%2F%3E%3Crect x=%22483%22 y=%22717%22 width=%228%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.08525 .99405 -.994 -.1397 1343.938 298.437)%22%2F%3E%3Crect x=%221437%22 y=%22507%22 width=%228%22 height=%2212%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.61586 .82115 -.78657 -.57498 2656.608 -274.553)%22%2F%3E%3Crect x=%22121%22 y=%22365%22 width=%227%22 height=%2215%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.93794 .37552 -.34147 .92945 121.613 -11.766)%22%2F%3E%3Crect x=%22118%22 y=%22891%22 width=%228%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.9485 .70288 -.40559 .75374 466.55 165.067)%22%2F%3E%3Crect x=%221399%22 y=%22808%22 width=%226%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.35974 .96126 -.93715 -.27564 2595.848 -312.51)%22%2F%3E%3Crect x=%22349%22 y=%2270%22 width=%229%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.49241 .70883 -.91836 -.70883 619.466 -97.691)%22%2F%3E%3Crect x=%221344%22 y=%22411%22 width=%227%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.69252 .83867 -.74264 .54464 798.916 -939.54)%22%2F%3E%3Crect x=%22724%22 y=%22160%22 width=%229%22 height=%2224%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.27943 .90223 -.97208 -.44005 1119.889 -345.85)%22%2F%3E%3Crect x=%22791%22 y=%22502%22 width=%226%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.94337 .26136 -.3054 -.97542 1643.642 904.617)%22%2F%3E%3Crect x=%22108%22 y=%22490%22 width=%229%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.6141 .70332 -.78592 -.7283 562.05 795.07)%22%2F%3E%3Crect x=%221048%22 y=%22259%22 width=%228%22 height=%2222%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.46104 .97624 -.84736 .37474 702.069 -536.553)%22%2F%3E%3Crect x=%22872%22 y=%22861%22 width=%227%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.9797 .53857 -.22628 .89633 233.276 -114.18)%22%2F%3E%3Crect x=%221207%22 y=%22540%22 width=%228%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.39128 .94027 -.92112 -.34223 2137.55 -361.502)%22%2F%3E%3Crect x=%221390%22 y=%2215%22 width=%227%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-1.02418 -.16274 -.3216 -1.0275 2907.91 663.865)%22%2F%3E%3Crect x=%22718%22 y=%22239%22 width=%229%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.02886 .2443 .03318 .97983 19.565 -70.055)%22%2F%3E%3Crect x=%22739%22 y=%22506%22 width=%229%22 height=%2226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.0522 .99484 -.98923 -.30415 1270.145 150.385)%22%2F%3E%3Crect x=%22698%22 y=%22709%22 width=%225%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.4204 1.02999 -.9562 .03597 1212.542 140.504)%22%2F%3E%3Crect x=%2235%22 y=%22444%22 width=%229%22 height=%2224%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.5316 .78993 -.85059 -.61716 464.388 708.987)%22%2F%3E%3Crect x=%22814%22 y=%22893%22 width=%229%22 height=%2224%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.81572 .61765 -.53656 .81964 463.149 -153.354)%22%2F%3E%3Crect x=%22743%22 y=%22835%22 width=%225%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.47532 .94552 -.89395 .32557 1273.532 -139.373)%22%2F%3E%3Crect x=%2298%22 y=%22265%22 width=%228%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.96757 .1046 -.3551 -.99513 375.217 531.437)%22%2F%3E%3Crect x=%221481%22 y=%22163%22 width=%228%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.9928 .19127 -.12052 -.98402 2941.283 161.05)%22%2F%3E%3Crect x=%22626%22 y=%22271%22 width=%228%22 height=%2221%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.06165 .92502 -.49258 .51274 271.441 -228.671)%22%2F%3E%3Crect x=%2244%22 y=%22668%22 width=%225%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.7067 .83018 -.72789 .55996 659.28 255.547)%22%2F%3E%3Crect x=%22953%22 y=%22430%22 width=%226%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.98905 .05285 -.04908 1.00844 74.351 -188.568)%22%2F%3E%3Crect x=%22352%22 y=%22472%22 width=%228%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.15565 1.03134 -.98323 -.09023 762.981 252.09)%22%2F%3E%3Crect x=%221256%22 y=%2278%22 width=%228%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.46947 .85012 -.88295 .53121 740.868 -1120.817)%22%2F%3E%3Crect x=%22371%22 y=%22396%22 width=%226%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.87544 .45845 -.4631 -.89976 831.428 642.906)%22%2F%3E%3Crect x=%22885%22 y=%22370%22 width=%228%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.51367 .66424 -.91457 -.76412 1794.427 220.662)%22%2F%3E%3Crect x=%22788%22 y=%22507%22 width=%229%22 height=%2224%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.10807 .60852 -.1182 .83756 185.412 -185.594)%22%2F%3E%3Crect x=%221315%22 y=%22583%22 width=%227%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.4546 .92945 -.89224 -.37552 2436.927 -504.055)%22%2F%3E%3Crect x=%22111%22 y=%22590%22 width=%228%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.01356 .56045 -.16223 .89691 140.273 36.895)%22%2F%3E%3Crect x=%22899%22 y=%22540%22 width=%229%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.00278 .47 -.15957 .92244 125.81 -140.248)%22%2F%3E%3Crect x=%2281%22 y=%22266%22 width=%227%22 height=%2220%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.69593 .94149 -.78098 -.38039 312.816 286.531)%22%2F%3E%3Crect x=%22629%22 y=%22964%22 width=%229%22 height=%2222%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.2767 .97949 -.96212 -.2082 1623.07 590.686)%22%2F%3E%3Crect x=%22464%22 y=%22839%22 width=%227%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.41537 1.03852 -1.0287 -.16448 1396.234 655.041)%22%2F%3E%3Crect x=%221200%22 y=%22966%22 width=%226%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.90225 .87253 -.62518 .50375 1112.267 -418.848)%22%2F%3E%3Crect x=%22907%22 y=%22512%22 width=%229%22 height=%2224%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.9893 .08764 -.10317 1.00168 101.283 -176.564)%22%2F%3E%3Crect x=%221070%22 y=%22119%22 width=%227%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.78643 .86044 -.68966 .517 364.631 -770.115)%22%2F%3E%3Crect x=%22879%22 y=%22904%22 width=%229%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.67646 .89947 -.75208 .47826 1028.944 -146.86)%22%2F%3E%3Crect x=%221181%22 y=%22700%22 width=%229%22 height=%2219%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.8919 .85437 -.59125 .55483 764.638 -466.569)%22%2F%3E%3Crect x=%2244%22 y=%22823%22 width=%229%22 height=%2220%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.97384 .55 -.31863 .84691 369.804 107.663)%22%2F%3E%3Crect x=%221006%22 y=%22499%22 width=%229%22 height=%2213%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.64743 .5886 -.80787 -.81013 2220.14 267.29)%22%2F%3E%3Crect x=%22449%22 y=%22460%22 width=%228%22 height=%2222%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.29237 .9974 -.9563 .15797 770.975 8.44)%22%2F%3E%3Crect x=%221246%22 y=%22808%22 width=%228%22 height=%2219%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.03582 .96593 -1.02568 -.25882 2322 -178.323)%22%2F%3E%3Crect x=%22323%22 y=%22456%22 width=%229%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.0869 .97496 -1.00561 .22509 678.909 48.983)%22%2F%3E%3Crect x=%22396%22 y=%22392%22 width=%228%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.86603 .68408 -.5 .75975 253.34 -92.628)%22%2F%3E%3Crect x=%22796%22 y=%22985%22 width=%229%22 height=%2223%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.8953 .67005 -.4981 -.74416 1845.23 1159.734)%22%2F%3E%3Crect x=%221012%22 y=%22955%22 width=%226%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.7932 .8191 -.64456 -.59511 2355.138 539.957)%22%2F%3E%3Crect x=%22415%22 y=%22320%22 width=%229%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.52201 .56966 -.98152 -.84455 1090.225 442.973)%22%2F%3E%3Crect x=%22696%22 y=%22810%22 width=%228%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.49895 1.04014 -.97012 -.01816 1379.478 305.474)%22%2F%3E%3Crect x=%22239%22 y=%22535%22 width=%225%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.15478 .49363 .14602 .92839 96.825 -2.037)%22%2F%3E%3Crect x=%221077%22 y=%22277%22 width=%226%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.32825 .79876 -1.00459 -.6019 1815.56 -392.069)%22%2F%3E%3Crect x=%221043%22 y=%22403%22 width=%226%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.39707 .8388 -.93432 .54472 952.083 -708.75)%22%2F%3E%3Crect x=%22311%22 y=%22142%22 width=%225%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.96698 .7522 -.39562 .7264 97.548 -100.162)%22%2F%3E%3Crect x=%22657%22 y=%2297%22 width=%228%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-1.00633 .12204 .0016 -.9939 1302.102 155.36)%22%2F%3E%3Crect x=%22303%22 y=%22760%22 width=%228%22 height=%228%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.8009 .67076 -.60135 .74496 638.161 -32.541)%22%2F%3E%3Crect x=%22584%22 y=%22151%22 width=%226%22 height=%229%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.0399 .24196 .03788 .97044 15.098 -147.68)%22%2F%3E%3Crect x=%22204%22 y=%22393%22 width=%229%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.76503 .50275 -.66397 -.8708 670.886 666.344)%22%2F%3E%3Crect x=%22663%22 y=%22697%22 width=%225%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.95815 .08764 -.4592 -1.00168 1832.353 1416.806)%22%2F%3E%3Crect x=%22533%22 y=%22467%22 width=%228%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.06993 1.00137 -1.00352 -.07002 1002.417 16.434)%22%2F%3E%3Crect x=%22606%22 y=%22763%22 width=%228%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.98737 .0349 -.37902 -.9994 1768.55 1516.243)%22%2F%3E%3Crect x=%221064%22 y=%22922%22 width=%226%22 height=%2215%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.43827 .91578 -.89684 -.40773 2262.711 405.964)%22%2F%3E%3Crect x=%22693%22 y=%22644%22 width=%225%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.51489 .86655 -.85673 -.5003 1575.54 397.548)%22%2F%3E%3Crect x=%22906%22 y=%22405%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.35338 .87247 -.91669 -.56659 1562.131 115.362)%22%2F%3E%3Crect x=%22330%22 y=%22945%22 width=%228%22 height=%2215%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.932 .09067 -.37646 -1.03634 1022.16 2005.104)%22%2F%3E%3Crect x=%22738%22 y=%22279%22 width=%225%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.02986 .63405 -.3054 .78298 171.836 -317.065)%22%2F%3E%3Crect x=%221004%22 y=%22377%22 width=%226%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.28994 .93715 -.95577 -.35974 1710.068 -513.068)%22%2F%3E%3Crect x=%22548%22 y=%22639%22 width=%229%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.22867 1.0069 -1.00114 .03516 1243.456 -1.828)%22%2F%3E%3Crect x=%221389%22 y=%22549%22 width=%228%22 height=%2220%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.29028 .90475 -.95737 -.461 2440.439 -689.247)%22%2F%3E%3Crect x=%22681%22 y=%22393%22 width=%226%22 height=%226%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.98606 .29277 -.19035 -.95762 1365.447 610.807)%22%2F%3E%3Crect x=%22216%22 y=%22393%22 width=%228%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.0554 .19375 .26837 .99677 6.258 -2.547)%22%2F%3E%3Crect x=%22220%22 y=%2272%22 width=%228%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.88911 .96955 -.67218 .39172 116.05 -101.554)%22%2F%3E%3Crect x=%22252%22 y=%22752%22 width=%229%22 height=%2218%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.34387 .9757 -.94551 .22526 941.986 352.751)%22%2F%3E%3Crect x=%221109%22 y=%22378%22 width=%228%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.95549 .6625 -.41026 .76213 303.837 -489.01)%22%2F%3E%3Crect x=%2232%22 y=%22109%22 width=%225%22 height=%225%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.56244 .75715 -.79625 -.70606 127.861 173.348)%22%2F%3E%3Crect x=%22846%22 y=%22861%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.29026 .89441 -.97016 -.45572 2148.956 429.7)%22%2F%3E%3Crect x=%221092%22 y=%22868%22 width=%228%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.80649 .48488 -.6074 .87475 639.208 -440.784)%22%2F%3E%3Crect x=%221130%22 y=%22699%22 width=%225%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.78984 .50375 -.61705 -.87253 2476.746 888.684)%22%2F%3E%3Crect x=%221082%22 y=%22124%22 width=%226%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.93513 .55 -.37823 .84691 133.28 -424.735)%22%2F%3E%3Crect x=%22595%22 y=%22159%22 width=%226%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.87042 .35842 -.5225 .93372 138.677 -213.938)%22%2F%3E%3Crect x=%22844%22 y=%22228%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.75045 .76604 -.6757 -.64279 1607.25 -263.223)%22%2F%3E%3Crect x=%221364%22 y=%2281%22 width=%227%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.34459 .97437 -.94675 .22495 991.998 -1263.084)%22%2F%3E%3Crect x=%22871%22 y=%22911%22 width=%228%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.00104 .19093 -.08775 .98223 146.29 -120.151)%22%2F%3E%3Crect x=%221289%22 y=%22499%22 width=%228%22 height=%2222%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.006 .60633 -.31424 .80463 306.886 -525.593)%22%2F%3E%3Crect x=%22549%22 y=%22580%22 width=%227%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.50202 .94772 -.82107 .44193 621.877 -28.785)%22%2F%3E%3Crect x=%221262%22 y=%22402%22 width=%225%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.47931 .98784 -.9364 .15646 1172.703 -927.45)%22%2F%3E%3Crect x=%22750%22 y=%2261%22 width=%225%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.19005 .9707 -.97568 .27835 670.774 -789.308)%22%2F%3E%3Crect x=%22425%22 y=%22219%22 width=%228%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.98809 .0524 -.22731 -1 934.947 453)%22%2F%3E%3Crect x=%221242%22 y=%22394%22 width=%226%22 height=%2217%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.41331 .82916 -.92725 -.55928 2199.984 -382.968)%22%2F%3E%3Crect x=%221197%22 y=%22736%22 width=%228%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.97302 .1746 -.20892 -.99023 2610.642 1137.837)%22%2F%3E%3Crect x=%22358%22 y=%22609%22 width=%226%22 height=%227%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.81713 .68604 -.51765 .7892 281.485 -8.171)%22%2F%3E%3Crect x=%22754%22 y=%22242%22 width=%225%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.99247 .29457 -.14857 .96349 84.31 -306.653)%22%2F%3E%3Crect x=%22211%22 y=%2280%22 width=%227%22 height=%2216%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.40516 .79102 -.94764 .61801 198.778 -154.825)%22%2F%3E%3Crect x=%221150%22 y=%2253%22 width=%227%22 height=%2218%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.64059 .43753 -.91183 -.93828 2055.355 -75.434)%22%2F%3E%3Crect x=%22827%22 y=%22625%22 width=%229%22 height=%2221%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.81039 .33284 -.6509 -.96664 2033.133 1149.784)%22%2F%3E%3Crect x=%221436%22 y=%22202%22 width=%226%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.9857 .08728 -.19145 -.99756 2911.845 363.32)%22%2F%3E%3Crect x=%221113%22 y=%22156%22 width=%229%22 height=%2221%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.80841 .73314 -.61014 .68366 341.404 -688.47)%22%2F%3E%3Crect x=%22811%22 y=%2253%22 width=%229%22 height=%2215%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.81925 .60218 -.57344 .79912 184.33 -507.404)%22%2F%3E%3Crect x=%221312%22 y=%22491%22 width=%225%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.54114 .9563 -.86988 -.31072 2406.625 -745.748)%22%2F%3E%3Crect x=%2236%22 y=%22907%22 width=%225%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-1.03218 -.14553 -.47302 -1.03552 792.45 1874.781)%22%2F%3E%3Crect x=%221368%22 y=%22715%22 width=%226%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.63273 .67614 -.7511 -.77781 2687.697 698.418)%22%2F%3E%3Crect x=%22267%22 y=%22340%22 width=%225%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.75363 .64367 -.65546 -.7671 722.234 422.939)%22%2F%3E%3Crect x=%22642%22 y=%22434%22 width=%229%22 height=%2225%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.55822 .9761 -.86443 -.27989 1352.53 -173.567)%22%2F%3E%3Crect x=%221209%22 y=%22584%22 width=%225%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.42262 .88416 -.9063 .47012 1231.5 -823.609)%22%2F%3E%3Crect x=%22655%22 y=%22283%22 width=%226%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.94823 -.15885 .30842 1.00293 1.083 -12.338)%22%2F%3E%3Crect x=%221073%22 y=%22473%22 width=%227%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.9771 .15682 -.20767 -.9901 2217.964 857.731)%22%2F%3E%3Crect x=%2249%22 y=%22956%22 width=%225%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.27231 .79393 -1.0468 -.62028 1367.246 1522.53)%22%2F%3E%3Crect x=%22904%22 y=%22130%22 width=%228%22 height=%2219%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.2806 .89441 -.97508 -.45572 1321.82 -529.611)%22%2F%3E%3Crect x=%221053%22 y=%22925%22 width=%228%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.79005 .70537 -.59957 .73044 994.963 -680.59)%22%2F%3E%3Crect x=%22887%22 y=%22252%22 width=%227%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.21101 .99878 -.99016 -.05234 1285.227 -602.893)%22%2F%3E%3Crect x=%221468%22 y=%22407%22 width=%226%22 height=%226%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.6323 .84183 -.7614 .56782 893.414 -1320.51)%22%2F%3E%3Crect x=%22788%22 y=%22838%22 width=%226%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.9765 .1397 -.20978 -.99405 1863.182 1503.269)%22%2F%3E%3Crect x=%22751%22 y=%22889%22 width=%229%22 height=%2224%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.84161 .63279 -.541 .78143 781.748 -360.542)%22%2F%3E%3Crect x=%22229%22 y=%2296%22 width=%228%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.7321 .71978 -.68233 .69508 141.385 -144.286)%22%2F%3E%3Crect x=%22931%22 y=%22499%22 width=%227%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.37076 1.03018 -.9186 .14478 1028.459 -259.43)%22%2F%3E%3Crect x=%22305%22 y=%22263%22 width=%225%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.9276 .63279 -.43482 -.78143 675.852 248.74)%22%2F%3E%3Crect x=%22378%22 y=%22607%22 width=%229%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.03486 .99708 -.99678 -.17581 995.59 400.559)%22%2F%3E%3Crect x=%22882%22 y=%22188%22 width=%226%22 height=%2215%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.37011 .93415 -.92096 .37742 700.153 -596.341)%22%2F%3E%3Crect x=%22562%22 y=%22795%22 width=%225%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.0755 .28408 .23055 .99069 24.947 -12.18)%22%2F%3E%3Crect x=%22326%22 y=%22622%22 width=%228%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.9047 .32577 -.44222 .9461 209.43 -61.83)%22%2F%3E%3Crect x=%221303%22 y=%22644%22 width=%225%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.97224 .19319 -.17458 -.99386 2750.37 836.037)%22%2F%3E%3Crect x=%22623%22 y=%22952%22 width=%228%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.95154 .08824 -.4563 -1.00861 1887.503 1974.256)%22%2F%3E%3Crect x=%22508%22 y=%22695%22 width=%229%22 height=%229%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.0424 .17389 .1609 .98616 73.992 -52.576)%22%2F%3E%3Crect x=%221286%22 y=%22964%22 width=%229%22 height=%2225%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.45191 1.01674 -.93604 .10686 1797.14 -165.651)%22%2F%3E%3Crect x=%22518%22 y=%2211%22 width=%226%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.46334 .7771 -.86964 -.6997 767.13 -218.388)%22%2F%3E%3Crect x=%221281%22 y=%2275%22 width=%226%22 height=%227%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-1.00164 .44079 -.215 -.90374 2594.92 -551.479)%22%2F%3E%3Crect x=%22518%22 y=%22636%22 width=%228%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.34237 .96258 -.9407 .27602 961.77 -8.14)%22%2F%3E%3Crect x=%22290%22 y=%22914%22 width=%227%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.59846 .82366 -.79504 -.57674 1262.328 1177.215)%22%2F%3E%3Crect x=%22143%22 y=%2221%22 width=%228%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.8999 .3908 -.43889 -.92065 292.404 -2.063)%22%2F%3E%3Crect x=%22706%22 y=%22195%22 width=%225%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.891 .5163 -.45399 .85926 167.339 -288.316)%22%2F%3E%3Crect x=%22136%22 y=%22909%22 width=%226%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.13892 .97925 -1.06102 -.2808 1311.236 1066.033)%22%2F%3E%3Crect x=%2287%22 y=%22615%22 width=%226%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.87358 .36508 -.46342 -.95105 411.558 1195.266)%22%2F%3E%3Crect x=%221103%22 y=%22594%22 width=%226%22 height=%226%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.01746 .99863 -1.00046 .05234 1663.111 -538.729)%22%2F%3E%3Crect x=%221108%22 y=%22912%22 width=%229%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.00491 .67945 -.3557 .7546 577.71 -334.704)%22%2F%3E%3Crect x=%22151%22 y=%22605%22 width=%228%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.68975 1.02119 -.84518 .1985 721.733 380.287)%22%2F%3E%3Crect x=%221306%22 y=%22555%22 width=%225%22 height=%2210%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.60571 .92029 -.80417 -.42914 2539.91 -634.605)%22%2F%3E%3Crect x=%22610%22 y=%22300%22 width=%227%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.9655 .4565 -.29572 -.89591 1279.324 234.663)%22%2F%3E%3Crect x=%221133%22 y=%22895%22 width=%228%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.05218 .27631 .05029 .9636 157.975 -201.888)%22%2F%3E%3Crect x=%22484%22 y=%22581%22 width=%229%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.58736 .84497 -.80204 -.54873 1131.204 553.994)%22%2F%3E%3Crect x=%221474%22 y=%22974%22 width=%227%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.67465 .82115 -.7454 .57498 1379.254 -901.11)%22%2F%3E%3Crect x=%2251%22 y=%22286%22 width=%225%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.86666 .61308 -.481 .81358 130.454 31.474)%22%2F%3E%3Crect x=%22485%22 y=%22626%22 width=%228%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.60182 .86189 -.79864 -.51788 1286.827 484.16)%22%2F%3E%3Crect x=%22112%22 y=%2213%22 width=%229%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.40815 .94566 -.91692 -.32562 180.708 -86.354)%22%2F%3E%3Crect x=%22767%22 y=%2247%22 width=%229%22 height=%2224%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.69191 .87036 -.7166 .54386 275.828 -466.452)%22%2F%3E%3Crect x=%221464%22 y=%22739%22 width=%227%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.63826 .96886 -.82476 .3148 1307.49 -626.757)%22%2F%3E%3Crect x=%22963%22 y=%22366%22 width=%227%22 height=%2218%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.82649 .42914 -.55784 -.92029 2040.965 134.927)%22%2F%3E%3Crect x=%22857%22 y=%2270%22 width=%226%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.41316 .75575 -.96404 -.65696 1323.49 -475.627)%22%2F%3E%3Crect x=%22737%22 y=%22506%22 width=%227%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.82821 .23087 -.7441 -1 1943.046 1023)%22%2F%3E%3Crect x=%22744%22 y=%22124%22 width=%225%22 height=%225%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.54251 .88958 -.83567 -.473 1258.414 -569.395)%22%2F%3E%3Crect x=%221338%22 y=%22160%22 width=%228%22 height=%2220%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.59987 .711 -.8066 -.711 2291.369 -804.344)%22%2F%3E%3Crect x=%2283%22 y=%22687%22 width=%225%22 height=%2213%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.10458 .53857 -.01844 .89633 183.274 51.985)%22%2F%3E%3Crect x=%221129%22 y=%22637%22 width=%226%22 height=%2217%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.07382 1.02158 -.9591 -.27373 1689.157 55.541)%22%2F%3E%3Crect x=%22228%22 y=%22365%22 width=%225%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.99864 .0872 -.05217 .9968 45.107 -26.963)%22%2F%3E%3Crect x=%22562%22 y=%22487%22 width=%226%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.42708 .9927 -.95492 .12189 954.018 -136.07)%22%2F%3E%3Crect x=%22431%22 y=%22467%22 width=%227%22 height=%2219%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.9703 .50069 -.31664 .86721 242.856 -131.504)%22%2F%3E%3Crect x=%221454%22 y=%22445%22 width=%228%22 height=%2222%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.99804 .17535 -.04255 .99449 89.534 -458.061)%22%2F%3E%3Crect x=%22294%22 y=%22600%22 width=%226%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.64107 .85862 -.76407 -.53652 958.621 626.01)%22%2F%3E%3Crect x=%22950%22 y=%22604%22 width=%227%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.79815 .44697 -.52564 -.95853 1870.08 1098.792)%22%2F%3E%3Crect x=%221441%22 y=%22429%22 width=%225%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.15725 1 -.9945 -.03492 2068.54 -1044.753)%22%2F%3E%3Crect x=%22238%22 y=%22521%22 width=%227%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.9952 .0351 .00206 -1.0049 403.196 1072.486)%22%2F%3E%3Crect x=%221021%22 y=%2242%22 width=%229%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.52926 .80059 -.85026 .60328 504.943 -730.05)%22%2F%3E%3Crect x=%22139%22 y=%2233%22 width=%227%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.85974 .60328 -.51668 -.80059 284.15 -25.71)%22%2F%3E%3Crect x=%22439%22 y=%22732%22 width=%225%22 height=%2212%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.50056 1.00613 -.96768 .05273 1192.052 309.09)%22%2F%3E%3Crect x=%22474%22 y=%22238%22 width=%226%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.54213 .85862 -.8259 -.53652 880.445 40.132)%22%2F%3E%3Crect x=%22663%22 y=%22862%22 width=%228%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.02253 .40674 -.16195 .91355 357.482 -196.38)%22%2F%3E%3Crect x=%22314%22 y=%22693%22 width=%229%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.05223 .99646 -1.01466 -.2118 1068.658 596.437)%22%2F%3E%3Crect x=%22950%22 y=%2215%22 width=%229%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.9461 .61905 -.40442 .79235 81.41 -485.373)%22%2F%3E%3Crect x=%22880%22 y=%22475%22 width=%227%22 height=%2212%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.82055 .23289 -.73976 -1.00874 2156.594 997.183)%22%2F%3E%3Crect x=%22768%22 y=%22224%22 width=%225%22 height=%2214%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.4492 1.03634 -1.00423 -.09067 769.052 -325.619)%22%2F%3E%3Crect x=%22117%22 y=%22838%22 width=%226%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.97033 -.16545 -.08226 -1.0446 228.41 1786.815)%22%2F%3E%3Crect x=%22238%22 y=%22516%22 width=%226%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.9925 .06985 -.12244 -.99893 597.874 1015.977)%22%2F%3E%3Crect x=%221126%22 y=%2210%22 width=%227%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.7786 .57393 -.63044 .81965 263.366 -684.086)%22%2F%3E%3Crect x=%22603%22 y=%22615%22 width=%229%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.46761 .92742 -.87977 .39367 844.628 -112.887)%22%2F%3E%3Crect x=%22798%22 y=%22774%22 width=%227%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.38572 .9573 -.91179 .32963 1122.544 -118.784)%22%2F%3E%3Crect x=%22731%22 y=%22468%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.23344 .97324 -.96055 -.27907 1430.162 -223.13)%22%2F%3E%3Crect x=%22391%22 y=%22842%22 width=%229%22 height=%229%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.69427 .71978 -.71887 -.69508 1248.565 1164.026)%22%2F%3E%3Crect x=%22909%22 y=%2222%22 width=%227%22 height=%227%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.0199 .96725 -1.02853 -.25917 971.136 -802.686)%22%2F%3E%3Crect x=%22121%22 y=%22153%22 width=%226%22 height=%227%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.83186 .83718 -.63338 .56469 153.781 -18.258)%22%2F%3E%3Crect x=%22848%22 y=%2289%22 width=%229%22 height=%2221%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.6341 .9141 -.75683 .48603 370.054 -499.7)%22%2F%3E%3Crect x=%221034%22 y=%22155%22 width=%229%22 height=%2219%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.60684 .92733 -.83319 .37466 584.573 -878.286)%22%2F%3E%3Crect x=%221210%22 y=%22909%22 width=%228%22 height=%2218%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.83932 .5003 -.54505 -.86655 2750.044 1148.52)%22%2F%3E%3Crect x=%221410%22 y=%22693%22 width=%225%22 height=%227%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(1.00426 .13926 -.03524 .99087 70.68 -141.018)%22%2F%3E%3Crect x=%221306%22 y=%22476%22 width=%228%22 height=%2219%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.01537 .99497 -1.00317 .12217 1675.146 -785.618)%22%2F%3E%3Crect x=%22338%22 y=%2277%22 width=%225%22 height=%226%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.16215 .55719 .06511 .8917 5.22 -70.423)%22%2F%3E%3Crect x=%22373%22 y=%22798%22 width=%227%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.58705 .94675 -.84258 -.34459 1168.458 678.37)%22%2F%3E%3Crect x=%221188%22 y=%22117%22 width=%227%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.58136 .50435 -.93396 -.90987 2116.693 -21.494)%22%2F%3E%3Crect x=%221228%22 y=%2216%22 width=%228%22 height=%2222%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.8317 .75045 -.58367 .6757 240.615 -742.65)%22%2F%3E%3Crect x=%221185%22 y=%22502%22 width=%225%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.2849 .70357 -1.10492 -.78139 2357.57 451.74)%22%2F%3E%3Crect x=%22406%22 y=%22157%22 width=%227%22 height=%2219%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.15265 .87515 -1.05804 -.4851 710.43 -96.805)%22%2F%3E%3Crect x=%221359%22 y=%22831%22 width=%229%22 height=%2224%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.78097 .50191 -.58348 -.90547 2771.856 1287.306)%22%2F%3E%3Crect x=%22692%22 y=%22962%22 width=%228%22 height=%229%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.52009 .72209 -.88263 -.69731 2205.293 1076.987)%22%2F%3E%3Crect x=%22225%22 y=%22237%22 width=%229%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.05212 .5153 -.11826 .89254 71.332 -34.338)%22%2F%3E%3Crect x=%22190%22 y=%22430%22 width=%229%22 height=%2222%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.75471 .5634 -.65606 .83526 337.031 -60.813)%22%2F%3E%3Crect x=%221158%22 y=%22706%22 width=%228%22 height=%2216%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.9795 .20842 -.18985 .98054 214.738 -309.541)%22%2F%3E%3Crect x=%22447%22 y=%22209%22 width=%225%22 height=%2210%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.72202 .9514 -.78828 .34628 364.75 -216.568)%22%2F%3E%3Crect x=%22845%22 y=%22485%22 width=%229%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.46913 .86721 -.88227 -.50069 1671.87 44.66)%22%2F%3E%3Crect x=%221428%22 y=%22944%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.34433 1 -.97592 .06993 2158.394 -646.496)%22%2F%3E%3Crect x=%221081%22 y=%2225%22 width=%229%22 height=%2222%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.43802 .9148 -.89812 .4073 640.737 -914.788)%22%2F%3E%3Crect x=%22446%22 y=%22909%22 width=%225%22 height=%2210%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.23945 .9576 -.94264 -.40648 1289.447 984.642)%22%2F%3E%3Crect x=%22597%22 y=%22853%22 width=%226%22 height=%226%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.46489 1.00244 -.9732 .05254 1449.313 262.056)%22%2F%3E%3Crect x=%22187%22 y=%22297%22 width=%229%22 height=%2225%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.05249 1.00324 -1.00603 -.1769 504.922 209.353)%22%2F%3E%3Crect x=%221304%22 y=%22636%22 width=%229%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.83258 .37552 -.60226 -.92945 2914.694 840.765)%22%2F%3E%3Crect x=%221312%22 y=%22864%22 width=%226%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.22345 .9781 -.97081 -.22581 2517.9 -336.622)%22%2F%3E%3Crect x=%22218%22 y=%22955%22 width=%226%22 height=%2213%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.96356 .08801 -.34847 -1.00598 890.873 1940.363)%22%2F%3E%3Crect x=%22477%22 y=%22203%22 width=%229%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(1.02326 .66618 -.32397 .76635 129.498 -187.149)%22%2F%3E%3Crect x=%221429%22 y=%22562%22 width=%228%22 height=%2221%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.4696 .85769 -.88376 .51535 1211.548 -901.567)%22%2F%3E%3Crect x=%22992%22 y=%22217%22 width=%229%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.986 .2443 -.13874 -.97983 2012.616 55.04)%22%2F%3E%3Crect x=%22734%22 y=%22436%22 width=%226%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.94506 .3092 -.32551 -.95164 1598.064 603.147)%22%2F%3E%3Crect x=%22516%22 y=%22416%22 width=%226%22 height=%2214%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.77221 .74416 -.64849 -.67005 1159.46 293.01)%22%2F%3E%3Crect x=%22476%22 y=%22234%22 width=%228%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.65994 .87682 -.75947 -.50623 975.129 -131.637)%22%2F%3E%3Crect x=%22911%22 y=%22836%22 width=%226%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.84616 .53121 -.52834 .85012 639.579 -423.317)%22%2F%3E%3Crect x=%22291%22 y=%22363%22 width=%226%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.63932 .57267 -.76175 -.88183 753.45 617.794)%22%2F%3E%3Crect x=%22297%22 y=%22166%22 width=%228%22 height=%2219%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.17458 1.00183 -.99208 -.03498 516.858 -140.96)%22%2F%3E%3Crect x=%22597%22 y=%22426%22 width=%225%22 height=%2213%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.8804 .24645 -.5265 -.98846 1412.723 828.792)%22%2F%3E%3Crect x=%22851%22 y=%22953%22 width=%228%22 height=%228%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.9772 .8834 -.54482 .5308 898.655 -93.12)%22%2F%3E%3Crect x=%22582%22 y=%22843%22 width=%226%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.3553 1.00076 -.98683 .03495 1450.667 264.542)%22%2F%3E%3Crect x=%2245%22 y=%22801%22 width=%228%22 height=%2220%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.64367 .79864 -.7671 -.60182 660.152 1259.939)%22%2F%3E%3Crect x=%22584%22 y=%22441%22 width=%229%22 height=%2223%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.3041 1.00975 -1.0385 -.15993 1023.472 55.717)%22%2F%3E%3Crect x=%22575%22 y=%22478%22 width=%229%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.88988 .64318 -.49426 .76651 383.551 -239.244)%22%2F%3E%3Crect x=%22271%22 y=%22621%22 width=%227%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.9563 0 -.63214 -1.0457 1166.741 1371.686)%22%2F%3E%3Crect x=%22163%22 y=%22796%22 width=%228%22 height=%229%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.25522 .93986 -.9395 -.4584 872.196 1061.55)%22%2F%3E%3Crect x=%2225%22 y=%22692%22 width=%228%22 height=%2222%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.86339 .3639 -.49883 -.94798 631.47 1353.765)%22%2F%3E%3Crect x=%22153%22 y=%22960%22 width=%228%22 height=%2222%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.71153 .41084 -.75779 -.96788 1111.939 1897.318)%22%2F%3E%3Crect x=%2250%22 y=%2275%22 width=%228%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.76154 .84497 -.68893 .54873 80.58 -2.67)%22%2F%3E%3Crect x=%22316%22 y=%22263%22 width=%228%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.16198 .99924 -1.00925 -.05237 605.196 -46.792)%22%2F%3E%3Crect x=%22247%22 y=%22746%22 width=%229%22 height=%2221%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.9962 0 .0361 1.00382 63.834 -24.893)%22%2F%3E%3Crect x=%22152%22 y=%22860%22 width=%229%22 height=%2226%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.5117 .98178 -.9191 .19084 1178.448 550.019)%22%2F%3E%3Crect x=%221240%22 y=%2267%22 width=%226%22 height=%229%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.0698 .9974 -1.01367 -.15797 1250.245 -982.275)%22%2F%3E%3Crect x=%22345%22 y=%22159%22 width=%229%22 height=%2212%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.90662 .2758 -.46398 -.96185 778.197 215.106)%22%2F%3E%3Crect x=%221335%22 y=%22196%22 width=%229%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.10521 .99695 -1.01412 -.10478 1447.86 -1015.82)%22%2F%3E%3Crect x=%221253%22 y=%22472%22 width=%229%22 height=%2213%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.34167 .92275 -.93868 -.39169 2126.428 -406.507)%22%2F%3E%3Crect x=%221326%22 y=%22278%22 width=%228%22 height=%2222%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.81236 .7576 -.6138 .65857 476.72 -792.563)%22%2F%3E%3Crect x=%221028%22 y=%2277%22 width=%225%22 height=%227%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.63971 .7576 -.76388 -.65857 1750.202 -737.342)%22%2F%3E%3Crect x=%22227%22 y=%22257%22 width=%227%22 height=%2215%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.94906 .36189 -.29087 -.94276 542.426 398.048)%22%2F%3E%3Crect x=%22860%22 y=%22368%22 width=%227%22 height=%229%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(1.04287 .34842 -.00482 .95728 50.356 -117.102)%22%2F%3E%3Crect x=%221169%22 y=%22627%22 width=%225%22 height=%225%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.7906 .54497 -.61756 -.83918 2521.564 560.241)%22%2F%3E%3Crect x=%221188%22 y=%22447%22 width=%229%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.08579 .98083 -1.04254 -.26281 1684.291 -382.261)%22%2F%3E%3Crect x=%221275%22 y=%22260%22 width=%228%22 height=%2220%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.8466 .6825 -.4913 .78512 273.147 -448.15)%22%2F%3E%3Crect x=%22689%22 y=%22424%22 width=%226%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.9104 .2443 -.44191 -.97983 1626.201 584.028)%22%2F%3E%3Crect x=%22361%22 y=%22202%22 width=%228%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.65257 .9514 -.81356 .34628 343.893 -152.826)%22%2F%3E%3Crect x=%22730%22 y=%22758%22 width=%226%22 height=%2211%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.45106 .76213 -.92002 .6625 1023.707 -403.979)%22%2F%3E%3Crect x=%22470%22 y=%22502%22 width=%227%22 height=%2211%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.35715 1 -.93058 .19438 766.191 27.391)%22%2F%3E%3Crect x=%221016%22 y=%22517%22 width=%226%22 height=%226%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.91841 .41919 -.32277 .94151 128.375 -142.674)%22%2F%3E%3Crect x=%22514%22 y=%22907%22 width=%229%22 height=%2224%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.98341 .25898 -.1912 .96651 217.037 -85.4)%22%2F%3E%3Crect x=%221213%22 y=%22351%22 width=%227%22 height=%2215%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.95756 .10614 -.3109 1.00986 158.064 -347.159)%22%2F%3E%3Crect x=%22259%22 y=%22859%22 width=%226%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.43206 .97089 -.92226 .24207 1144.722 392.467)%22%2F%3E%3Crect x=%22493%22 y=%22983%22 width=%227%22 height=%2218%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.3341 1.0536 -.97836 -.09218 1402.899 731.288)%22%2F%3E%3Crect x=%22595%22 y=%22212%22 width=%228%22 height=%2223%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.01018 .63172 -.3355 .78011 148 -276.853)%22%2F%3E%3Crect x=%221342%22 y=%22453%22 width=%225%22 height=%225%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.95297 .68165 -.40864 .75705 350.117 -544.478)%22%2F%3E%3Crect x=%221375%22 y=%2284%22 width=%229%22 height=%2226%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.05185 .99127 -1.01888 .19268 1560.042 -1483.03)%22%2F%3E%3Crect x=%221175%22 y=%22630%22 width=%225%22 height=%226%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(-.28435 .8708 -.9842 -.50275 2241.683 49.642)%22%2F%3E%3Crect x=%221342%22 y=%22129%22 width=%227%22 height=%2213%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.88207 .6491 -.48938 .77357 242.002 -653.592)%22%2F%3E%3Crect x=%22244%22 y=%22665%22 width=%229%22 height=%2216%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.38548 .87401 -.90328 -.54614 887.896 885.32)%22%2F%3E%3Crect x=%221104%22 y=%22775%22 width=%229%22 height=%2210%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.92882 .24251 -.3982 -.97267 2610.878 1192.34)%22%2F%3E%3Crect x=%22662%22 y=%22201%22 width=%228%22 height=%2220%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.2771 1.00737 -.9733 .07044 727.238 -568.37)%22%2F%3E%3Crect x=%2221%22 y=%22236%22 width=%225%22 height=%225%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(1.0133 .36637 -.0897 .95444 38.106 7.252)%22%2F%3E%3Crect x=%22363%22 y=%22607%22 width=%229%22 height=%2211%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.19357 .94027 -.99308 -.34223 1123.677 489.4)%22%2F%3E%3Crect x=%221423%22 y=%22278%22 width=%225%22 height=%2210%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.43112 .99449 -.92953 .17535 1133.335 -983.924)%22%2F%3E%3Crect x=%22602%22 y=%22265%22 width=%229%22 height=%2213%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.22002 1.03465 -.95883 .03613 703.03 -203.31)%22%2F%3E%3Crect x=%221190%22 y=%22813%22 width=%227%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.69198 .36934 -.90487 -.96216 3142.437 1459.852)%22%2F%3E%3Crect x=%221179%22 y=%22247%22 width=%225%22 height=%2210%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.08682 .99069 -.9845 -.28408 1503.527 -552.331)%22%2F%3E%3Crect x=%22218%22 y=%22831%22 width=%226%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.92152 .69561 -.48333 .72033 706.93 69.054)%22%2F%3E%3Crect x=%22614%22 y=%22584%22 width=%229%22 height=%2212%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.76503 .50275 -.66397 .8708 491.14 -299.73)%22%2F%3E%3Crect x=%22624%22 y=%22228%22 width=%229%22 height=%2223%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.27031 .9707 -.95266 .27835 640.698 -348.924)%22%2F%3E%3Crect x=%22516%22 y=%22272%22 width=%229%22 height=%2217%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.3354 1 -.98242 .0524 692.552 -227.422)%22%2F%3E%3Crect x=%22154%22 y=%22633%22 width=%227%22 height=%2210%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.78903 .65616 -.61635 .75482 470.88 50.328)%22%2F%3E%3Crect x=%22262%22 y=%22246%22 width=%226%22 height=%2214%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.9848 .03524 -.17365 -1.00921 569.907 536.235)%22%2F%3E%3Crect x=%221449%22 y=%22988%22 width=%229%22 height=%2218%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.60931 .69508 -.80772 -.71978 3273.08 755.075)%22%2F%3E%3Crect x=%221292%22 y=%22256%22 width=%227%22 height=%2217%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(-.99347 .01755 -.06918 -1.00536 2579.836 643.845)%22%2F%3E%3Crect x=%22130%22 y=%22148%22 width=%229%22 height=%2211%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.6393 .88416 -.7911 .47012 192.511 -30.533)%22%2F%3E%3Crect x=%22609%22 y=%22694%22 width=%229%22 height=%2214%22 fill=%22%23ceeaf3%22 rx=%220%22 transform=%22matrix(.50218 1.03465 -.98405 -.03613 1227.11 255.96)%22%2F%3E%3Crect x=%2225%22 y=%22962%22 width=%227%22 height=%227%22 fill=%22%23EAF6F6%22 rx=%220%22 transform=%22matrix(.0476 1.03552 -.9724 -.14553 863.594 1085.212)%22%2F%3E%3Crect x=%22284%22 y=%22816%22 width=%226%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(-.94274 .27669 -.32642 -.96493 936.947 1506.726)%22%2F%3E%3Crect x=%22639%22 y=%22456%22 width=%226%22 height=%226%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.97715 .08749 -.26114 1 99.286 -112.335)%22%2F%3E%3Crect x=%221081%22 y=%22149%22 width=%228%22 height=%2216%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.74701 .57498 -.67236 .82115 375.8 -671.642)%22%2F%3E%3Crect x=%221148%22 y=%22583%22 width=%229%22 height=%2225%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.3384 1.02497 -1.0112 -.10773 1536.27 -234.273)%22%2F%3E%3Crect x=%22595%22 y=%2234%22 width=%226%22 height=%2212%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(.36016 .96607 -.93861 .25886 424.583 -537.628)%22%2F%3E%3Crect x=%22793%22 y=%22377%22 width=%229%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.95418 .08945 -.27331 -1.0224 1643.691 890.395)%22%2F%3E%3Crect x=%22549%22 y=%22971%22 width=%227%22 height=%228%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-1 .01746 .00002 -1 1070.595 1950)%22%2F%3E%3Crect x=%22286%22 y=%22907%22 width=%226%22 height=%228%22 fill=%22%2366bfbf%22 rx=%220%22 transform=%22matrix(.58136 .79393 -.80535 .62028 704.752 151.96)%22%2F%3E%3Crect x=%22697%22 y=%22374%22 width=%228%22 height=%2215%22 fill=%22%23FCFEFE%22 rx=%220%22 transform=%22matrix(-.98362 .01762 -.38954 -1.00967 1649.946 852.855)%22%2F%3E%3C%2Fsvg%3E");
-  opacity: 0.9;
-}
-
-  
-    .container-reading {
-
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin-left: 50px;
-      padding-left: 20px;
-     
-
-    }
-  
-  
-    .profile-area {
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-left: 3px solid #ccc;
-      border-right:3px solid #ccc; ;
-      width: 13%;
-      padding-right: 1px;
-
-      background: linear-gradient(180deg, #6ed5cc, #479aaf, rgba(59,85,109,1))
-
-    }
-    .avatar {
-    border-radius: 50%;
-    height: 64px;
-    object-fit: cover;
-    object-position: center;
-    width: 64px;
-}
-    .profile-area img {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-   
-    }
-  
-  .profile-username {
-    font-size: x-large;
-    font-weight: bolder;
-    }
-
-    .card {
-      display: flex;
-      align-items: center;
-      margin: 2rem 0;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      max-width: 600px;
-      background: radial-gradient(circle at 50% 50%,rgba(251, 255, 255, 1), rgba(234, 251, 255, 1));
-    }
-    button{
-      display: flex;
-      justify-content:left;
-     
-
-    }
-    .card img {
-      margin-right: 1rem;
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-    }
-  
-    .card .container {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .card h4 {
-      margin: 0;
-    }
-  
-    .card .auteur {
-      margin-right: 0.5rem;
-    }
-  
-    .card p {
-      margin: 0.5rem 0;
-    }
-  
-    .card .description {
-      margin-top: 0.5rem;
-    }
-  
-    .auteur {
-      font-weight: bold;
-      margin-right: 5px;
-      display: inline-block;
-    }
-    a{
-      font-size: larger;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    a:hover{
-      color:rgb(5, 109, 81);
-    }
-   /*Animation pour h1*/
-
-    .animate-charcter{
-    font-family: "Raleway", sans serif;
-    margin-top:25px;
-    text-transform: uppercase;
-    background-image: linear-gradient(
-      -225deg,
-      #0B162C 0%,
-      #1C2942 29%,
-      #3B556D 67%,
-      #5FC2BA 100%
-    );
-    background-size: auto auto;
-    background-clip: border-box;
-    background-size: 200% auto;
-    color: #fff;
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textclip 2s linear infinite;
-    display: inline-block;
-    font-size: 60px;
-}
-
-@keyframes textclip {
-  to {
-    background-position: 100% center;
+<style>
+  main {
+    display: flex;
+    justify-content: center;
   }
+
+  .container-reading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-left: 50px;
+    padding-left: 20px;
+  }
+
+  .profile-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    width: 13%;
+    padding-right: 1px;
+
+    background: linear-gradient(180deg, #6ed5cc, #479aaf, rgba(59, 85, 109, 1));
+  }
+
+  .profile-area img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
 }
   
    .profile-area {
@@ -285,99 +203,138 @@
     }
 
 
-    /* Styles pour les écrans de petite taille (jusqu'à 768px de largeur) */
-@media only screen and (max-width: 768px) {
-  /* Ajouter des styles pour l'en-tête */
-  header {
+  .card {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 600px;
+  }
+  button {
+    display: flex;
+    justify-content: left;
+  }
+  .card img {
+    margin-right: 1rem;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+  }
+
+  .card h4 {
+    margin: 0;
+  }
+
+  .card .auteur {
+    margin-right: 0.5rem;
+  }
+
+  .card p {
+    margin: 0.5rem 0;
+  }
+
+  .card .description {
+    margin-top: 0.5rem;
+  }
+
+  .auteur {
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  #title1 {
     text-align: center;
-    padding: 20px;
   }
 
-  /* Modifier les styles pour le logo */
-  header .logo {
-    font-size: 2rem;
-    margin-bottom: 10px;
+  .divider {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    position: absolute;
+    left: 18%;
+    top: 0;
   }
 
-  /* Modifier les styles pour la navigation */
-  header nav {
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 20px;
+  .profile-area {
+    position: relative;
   }
 
-  /* Modifier les styles pour les liens de navigation */
-  header nav a {
-    padding: 5px;
-    margin: 5px;
-  }
+  /* Styles pour les écrans de petite taille (jusqu'à 768px de largeur) */
+  @media only screen and (max-width: 768px) {
+    /* Ajouter des styles pour l'en-tête */
 
-  /* Ajouter des styles pour le contenu principal */
-  main {
-    padding: 20px;
-  }
-
-  /* Modifier les styles pour les articles */
-  article {
-    margin-bottom: 20px;
-    padding: 20px;
-  }
-}
-
-/* Styles pour les écrans de grande taille (à partir de 769px de largeur) */
-@media only screen and (min-width: 769px) {
-  /* Ajouter des styles pour l'en-tête */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    padding: 20px;
-  }
-
-  /* Modifier les styles pour le logo */
-  header .logo {
-    font-size: 3rem;
-  }
-
-  /* Modifier les styles pour la navigation */
-  header nav {
-    display: flex;
-    align-items: center;
-  }
-
-  /* Modifier les styles pour les liens de navigation */
-  header nav a {
-    padding: 10px;
-    margin: 10px;
-  }
-
-  /* Ajouter des styles pour le contenu principal */
-  main {
-    padding: 40px;
-  }
-
-  /* Modifier les styles pour les articles */
-  article {
-    margin-bottom: 40px;
-    padding: 40px;
-  }
-}
-
-
-    .container-title {
-      font-size: large;
-      font-style: italic;
-      font-weight:900;
-      letter-spacing: 1px;
-      line-height: 20px;
-      padding-top: 25px;
-      padding-bottom: 25px;
-      border-bottom: 2px solid rgb(167, 159, 159);
+    .profile-area {
+      margin-top: -1.3rem;
+      margin-bottom: -1.3rem;
+      margin-right: -8rem;
+      height: 125vh;
+      width: 30%;
     }
 
-  </style>
-  
+    .card img {
+      width: 25%;
+      height: 20%;
+    }
+
+    #title1 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .container {
+      width: 20%;
+      margin-left: 1rem;
+      padding: 0;
+    }
+
+    .container p {
+      font-size: 1rem;
+      margin-left: -1.8rem;
+    }
+
+    .container span {
+      font-size: 1rem;
+      margin-left: -1.8rem;
+    }
+
+    .container h4 {
+      font-size: 1rem;
+      margin-left: 0rem;
+    }
+
+    .title_modify {
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding-bottom: 1rem;
+      margin-left: 2rem;
+    }
+
+    textarea {
+      width: 8rem;
+    }
+
+    #title {
+      width: 8rem;
+    }
+
+    #category {
+      width: 8rem;
+    }
+
+    button {
+      width: 8rem;
+    }
+
+    /* Ajouter des styles pour le contenu principal */
+    main {
+      padding: 20px;
+    }
+  }
+</style>

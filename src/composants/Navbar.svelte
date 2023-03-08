@@ -1,11 +1,18 @@
-    <script>
+<script>
         import logo from '../assets/logo-thestoryteller.png'
-        import {link} from 'svelte-spa-router'
-        import {getAPI,getToken,removeToken} from '../utils/api';
-     
+        import {
+            link
+        } from 'svelte-spa-router'
+        import {
+            getAPI,
+            getToken,
+            removeToken
+        } from '../utils/api';
+        import {
+            push
+        } from 'svelte-spa-router';
         let token = getToken()
         let user = null;
-     
         //récuperer les données de l'utilisateur
         function getUserInfos(){
             if (!token) {
@@ -15,19 +22,15 @@
                     .then(function(response){
                         // console.log(response);
                         user = response.data.data;
-
                         })
                     .catch(function(err){
                         removeToken();
                         location.href = '/#/connexion';
-                        //a chaque fois que directus envoie un message d'erreur on supprime le token et 
+                        //a chaque fois que directus envoie un message d'erreur on supprime le token et
                         //cela redirige vers la page de connexion
                     })
-
         }
         getUserInfos();
-
-
         function signoutHandle() {
             console.log('plouf')
             //script de déconnexion
@@ -35,18 +38,13 @@
             //push ("/")
             location.href = '/'
         }
-
         function search_something() {
-
         }
-
         let showDropdown = false;
-
         function toggleDropdown() {
             showDropdown = !showDropdown;
         }
     </script>
-
 <header class="header">
     {#if user}
     <nav class="nav-bar" aria-label="header navigation">
@@ -94,13 +92,10 @@
 {/if}
 </header>
 <style>
-  
     img {
     width: 6em;
     margin:15px;
     }
-
-
     a {
     text-decoration: none;
     color: azure;
@@ -109,12 +104,21 @@
     margin-right: 50px;
     font-family: "Raleway", sans serif;
     }
-
     a:hover{
     color:#5FC2BA;
     transition: .3seconds;
     }
-
+    /* .div-nav-search{
+    height: 3em;
+    } */
+    /* #searchbar {
+    width: auto;
+    height: 20px;
+    border-radius:25px;
+    } */
+    i {
+    color:white;
+    }
     .logout{
     padding: .5em 1em;
     cursor: pointer;
@@ -122,7 +126,6 @@
     background-color:#0B162C ;
     color: white;
     }
-
     .nav-bar1{
     width: 100%;
     display: flex;
@@ -130,17 +133,14 @@
     justify-content: space-between;
     text-decoration: none;
     }
-
     .div-nav-connexion {
     color: beige;
     }
-
     .dropdown {
     position: relative;
     display: inline-block;
     margin-right: 13%;
     }
-
     .dropdown-child {
     display: none;
     position: absolute;
@@ -148,17 +148,14 @@
     border-radius: 15px;
     line-height:1.5em;
     }
-
     .dropdown-child ul {
     list-style: none;
     padding: 0;
     margin: 0;
     }
-
     .dropdown-child ul li {
     display: block;
     }
-
     .dropdown-child ul li a {
     display: block;
     padding: 5px 10px;
@@ -204,63 +201,48 @@
     color: red;
     transition: .3seconds;
     }
-
- </style>
     @media only screen and (max-width: 425px) {
   .header {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   img {
     width: 3em;
     margin:10px;
     }
-
   .nav-bar {
     width: 100%;
     flex-direction: column;
     align-items: center;
     margin-bottom: 1em;
   }
-
   .header__search {
     width: 100%,
   }
-
   .dropdown {
     margin-right: 0;
   }
-
   .mainmenubtn {
     width: 100%;
     margin-bottom: 0.5em;
   }
-
   .dropdown-child ul li {
     margin-bottom: 0.5em;
   }
-
   .div-nav-logo img {
     margin: 0;
   }
-
   .div-nav-search {
     margin-right: 0;
     margin-bottom: 1em;
   }
-
   .div-nav-connexion {
     margin-right: 100rem;
     font-size: 20%;
   }
-
   #searchbar {
     width: 5rem;
   }
 }
-
-
 </style>
-
