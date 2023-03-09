@@ -334,82 +334,76 @@
       /* Styles pour les écrans de petite taille (jusqu'à 768px de largeur) */
   @media only screen and (max-width: 768px) {
     /* Ajouter des styles pour l'en-tête */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    .animate-charcter {
+      font-size: 1.5rem;
+    }
+
+    .profile-area {
+      margin-top: 0rem;
+      margin-bottom: -1.3rem;
+      margin-right: -8rem;
+      height: 72vh;
+      width: 30%;
+    }
+
+    .card img {
+      width: 25%;
+      height: 20%;
+    }
+
+    #title1 {
+      font-size: 1.5rem;
       text-align: center;
-      padding: 20px;
     }
-  
-    /* Modifier les styles pour le logo */
-    header .logo {
-      font-size: 2rem;
-      margin-bottom: 10px;
+
+    .container {
+      width: 20%;
+      margin-left: 1rem;
+      padding: 0;
     }
-  
-    /* Modifier les styles pour la navigation */
-    header nav {
-      flex-direction: column;
-      text-align: center;
-      margin-bottom: 20px;
+
+    .container p {
+      font-size: 1rem;
+      margin-left: -1.8rem;
     }
-  
-    /* Modifier les styles pour les liens de navigation */
-    header nav a {
-      padding: 5px;
-      margin: 5px;
+
+    .container span {
+      font-size: 1rem;
+      margin-left: -1.8rem;
     }
-  
+
+    .container h4 {
+      font-size: 1rem;
+      margin-left: 0rem;
+    }
+
+    .title_modify {
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding-bottom: 1rem;
+      margin-left: 2rem;
+    }
+
+    textarea {
+      width: 8rem;
+    }
+
+    #title {
+      width: 8rem;
+    }
+
+    #category {
+      width: 8rem;
+    }
+
+    button {
+      width: 8rem;
+    }
+
     /* Ajouter des styles pour le contenu principal */
     main {
       padding: 20px;
-    }
-  
-    /* Modifier les styles pour les articles */
-    article {
-      margin-bottom: 20px;
-      padding: 20px;
-    }
-  }
-  
-  /* Styles pour les écrans de grande taille (à partir de 769px de largeur) */
-  @media only screen and (min-width: 769px) {
-    /* Ajouter des styles pour l'en-tête */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      padding: 20px;
-    }
-  
-    /* Modifier les styles pour le logo */
-    header .logo {
-      font-size: 3rem;
-    }
-  
-    /* Modifier les styles pour la navigation */
-    header nav {
-      display: flex;
-      align-items: center;
-    }
-  
-    /* Modifier les styles pour les liens de navigation */
-    header nav a {
-      padding: 10px;
-      margin: 10px;
-    }
-  
-    /* Ajouter des styles pour le contenu principal */
-    main {
-      padding: 40px;
-    }
-  
-    /* Modifier les styles pour les articles */
-    article {
-      margin-bottom: 40px;
-      padding: 40px;
     }
   }
   
