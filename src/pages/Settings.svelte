@@ -158,6 +158,11 @@
 
 <style>
   body {
+    /*background-image: url(../assets/openedbook.jpeg);
+    background-size: cover;
+    opacity: 0.9;
+    margin-top: 0;*/
+
     font-family: "Courier New", Courier, monospace;
     background-color: #e5e5f7;
     opacity: 0.9;
