@@ -35,6 +35,7 @@ export const getAPI = function(){
 
     return axios.create({
         baseURL: 'https://w5sbygse.directus.app/',
+        //baseURL: 'http://woocrush.fr:8055/',
         headers
     })
 }
