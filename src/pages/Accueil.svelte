@@ -265,11 +265,11 @@
   }
   /* Augmenter la taille de la police des titres */
   h1, h2, h3 {
-    font-size: 1px;
+  
   }
   /* Réduire la taille de la police du texte */
   p {
-    font-size: 15px;
+    font-size: 20px;
   }
   /* Réduire la largeur de la carte */
   .card {
