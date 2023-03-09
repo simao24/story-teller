@@ -102,8 +102,77 @@
       });
   }
 </script>
+<!--New settings page-->
+<main class="settings">
+  <form>
+    <h1><i class="fa fa-cogs"></i> Settings</h1>
+    <div class="settings-options">
+      <label for="profile"><i class="fa fa-user"></i> Mon profil</label>
+      <label for="preferences"><i class="fa fa-cog"></i> Préférences</label>
+      <label for="account"><i class="fa fa-wrench"></i> Mon compte</label>
+    </div>
 
-<body>
+    <input type="radio" class="helper-input" name="settings-page" id="profile" checked="checked">
+    <div class="panel profile">
+      <h2><i class="fa fa-user"></i> Mon profil</h2>
+
+      <input type="text" value={newFirstName} on:input={handleFirstNameChange}/>
+      <label for="name" class="text-label">Pseudo</label>
+
+      <hr>
+
+      <input type="text" id="location"  placeholder="Ville" value="">
+      <label for="location" class="text-label">Ville</label>
+
+      <hr>
+
+
+      <hr>
+
+      <label for="bio">Bio</label>
+      <textarea name="bio" id="bio" placeholder="A propos de moi"></textarea>
+    </div>
+
+    <input type="radio" class="helper-input" name="settings-page" id="preferences">
+    <div class="panel preferences">
+      <h2><i class="fa fa-cog"></i> Preferences</h2>
+      <label>Email Alerts</label>
+      <p>Vous avez plusieurs options</p>
+
+      <input type="checkbox" class="helper-input" name="email-input" id="email-input">
+      <label for="email-input" class="select-toggle"><span class="screen-reader-text">Montrer Email Options</span></label>
+      <div class="select">
+        <input type="checkbox" name="email" id="daily"> <label for="daily">Journalière</label>
+        <input type="checkbox" name="email" id="weekly" checked="checked"> <label for="weekly">Hebdomadaire</label>
+        <input type="checkbox" name="email" id="monthly"> <label for="monthly">Mensuel</label>
+        <input type="checkbox" name="email" id="yearly"> <label for="yearly">Annuel</label>
+      </div>
+    </div>
+
+    <input type="radio" class="helper-input" name="settings-page" id="account">
+    <div class="panel account">
+      <h2><i class="fa fa-wrench"></i> Account</h2>
+      <button type="submit" class="material-button" id="supprimer" on:click={deleteUser}><i class="fa fa-cloud"></i>Supprimer mon compte</button>
+    </div>
+    <button type="submit" class="material-button" id="valider" on:click={handleEditClick}>
+      <i class="fa fa-cloud"></i>
+      Valider
+    </button>
+    {#if showMessage}
+    <div class="message">{message}</div>
+  {/if}
+    
+  </form>
+</main>
+
+<!--Fin nex settings page-->
+
+
+
+<!--<body>
+
+  <img alt="Andrew Jones" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-responsive mt-2" width="128" height="128">
+
   <div class="main-container">
     <h1>Gestion de compte</h1>
 
@@ -113,21 +182,12 @@
       <div class="edit-elements">
         <p>Photo de profil</p>
         <p>
-          <input
-            type="text"
-            id="avatar"
-            value={newAvatar}
-            on:input={handleAvatarChange}
-          />
+          <input type="text" id="avatar" value={newAvatar} on:input={handleAvatarChange}/>
         </p>
         <p>Pseudo:</p>
 
         <p>
-          <input
-            type="text"
-            value={newFirstName}
-            on:input={handleFirstNameChange}
-          />
+          <input type="text" value={newFirstName} on:input={handleFirstNameChange}/>
         </p>
         <p>Email:</p>
         <p>
@@ -135,11 +195,7 @@
         </p>
         <p>Mot de passe:</p>
         <p>
-          <input
-            type="password"
-            value={newPassword}
-            on:input={handlePasswordChange}
-          />
+          <input type="password" value={newPassword} on:input={handlePasswordChange}/>
         </p>
       </div>
       <div class="delete-user-container">
@@ -155,180 +211,327 @@
     </div>
   </div>
 </body>
-
+-->
 <style>
-  body {
-    /*background-image: url(../assets/openedbook.jpeg);
-    background-size: cover;
-    opacity: 0.9;
-    margin-top: 0;*/
 
-    font-family: "Courier New", Courier, monospace;
-    background-color: #e5e5f7;
-    opacity: 0.9;
-    background-image: radial-gradient(#5fc2ba 0.75px, #e5e5f7 0.75px);
-    background-size: 15px 15px;
-    min-height: 100vh;
-    margin-top: 0;
-    padding-top: 30px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 30px;
-    margin-top: 20px;
-    padding: 25px;
-    width: auto;
-  }
+  /*new settings style*/
 
-  h2 {
-    text-align: center;
-    font-size: 25px;
-    margin-top: 0px;
-    width: auto;
-  }
 
-  .edit-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 15px;
-    width: 50%;
-    height: auto;
-    padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
 
-  .edit-elements {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 10px;
-    margin: 10px;
-    width: 100%;
-  }
-
-  .edit-elements p {
-    text-align: left;
-  }
-
-  .edit-elements input {
-    /* text-align: right; */
-    width: 50%;
-    height: 50%;
-    border-radius: 10px;
-    margin-left: 40%;
-  }
-
-  .delete-user-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    width: 50%;
-  }
-  button {
-    background-color: #1c2942;
-    color: #5fc2ba;
-    font-size: large;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px 15px;
-  }
-
-  button:hover {
-    background-color: #5fc2ba;
-    color: #1c2942;
-  }
-  /*.edit-button {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }*/
-  .message {
-    position: absolute;
-
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    background-color: #1c2942;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  @media screen and (max-width: 767px) {
-    body {
-      width: 100%;
-      align-items: center;
-      background-image: radial-gradient(#5fc2ba 0.75px, #e5e5f7 0.75px);
-      background-size: 15px 15px;
-    }
-
-    /* h1 {
+  main {
+  padding: 0.5rem;
+  margin: 1.5rem auto;
+  width: 400px;
+  background: #fefefe;
+  border-radius: 3px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+main h1:first-child {
+  margin: -1rem -1rem 1rem;
+  background: #333333;
+  color: #fefefe;
+  padding: 1rem;
+}
+.settings-options {
+  padding: 0.25rem;
+  margin: -1rem -1rem 1rem;
+  background: rgba(51, 51, 51, 0.075);
+  border-bottom: 1px solid rgba(51, 51, 51, 0.15);
+  box-shadow: inset 0 0 3px 3px rgba(0, 0, 0, 0.05);
   text-align: center;
-  } */
-    .edit-container {
-      font-size: 1.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      /* height: 100vh; */
-      width: 50%;
-      margin-left: 20%;
-      margin-bottom: 1rem;
-    }
+}
+.settings-options label {
+  margin-right: 2rem;
+  cursor: pointer;
+  opacity: 0.75;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-bottom: 5px solid transparent;
+  padding-bottom: 1px;
+}
+.settings-options label:hover, .settings-options label:active, .settings-options label:focus {
+  opacity: 1;
+  border-color: #333333;
+}
+main {
+  width: 70%;
+  padding:2em 2em;
+  overflow: hidden;
+}
+.settings .panel > label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.settings .panel {
+  position: relative;
+}
+.settings .panel .text-label, .settings .panel > label {
+  display: block;
+  margin-top: -1rem;
+  padding-bottom: 1rem;
+  position: relative;
+  z-index: 5;
+  transition: all 0.15s ease-in-out;
+}
+.settings .panel > label {
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+.settings .panel > label + p {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+}
+.settings .panel input[type=text], .settings .panel input[type=number], .settings .panel input[type=password], .settings .panel input[type=email] {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  background: #fefefe;
+}
+.settings .panel input[type=text]:focus + .text-label, .settings .panel input[type=number]:focus + .text-label, .settings .panel input[type=password]:focus + .text-label, .settings .panel input[type=email]:focus + .text-label {
+  margin-top: -2.5rem;
+  padding-bottom: 2.5rem;
+}
+.settings .panel textarea {
+  width: 100%;
+  min-height: 250px;
+  border-radius: 5px;
+  border: 1px solid rgba(51, 51, 51, 0.15);
+  padding: 0.5rem;
+}
+.settings hr {
+  clear: both;
+  margin: 0.5rem;
+  visibility: hidden;
+}
+.select-toggle {
+  z-index: 20;
+  position: absolute !important;
+  z-index: 20 !important;
+  right: 0;
+  left: 0;
+  text-align: right;
+  transition: none !important;
+  cursor: pointer;
+}
+.select-toggle:after {
+  display: block;
+  position: relative;
+  z-index: 25;
+  padding: 0.25rem 0.75rem;
+  margin: 0.35rem 0.35rem;
+  font-family: FontAwesome;
+  font-size: 1rem;
+  font-family: "FontAwesome";
+  content: "\f0d7";
+  font-size: 1rem;
+}
+.helper-input:checked + .select-toggle {
+  left: initial;
+  transform: rotate(90deg);
+}
+.select {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background: rgba(51, 51, 51, 0.075);
+  border: 1px solid rgba(51, 51, 51, 0.15);
+  padding: 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: height 0.25s ease-in-out;
+  max-height: 2.25rem;
+  overflow: hidden;
+  font-size: 0;
+}
+.select input {
+  display: none;
+}
+.select input + label {
+  font-size: 1rem;
+  max-height: 0;
+  max-width: 0;
+  opacity: 0;
+  cursor: pointer;
+  display: inline-block;
+  transition: max-height 0.35s ease-in-out;
+}
+.select input + label:hover {
+  background: rgba(51, 51, 51, 0.1);
+}
+.select input + label:before {
+  font-family: "FontAwesome";
+  margin-right: 0.5rem;
+}
+.select input[type=radio] + label:before {
+  content: "\f10c";
+}
+.select input[type=checkbox] + label:before {
+  content: "\f096";
+}
+.select input[type=radio]:checked + label, .select input[type=checkbox]:checked + label {
+  opacity: 1;
+  max-height: 99rem;
+  max-width: initial;
+  font-weight: 800;
+  margin-right: 0.5rem;
+}
+.select input[type=radio]:checked + label:before, .select input[type=checkbox]:checked + label:before {
+  content: "\f05d";
+}
+.select input[type=checkbox]:checked + label {
+  font-weight: 400;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 0.1rem 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.select input[type=checkbox]:checked + label:before {
+  content: "";
+  margin: 0;
+}
+.helper-input:checked + label + .select {
+  max-height: 99rem;
+}
+.helper-input:checked + label + .select input + label {
+  font-size: 1rem;
+  opacity: 1;
+  max-width: 999rem;
+  margin: 0 -0.5rem;
+  padding: 0.5rem;
+  max-height: 99rem;
+  width: 200%;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+.helper-input:checked + label + .select input + label:before {
+  margin-right: 0.5rem;
+}
+.helper-input:checked + label + .select input:first-child + label {
+  border: 0;
+  margin-top: -0.5rem;
+}
+.helper-input:checked + label + .select label:last-child {
+  margin-bottom: -0.5rem;
+}
+.helper-input:checked + label + .select input[type=checkbox]:checked + label:before {
+  content: "\f046";
+}
+.helper-input:checked + label + .select label ~ label {
+  border-top: 1px solid rgba(51, 51, 51, 0.15);
+}
+.helper-input {
+  display: none;
+}
+.helper-input + .panel {
+  height: auto;
+  max-height: 0px;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+.helper-input:checked + .panel {
+  display: block;
+  opacity: 1;
+  max-height: 999px;
+}
+.screen-reader-text {
+  display: none;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+main p:first-child {
+  margin-top: 0;
+}
+main p:last-child {
+  margin-bottom: 0;
+}
+body {
+  color: #333333;
+  background: linear-gradient(25deg, #00c6ff, #0072ff);
+}
+input {
+  transition: border-color 0.15s ease-in-out;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.15);
+  padding: 0.15rem;
+  color: rgba(51, 51, 51, 0.95);
+}
+input:hover {
+  color: #333;
+  border-color: rgba(51, 51, 51, 0.75);
+}
+input:focus {
+  outline: none;
+  border-bottom: 3px solid #333333;
+  margin-bottom: -2px;
+}
+.material-button, .material-delete {
+  
+  transition: all 0.15s ease-in-out;
+  background: #5FC2BA;
+  border: none;
+  font-size: 0.9rem;
+  line-height: 2rem;
+  border-radius: 3px;
+  color: #1C2942;
+  box-shadow: 1px 1px 3px 0 rgba(51, 51, 51, 0.15);
+  text-transform: uppercase;
+}
+.material-button:hover, .material-delete:hover {
+  background: #1C2942;
+  color:#5FC2BA;
+  transition: 0.3s;
+  font-weight: bold;
+  box-shadow: 1px 3px 3px 0 rgba(51, 51, 51, 0.15);
+}
+.material-button:active, .material-delete:active {
+  top: -0.7rem;
+  outline: 0;
+  box-shadow: none;
+}
+.material-delete {
+  font-size: 1rem;
+  line-height: 1rem;
+  height: 2rem;
+  width: 2rem;
+  top: 0;
+  right: -1.5rem;
+  transform: rotate(45deg);
+  background: none;
+  color: rgba(51, 51, 51, 0.15);
+  box-shadow: none;
+}
+.material-delete:hover {
+  background: rgba(51, 51, 51, 0.075);
+  color: #fefefe;
+  box-shadow: none;
+}
+.material-delete:active {
+  color: red;
+  background: transparent;
+  top: 0;
+}
+.material-modal-button {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: #b40030;
+}
+.material-modal-button:hover {
+  color: #E7003E;
+}
 
-    /* .edit-container {
-    width: 80%;
-    padding: 1rem;
-    border-radius: 0;
-    border: none;
-    width: 100%;
-    display: inline-flex;
-  } */
-
-    .edit-elements p {
-      width: 100%;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .edit-elements input {
-      font-size: 1rem;
-      padding: 0.5rem;
-      margin-left: -25%;
-      width: 100%;
-      height: 5%;
-    }
-
-    /* .edit-elements p {
-    font-size: 1rem;
-    padding: 0.5rem;
-  } */
-
-    .delete-user-container {
-      width: 100%;
-      padding: 1rem;
-    }
-
-    #valider {
-      font-size: 1rem;
-      padding: 0.5rem;
-    }
-
-    .delete-user-button button {
-      font-size: 1rem;
-      padding: 0.5rem;
-    }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    body {
-      width: 50%;
-      align-items: center;
-    }
-  }
+ 
 </style>
