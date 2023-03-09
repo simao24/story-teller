@@ -2,6 +2,7 @@
 
   import { link } from "svelte-spa-router";
   import { getAPI, getToken } from "../utils/api";
+  import Swal from "sweetalert2";
   // Configuration de la requête
   let userInfos = {};
   let newFirstName = "";
@@ -11,6 +12,7 @@
   let message = "";
   let showMessage = null;
 
+
   // Récupération des informations de l'utilisateur actuel
   getAPI()
     .get("/users/me")
@@ -19,13 +21,11 @@
       console.log(userInfos);
       newFirstName = userInfos.first_name;
       newEmail = userInfos.email;
-
       //  newAvatar = "";
     })
     .catch(function (error) {
       console.log(error);
     });
-
   function handleFirstNameChange(event) {
     newFirstName = event.target.value;
   }
@@ -40,7 +40,6 @@
   }
   function handleEditClick() {
     let data = {};
-
     if (newFirstName != "") {
       data.first_name = newFirstName;
     }
@@ -53,56 +52,83 @@
     if (newAvatar != "") {
       data.avatar = newAvatar;
     }
-
     getAPI()
       .patch("/users/me", data)
+      //Ajout modale pour confirmer la modification
+      Swal.fire({
+        icon:'success',
+        title:'Votre modification a été enregistrée avec succès!',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
       .then(function (response) {
         showMessage = true;
+        /*showMessage = true;
         message = "Modification enregistrée avec succès";
         setTimeout(() => {
           showMessage = false;
         }, 2000);
+        }, 2000); */
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
-
+                    }
   function handleDeleteUserClick() {
-    const confirmDelete = confirm(
-      "Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible."
-    );
-    if (confirmDelete) {
-      deleteUser();
-    }
+  const confirmDelete = confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
+  if (confirmDelete) {
+    
+    deleteUser();
   }
-  const parseJwt = (token) => {
-    try {
-      return JSON.parse(atob(token.split(".")[1]));
-    } catch (e) {
-      return null;
-    }
-  };
-
-  function deleteUser() {
-    const token = parseJwt(getToken());
-    console.log(token);
-    getAPI()
-      .delete("/users/" + token.id)
-
-      .then((data) => {
-        console.log("Utilisateur supprimé : ", data);
-        // Déconnecter l'utilisateur
-        localStorage.removeItem("token");
-        // Rediriger vers la page de connexion
-        window.location.href = "/#/connexion";
-      })
-      .catch((error) => {
-        console.log("Erreur : ", error);
-      });
+}
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
   }
+};
+function deleteUser() {
+  
+  const token = parseJwt(getToken())
+  console.log(token);
+  //Demander à l'utilisateur de confirmer s'il veut supprimer son histoire
+  if (confirm(`Êtes-vous sûr de vouloir supprimer votre compte?"${newFirstName}?"`)){
+        // Envoyer une requete DELETE à l'API pour supprimer l'histoire de la BDD
+  getAPI().delete("/users/"+ token.id)
+  //ajout d'une modale pour confirmer la suppression de compte
+  Swal.fire({
+        icon:'warning',
+        title:'Votre compte vient d\'être supprimée',
+        showConfirmButton:false,
+        timer:1700
+        
+      }) 
+  
+  .then(data => {
+   
+    console.log('Utilisateur supprimé : ', data);
+    // Déconnecter l'utilisateur
+    localStorage.removeItem("token");
+    
+    // Rediriger vers la page de connexion
+    window.location.href = "/#/connexion";
+    location.reload();
+  })
+  .catch(error => {
+    console.log('Erreur : ', error);
+  });
+}
+}
+  
 </script>
+
 <!--New settings page-->
+<body>
+  
+
 <main class="settings">
   <form>
     <h1><i class="fa fa-cogs"></i> Settings</h1>
@@ -121,11 +147,12 @@
 
       <hr>
 
-      <input type="text" id="location"  placeholder="Ville" value="">
-      <label for="location" class="text-label">Ville</label>
+      <input type="text" id="location"  placeholder="Email" value={newEmail} on:input={handleEmailChange} />
+      <label for="location" class="text-label">Email</label>
 
       <hr>
-
+      <input type="password" id="location" value={newPassword} on:input={handlePasswordChange}/>   
+      <label for="password" class="text-label">Mot de passe</label>
 
       <hr>
 
@@ -135,7 +162,7 @@
 
     <input type="radio" class="helper-input" name="settings-page" id="preferences">
     <div class="panel preferences">
-      <h2><i class="fa fa-cog"></i> Preferences</h2>
+      <h2><i class="fa fa-cog"></i> Préférences</h2>
       <label>Email Alerts</label>
       <p>Vous avez plusieurs options</p>
 
@@ -151,8 +178,8 @@
 
     <input type="radio" class="helper-input" name="settings-page" id="account">
     <div class="panel account">
-      <h2><i class="fa fa-wrench"></i> Account</h2>
-      <button type="submit" class="material-button" id="supprimer" on:click={deleteUser}><i class="fa fa-cloud"></i>Supprimer mon compte</button>
+      <h2><i class="fa fa-wrench"></i> Mon compte</h2>
+      <button type="submit" class="material-delete" id="supprimer" on:click={deleteUser}><i class="fa fa-cloud"></i>Supprimer mon compte</button>
     </div>
     <button type="submit" class="material-button" id="valider" on:click={handleEditClick}>
       <i class="fa fa-cloud"></i>
@@ -164,7 +191,7 @@
     
   </form>
 </main>
-
+</body>
 <!--Fin nex settings page-->
 
 
@@ -231,7 +258,14 @@ main h1:first-child {
   background: #333333;
   color: #fefefe;
   padding: 1rem;
+  font-size: 2em;
 }
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-bottom: 0.8em;
+}
+
 .settings-options {
   padding: 0.25rem;
   margin: -1rem -1rem 1rem;
@@ -239,13 +273,14 @@ main h1:first-child {
   border-bottom: 1px solid rgba(51, 51, 51, 0.15);
   box-shadow: inset 0 0 3px 3px rgba(0, 0, 0, 0.05);
   text-align: center;
+  
 }
 .settings-options label {
   margin-right: 2rem;
   cursor: pointer;
   opacity: 0.75;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 1.5rem;
   font-weight: 800;
   border-bottom: 5px solid transparent;
   padding-bottom: 1px;
@@ -258,9 +293,12 @@ main {
   width: 70%;
   padding:2em 2em;
   overflow: hidden;
+  -webkit-box-shadow: 14px 9px 43px 23px rgba(59,85,109,0.19);
+-moz-box-shadow: 14px 9px 43px 23px rgba(59,85,109,0.19);
+box-shadow: 14px 9px 43px 23px rgba(59,85,109,0.19);
 }
 .settings .panel > label {
-  font-size: 0.75rem;
+  font-size: 1em;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -270,7 +308,7 @@ main {
 .settings .panel .text-label, .settings .panel > label {
   display: block;
   margin-top: -1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.4em;
   position: relative;
   z-index: 5;
   transition: all 0.15s ease-in-out;
@@ -278,13 +316,15 @@ main {
 .settings .panel > label {
   margin: 0 0 0.5rem;
   padding: 0;
+
 }
 .settings .panel > label + p {
   margin: 0 0 0.75rem;
-  font-size: 0.8rem;
+  font-size: 1.6em;
 }
 .settings .panel input[type=text], .settings .panel input[type=number], .settings .panel input[type=password], .settings .panel input[type=email] {
   width: 100%;
+  font-size: 1.2em;
   position: relative;
   z-index: 10;
   overflow: hidden;
@@ -383,7 +423,7 @@ main {
 }
 .select input[type=checkbox]:checked + label {
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   padding: 0.1rem 0.25rem;
@@ -392,12 +432,13 @@ main {
 .select input[type=checkbox]:checked + label:before {
   content: "";
   margin: 0;
+  
 }
 .helper-input:checked + label + .select {
   max-height: 99rem;
 }
 .helper-input:checked + label + .select input + label {
-  font-size: 1rem;
+  font-size: 1.6rem;
   opacity: 1;
   max-width: 999rem;
   margin: 0 -0.5rem;
@@ -456,8 +497,9 @@ main p:last-child {
   margin-bottom: 0;
 }
 body {
+  
   color: #333333;
-  background: linear-gradient(25deg, #00c6ff, #0072ff);
+  background: linear-gradient(65deg,#eefdfc, #b3f6f2, #37cdc5);
 }
 input {
   transition: border-color 0.15s ease-in-out;
@@ -482,9 +524,9 @@ input:focus {
   transition: all 0.15s ease-in-out;
   background: #5FC2BA;
   border: none;
-  font-size: 0.9rem;
+  font-size: 1.8rem;
   line-height: 2rem;
-  border-radius: 3px;
+  border-radius: 12px;
   color: #1C2942;
   box-shadow: 1px 1px 3px 0 rgba(51, 51, 51, 0.15);
   text-transform: uppercase;
@@ -501,37 +543,7 @@ input:focus {
   outline: 0;
   box-shadow: none;
 }
-.material-delete {
-  font-size: 1rem;
-  line-height: 1rem;
-  height: 2rem;
-  width: 2rem;
-  top: 0;
-  right: -1.5rem;
-  transform: rotate(45deg);
-  background: none;
-  color: rgba(51, 51, 51, 0.15);
-  box-shadow: none;
-}
-.material-delete:hover {
-  background: rgba(51, 51, 51, 0.075);
-  color: #fefefe;
-  box-shadow: none;
-}
-.material-delete:active {
-  color: red;
-  background: transparent;
-  top: 0;
-}
-.material-modal-button {
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  color: #b40030;
-}
-.material-modal-button:hover {
-  color: #E7003E;
-}
+
 
  
 </style>
