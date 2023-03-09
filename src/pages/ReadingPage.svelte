@@ -1,7 +1,14 @@
 <script>
   import { push } from "svelte-spa-router";
   import imghomepage from "../assets/img-homepage.jpg";
+  import cat_educatif from "../assets/category/Educative-pic.jpg";
+  import cat_thriller from "../assets/category/thriller2.jpg";
+  import cat_romantique from "../assets/category/romantique.jpg";
+  import cat_sciencefiction from "../assets/category/sciencefiction.jpg";
+  import cat_horror from "../assets/category/horror2.jpg";
+  import cat_aventure from "../assets/category/aventure.jpg";
   import { link } from "svelte-spa-router";
+    import { select_option } from "svelte/internal";
 
   let stories = [];
   let category ="";
@@ -15,28 +22,18 @@
 
   };
 
-
-
-  // function pour afficher une image par categorie
-
-  function getCategoryImage(category) {
-  switch(category) {
-    case '10':
-      return '../assets/pexels-nina-uhlikova-725255(1).jpg'; // Aventures
-    case '11':
-      return 'https://www.pexels.com/fr-fr/photo/personne-en-veste-en-cuir-noir-portant-des-lunettes-noires-7672279/'; // Sciences-fiction
-    case '12':
-      return 'https://www.pexels.com/fr-fr/photo/mode-homme-gens-femme-7319478/'; // Thriller
-    case '13':
-      return 'https://www.pexels.com/fr-fr/photo/homme-femme-coucher-lit-414032/'; // Romantique
-    case '14':
-      return 'https://www.pexels.com/fr-fr/photo/sorciere-tenant-des-portes-en-bois-5407936/'; // Horreur
-    case '15':
-      return 'https://www.pexels.com/fr-fr/photo/photo-de-livre-de-lecture-fille-3755707/'; // Educatif
-    default:
-      return 'https://picsum.photos/id/1011/800/450'; // Default image
+  const categoryImg = {
+    10: cat_aventure,
+    15: cat_educatif,
+    11: cat_sciencefiction,
+    12: cat_thriller,
+    13: cat_romantique,
+    14: cat_horror
   }
-}
+
+
+
+
 
   const get_stories = async () => {
    let url = "";
@@ -85,31 +82,51 @@
       alert("Cette histoire est déjà dans vos favoris !");
     }
   };
+
+
+
+
+
+  
 </script>
 
 
 
 <!--template cards-->
 <main aria-labelledby="title1">
+
   <div class="container-reading">
     <div class="container-reading-header">
     <h1 class="animate-charcter">HISTOIRES</h1>
     <!-- Menu déroulant-->
 
+   <!--<section id="header-container">
+  <select>
+    <option disabled>What's your favorite movie ?</option>
+    <option value="choix-2">Inception</option>
+    <option value="choix-3">Godzilla</option>
+    <option value="choix-4">Back to the future</option>
+    <option value="choix-5">Shutter Island</option>
+  </select>
+</section>--> 
+
+
+
     <nav class="nav-categories">
       <ul>
-        <li class="menu-deroulant-categories">
+        <!--<li class="menu-deroulant-categories">-->
           <h2>Catégories</h2>
-          <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
+      <div class="header-container">
+        <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
+          <option disabled>Catégories</option>
            <option class="select-menu-option" value="10">Aventures</option> 
            <option class="select-menu-option" value="15">Educatif</option> 
            <option class="select-menu-option" value="11">Science-fiction</option>
            <option class="select-menu-option" value="12">Thriller</option>  
            <option class="select-menu-option" value="13">Romantique</option> 
            <option class="select-menu-option" value="14">Horreur</option> 
-          </select>
-
-        </li>
+        </select>
+        </div>
       </ul>
     </nav>
   </div>
@@ -123,7 +140,7 @@
       <article>
         <div class="article-wrapper">
           <figure>
-            <img src={getCategoryImage(story.category.id)} alt={story.category.name} />
+            <img src={categoryImg[story.category.id]} alt={story.category.name} />
           </figure>
           <div class="article-body">
             <h2>"{story.title}"</h2>
@@ -148,8 +165,17 @@
       
     </section>
 
+  
+
 </main>
 <style>
+/*styles menu select*/
+
+.select-menu{
+  border-radius: 25px;
+}
+
+/*fin styles menu select*/
   .articles {
     animation: myAnim 1s ease 0s 1 normal forwards;
   }
@@ -172,13 +198,13 @@ figure > img{
     height: fit-content;
     margin-left: 0px;
     margin-right: 0px;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .category_tag--aventures{
   background-color: #FF8A65;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -186,7 +212,7 @@ figure > img{
 .category_tag--romantique{
   background-color: #E91E63;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -195,7 +221,7 @@ figure > img{
   background-color: #0D47A1;
   color: white;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -208,7 +234,7 @@ figure > img{
 .category_tag--educatif{
   background-color: #d4f756;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -216,7 +242,7 @@ figure > img{
   background-color: #111111;
   color:white;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: .25em .5em;
   width:fit-content;
 }
@@ -391,7 +417,9 @@ main {
     align-items: flex-start; /* aligne les éléments de la flex box sur le bord supérieur */
     padding-top: 60px;
     background: linear-gradient(0deg, #5fc2ba, #afe1dd, rgba(234, 244, 244, 1), #ffffff);
+
   }
+
   .container-reading-header{
     width: 100%;
     display: flex;
@@ -399,7 +427,6 @@ main {
     justify-content:center;
     align-items:center;
     margin-bottom: 35px;
-    margin-left: 1000px;
     justify-content: space-between;
   }
   .container-reading-header h2{
@@ -486,6 +513,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width:100%;
 }
 
   .nav-categories ul {
