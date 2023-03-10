@@ -280,59 +280,7 @@
     }
 }
 /* Style pour les grands écrans */
-@media screen and (min-width: 1024px) {
-  /* Réduire la taille de la police pour une meilleure lisibilité */
-  body {
-      font-size: 14px;
-      width: 100%;
-    }
 
-    .main__button {
-      align-items: center;
-    }
-
-    .main__buttons {
-      margin-left: 1rem;
-    }
-    .waviy {
-      font-size: 2rem;
-      align-items: center;
-    }
-
-    .main__subtitle {
-      font-size: 100%;
-      width: auto;
-      margin-bottom: -2rem;
-    }
-
-    .main__text-title {
-      font-size: 1.2rem;
-      margin-top: 0rem;
-      text-align: left;
-      margin-right: 20%;
-    }
-
-    .main__text-paragraph {
-      font-size: 0.7rem;
-      line-height: normal;
-      margin-bottom: 5rem;
-      margin-right: 20%;
-      text-align: left;
-    }
-
-    .main__image-text img {
-      width: 35%;
-    }
-    /* Augmenter la taille de la police des titres */
-    h1 {
-      font-size: 28px;
-    }
-    /* Réduire la taille de la police du texte */
-    p {
-      font-size: 12px;
-      text-align: center;
-    }
-}
 </style>
 
 

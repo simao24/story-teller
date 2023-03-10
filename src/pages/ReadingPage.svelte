@@ -97,38 +97,25 @@
 
   <div class="container-reading">
     <div class="container-reading-header">
-    <h1 class="animate-charcter">HISTOIRES</h1>
-    <!-- Menu déroulant-->
-
-   <!--<section id="header-container">
-  <select>
-    <option disabled>What's your favorite movie ?</option>
-    <option value="choix-2">Inception</option>
-    <option value="choix-3">Godzilla</option>
-    <option value="choix-4">Back to the future</option>
-    <option value="choix-5">Shutter Island</option>
-  </select>
-</section>--> 
-
-
-
-    <nav class="nav-categories">
-      <ul>
-        <!--<li class="menu-deroulant-categories">-->
-          <h2>Catégories</h2>
-      <div class="header-container">
-        <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
-          <option disabled>Catégories</option>
-           <option class="select-menu-option" value="10">Aventures</option> 
-           <option class="select-menu-option" value="15">Educatif</option> 
-           <option class="select-menu-option" value="11">Science-fiction</option>
-           <option class="select-menu-option" value="12">Thriller</option>  
-           <option class="select-menu-option" value="13">Romantique</option> 
-           <option class="select-menu-option" value="14">Horreur</option> 
-        </select>
-        </div>
-      </ul>
-    </nav>
+      <h1 class="animate-charcter">HISTOIRES</h1>
+  
+      <nav class="nav-categories">
+        <ul>
+          <!--<li class="menu-deroulant-categories">-->
+            <h2>Catégories</h2>
+        <div class="header-container">
+          <select class="select-menu" bind:value={category} on:change={get_stories} name="" id="">
+            <option disabled>Catégories</option>
+            <option class="select-menu-option" value="10">Aventures</option> 
+            <option class="select-menu-option" value="15">Educatif</option> 
+            <option class="select-menu-option" value="11">Science-fiction</option>
+            <option class="select-menu-option" value="12">Thriller</option>  
+            <option class="select-menu-option" value="13">Romantique</option> 
+            <option class="select-menu-option" value="14">Horreur</option> 
+          </select>
+          </div>
+        </ul>
+      </nav>
   </div>
 </div>
 
@@ -426,7 +413,7 @@ main {
     flex-direction: column;
     justify-content:center;
     align-items:center;
-    margin-bottom: 35px;
+    padding:35px 35px;
     justify-content: space-between;
   }
   .container-reading-header h2{
@@ -517,6 +504,7 @@ main {
 }
 
   .nav-categories ul {
+    
     list-style: none;
     padding: 0;
     margin: 0;
@@ -748,11 +736,11 @@ main {
     margin-top: 0rem;
   }
   .nav-categories {
-    width: 30%;
+ 
     text-align: center;
   }
   .select-menu {
-    width: 100%;
+    
     margin-bottom: 10px;
   }
   .articles {
