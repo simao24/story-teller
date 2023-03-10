@@ -115,9 +115,11 @@
         align-items: center;
         font-size: larger;
         font-weight: 600;
-        margin: 10px;
         border-radius: 5px;
-        padding: 15px 60px;
+        padding-left: 50px;
+        padding-right: 60px;
+        padding-bottom: 15px;
+        padding-top: 15px;
     }
     button:hover {
         color: #5FC2BA;
