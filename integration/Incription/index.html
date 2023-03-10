@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar1" aria-label="header navigation">
+            <a href="/" class="logo" title="The Story Teller" aria-label="accueil du site">
+                <img alt="Logo de l'application">
+            </a>
+            <a href="/stories" class="connexion" title="link connexion"
+                aria-label="lien vers la page de connexion">Connexion</a>
+        </nav>
+        <!-- Menu deroulant PSEUDO-->
+
+        <div class="dropdown">
+            <button class="mainmenubtn">Pseudo</button>
+            <div class="dropdown-child">
+                <!--<a use:link={"/favorites"}>Favoris</a>-->
+                <a use:link="{/create-story}">Créer une histoire</a>
+                <a use:link="{/settings}">Gestion du compte</a>
+                <a use:link="{/my-story}">Mes histoires</a>
+                <div class="signout" on:click="{signoutHandle}">Se deconnecter</div>
+
+            </div>
+        </div>
+
+        <!-- Search bar-->
+        <nav class="nav-bar2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="searchbar"  type="text" name="search" placeholder="Rechercher">
+        </nav>
+
+    </header>
+
+    <main aria-labelledby="title1">
+        <div class="container">
+            <h1 id="title1">Inscription</h1>
+    
+            <form action="#" aria-label="Informations de connexion">
+                
+                <label for="pseudo">Pseudo</label>
+                <input required type="pseudo" name="pseudo" id="pseudo" placeholder="pseudo">
+
+                <label for="email">email</label>
+                <input required type="name" name="email" id="email" placeholder="mon email">
+    
+                <label for="password">Mot de passe</label>
+                <input required type="password" name="password" id="password" placeholder="***********">
+
+                <label for="confirm">Confirmer le mot de passe</label>
+                <input required type="confirm" name="confirm" id="confirm" placeholder="***********">
+    
+                <input type="submit" value="S'inscrire">
+    
+            </form>
+                
+        </div>
+    </main>
+
+
+    <footer class="footer">
+        <div>
+            <p>Contact : thestoryteller.maya5@gmail.com</p>
+        </div>
+        <div class="footer-name">
+            <p>© The Story Teller 2023</p>
+        </div>
+        <div class="footer-logo"><i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
+    </footer>
+</body>
+</html>

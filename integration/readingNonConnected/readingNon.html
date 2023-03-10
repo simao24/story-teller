@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Story Teller</title>
+    <link rel="stylesheet" href="../APP-STYLES/reset.css">
+    <link rel="stylesheet" href="../APP-STYLES/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0693f46e04.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="header__logo">
+            <img src="../accueil/img/logo-thestoryteller.png" alt="Story Teller logo">
+        </a>
+        <form action="recherche.php" class="header__search">
+            <label for="recherche" class="header__search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
+            <input type="text" id="recherche" name="recherche" placeholder="Recherchez" class="header__search-input"> 
+        </form>
+        <a href="connexion.html" class="header__connect">Connexion</a>
+    </header>
+
+    <main aria-labelledby="title1">
+        <div class="container-reading">
+            <h1 id="title1">HISTOIRES</h1>
+            <!-- Menu déroulant-->
+
+            <nav class="nav-categories">
+                <ul>
+                    <li class="menu-deroulant-categories"><a href="#">Catégories</a>
+                        <ul class="sous-menu">
+                            <li><a href="#">Aventures</a></li>
+                            <li><a href="#">Science-fiction</a></li>
+                            <li><a href="#">Thriller</a></li>
+                            <li><a href="#">Romantique</a></li>
+                            <li><a href="#">Horreur</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="card">
+                <img src="../accueil/img/adventure-img.jpeg" alt="aventure au pole Nord">
+                <a href="/user/favoris" class="fa-regular fa-thumbs-up"></a>
+                <div class="container">
+                    <h4><b>Aventure au Pole Nord</b></h4>
+                    <span class="auteur">Auteur:</span>
+                    <p>Frederic Wonderberg</p>
+                    <span class="description">Description:</span>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora
+                        voluptatum ea esse, quis
+                        at quidem doloribus </p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../accueil/img/adventure-img.jpeg" alt="aventure au pole Nord">
+                <a href="/user/favoris" class="fa-regular fa-thumbs-up"></a>
+                <div class="container">
+                    <h4><b>Detective Loup</b></h4>
+                    <span class="auteur">Auteur:</span>
+                    <p>Marie-Anne Strump</p>
+                    <span class="description">Description:</span>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Qui quaerat amet perspiciatis, saepe ducimus quibusdam tempora
+                        voluptatum ea esse, quis
+                        at quidem doloribus </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div>
+            <p>Contact : thestoryteller.maya5@gmail.com</p>
+        </div>
+        <div class="footer-name">
+            <p>© The Story Teller 2023</p>
+        </div>
+        <div class="footer-logo"><i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
+    </footer>
+</body>
+
+</html>
