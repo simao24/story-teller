@@ -173,110 +173,165 @@
     }
     /* Style pour les petits écrans */
 @media screen and (max-width: 767px) {
-  /* Réduire la taille de la police pour une meilleure lisibilité */
-  body {
-    font-size: 14px;
-    width: 100%;
-  }
-  /* Centrer les éléments du header */
-  header {
-    text-align: center;
-  }
-  /* Mettre le logo en haut de la page */
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 10px;
-  }
-  .main__button {
-    width: 1px;
-    margin: 0;
-  }
-  .waviy {
-    font-size: 2rem;
-    align-items: center;
-  }
-  .main__subtitle {
-    font-size: 0.8rem;
-    width: 0.5rem;
-  }
-  /* Augmenter la taille de la police des titres */
-  h1, h2, h3 {
-    font-size: 28px;
-  }
-  /* Réduire la taille de la police du texte */
-  p {
-    font-size: 12px;
-    text-align: center;
-  }
-  /* Réduire la largeur de la carte */
-  .card {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
+    /* Réduire la taille de la police pour une meilleure lisibilité */
+    body {
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .main__button {
+      align-items: center;
+    }
+
+    .main__buttons {
+      margin-left: 1rem;
+    }
+    .waviy {
+      font-size: 2rem;
+      align-items: center;
+    }
+
+    .main__subtitle {
+      font-size: 70%;
+      width: auto;
+      margin-bottom: -2rem;
+    }
+
+    .main__text-title {
+      font-size: 1.2rem;
+      margin-top: 0rem;
+      text-align: left;
+      margin-right: 20%;
+    }
+
+    .main__text-paragraph {
+      font-size: 0.7rem;
+      line-height: normal;
+      margin-bottom: 5rem;
+      margin-right: 20%;
+      text-align: left;
+    }
+
+    .main__image-text img {
+      width: 35%;
+    }
+    /* Augmenter la taille de la police des titres */
+    h1 {
+      font-size: 28px;
+    }
+    /* Réduire la taille de la police du texte */
+    p {
+      font-size: 12px;
+      text-align: center;
+    }
 }
 /* Style pour les écrans moyens */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  /* Augmenter la taille de la police pour une meilleure lisibilité */
+  /* Réduire la taille de la police pour une meilleure lisibilité */
   body {
-    font-size: 16px;
-  }
-  /* Centrer les éléments du header */
-  header {
-    text-align: center;
-  }
-  /* Mettre le logo en haut de la page */
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
-  /* Augmenter la taille de la police des titres */
-  h1, h2, h3 {
-    font-size: 32px;
-  }
-  /* Réduire la taille de la police du texte */
-  p {
-    font-size: 18px;
-  }
-  /* Réduire la largeur de la carte */
-  .card {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 30px;
-  }
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .main__button {
+      align-items: center;
+    }
+
+    .main__buttons {
+      margin-left: 1rem;
+    }
+    .waviy {
+      font-size: 2rem;
+      align-items: center;
+    }
+
+    .main__subtitle {
+      font-size: 100%;
+      width: auto;
+      margin-bottom: -2rem;
+    }
+
+    .main__text-title {
+      font-size: 1.2rem;
+      margin-top: 0rem;
+      text-align: left;
+      margin-right: 20%;
+    }
+
+    .main__text-paragraph {
+      font-size: 0.7rem;
+      line-height: normal;
+      margin-bottom: 5rem;
+      margin-right: 20%;
+      text-align: left;
+    }
+
+    .main__image-text img {
+      width: 35%;
+    }
+    /* Augmenter la taille de la police des titres */
+    h1 {
+      font-size: 28px;
+    }
+    /* Réduire la taille de la police du texte */
+    p {
+      font-size: 12px;
+      text-align: center;
+    }
 }
 /* Style pour les grands écrans */
 @media screen and (min-width: 1024px) {
-  /* Augmenter la taille de la police pour une meilleure lisibilité */
+  /* Réduire la taille de la police pour une meilleure lisibilité */
   body {
-    font-size: 18px;
-  }
-  /* Centrer les éléments du header */
-  header {
-    text-align: center;
-  }
-  /* Mettre le logo en haut de la page */
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 30px;
-  }
-  /* Augmenter la taille de la police des titres */
-  h1, h2, h3 {
-  
-  }
-  /* Réduire la taille de la police du texte */
-  p {
-    font-size: 20px;
-  }
-  /* Réduire la largeur de la carte */
-  .card {
-    width: 50%;
-    margin: 0 auto;
-    margin-bottom: 40px;
-  }
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .main__button {
+      align-items: center;
+    }
+
+    .main__buttons {
+      margin-left: 1rem;
+    }
+    .waviy {
+      font-size: 2rem;
+      align-items: center;
+    }
+
+    .main__subtitle {
+      font-size: 100%;
+      width: auto;
+      margin-bottom: -2rem;
+    }
+
+    .main__text-title {
+      font-size: 1.2rem;
+      margin-top: 0rem;
+      text-align: left;
+      margin-right: 20%;
+    }
+
+    .main__text-paragraph {
+      font-size: 0.7rem;
+      line-height: normal;
+      margin-bottom: 5rem;
+      margin-right: 20%;
+      text-align: left;
+    }
+
+    .main__image-text img {
+      width: 35%;
+    }
+    /* Augmenter la taille de la police des titres */
+    h1 {
+      font-size: 28px;
+    }
+    /* Réduire la taille de la police du texte */
+    p {
+      font-size: 12px;
+      text-align: center;
+    }
 }
 </style>
 
