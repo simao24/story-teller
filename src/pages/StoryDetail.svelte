@@ -157,7 +157,7 @@
       <p class="description">{story.content}</p>
     </div>
     
-    {#if token?.id == story.user}
+    {#if token?.id == story.user?.id}
     <button class="fa-regular fa-pen-to-square fa-xl" on:click={()=> editingModeofStory = true}></button>
     <button class="fa-regular fa-trash-can fa-xl" on:click={()=>supprimerHistoire(story)}></button>
     {/if}
@@ -338,7 +338,8 @@
     }*/
     /*formulaire modification*/
     .card {
-      width: 30%;
+      width: 100%;
+      max-width: 27em;
       display:flex;
       flex-direction: row;
       justify-content: center;
@@ -376,7 +377,7 @@ h3{
     border-radius: 5px;
     border: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    width: calc(100% - 20px);
     font-size: 16px;
   }
   button[type="submit"],
